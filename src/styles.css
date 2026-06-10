@@ -1,17 +1,476 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import 'tailwindcss';
 
-@import "tailwindcss";
+@plugin '@tailwindcss/typography';
 
-* {
-  box-sizing: border-box;
+@custom-variant dark (&:is(.dark *));
+:root {
+    --background: #fafafa;
+    --foreground: #2f3a33;
+
+    --card: #ffffff;
+    --card-foreground: #2f3a33;
+
+    --popover: #ffffff;
+    --popover-foreground: #2f3a33;
+
+    --primary: #556b5d;
+    --primary-foreground: #ffffff;
+
+    --secondary: #edf1ed;
+    --secondary-foreground: #2f3a33;
+
+    --muted: #f2f4f1;
+    --muted-foreground: #6b746f;
+
+    --accent: #e4e9e4;
+    --accent-foreground: #2f3a33;
+
+    --destructive: #dc2626;
+    --destructive-foreground: #ffffff;
+
+    --border: #d8ddd8;
+    --input: #e7ebe7;
+    --ring: #556b5d;
+
+    --chart-1: #556b5d;
+    --chart-2: #7d9385;
+    --chart-3: #2f3a33;
+    --chart-4: #8ca394;
+    --chart-5: #a9b5ad;
+
+    --sidebar: #f2f4f1;
+    --sidebar-foreground: #2f3a33;
+
+    --sidebar-primary: #556b5d;
+    --sidebar-primary-foreground: #ffffff;
+
+    --sidebar-accent: #e4e9e4;
+    --sidebar-accent-foreground: #2f3a33;
+
+    --sidebar-border: #d8ddd8;
+    --sidebar-ring: #556b5d;
+
+    --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+    --font-serif: "Cormorant Garamond", serif;
+    --font-display: "Cormorant Garamond", serif;
+
+    --radius: 0.5rem;
+    --tracking-normal: -0.02em;
+
+    --brand-secondary: #3f5247;
 }
 
-html,
-body,
-#app {
-  min-height: 100%;
+.dark {
+    --background: #161a17;
+    --foreground: #f3f5f2;
+
+    --card: #1d221f;
+    --card-foreground: #f3f5f2;
+
+    --popover: #1d221f;
+    --popover-foreground: #f3f5f2;
+
+    --primary: #8ca394;
+    --primary-foreground: #161a17;
+
+    --secondary: #252b27;
+    --secondary-foreground: #f3f5f2;
+
+    --muted: #202521;
+    --muted-foreground: #9ca7a0;
+
+    --accent: #252b27;
+    --accent-foreground: #f3f5f2;
+
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+
+    --border: #303833;
+    --input: #252b27;
+    --ring: #8ca394;
+
+    --chart-1: #8ca394;
+    --chart-2: #556b5d;
+    --chart-3: #d8ddd8;
+    --chart-4: #a9b5ad;
+    --chart-5: #6b746f;
+
+    --sidebar: #1a1f1b;
+    --sidebar-foreground: #f3f5f2;
+
+    --sidebar-primary: #8ca394;
+    --sidebar-primary-foreground: #161a17;
+
+    --sidebar-accent: #252b27;
+    --sidebar-accent-foreground: #f3f5f2;
+
+    --sidebar-border: #303833;
+    --sidebar-ring: #8ca394;
+
+
+    --radius: 0.5rem;
+    --tracking-normal: -0.02em;
+
+    --brand-secondary: #6f8878;
+}
+
+@theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+
+    --font-sans: var(--font-sans);
+    --font-serif: var(--font-serif);
+    --font-mono: var(--font-mono);
+
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+
+    /* Compatibility aliases for the current app theme */
+    --color-base: var(--background);
+    --color-surface: var(--card);
+    --color-elevated: var(--popover);
+    --color-accent-primary: var(--primary);
+    --color-accent-secondary: var(--brand-secondary);
+    --color-border-subtle: var(--border);
+    --color-text-primary: var(--foreground);
+    --color-text-muted: var(--muted-foreground);
+    --color-tag-bg: var(--secondary);
+    --color-hover-state: var(--accent);
+
+    --radius-card: 0px;
 }
 
 body {
-  margin: 0;
+    @apply bg-background text-foreground font-sans antialiased;
+    letter-spacing: var(--tracking-normal);
+
+    selection: bg-foreground/10;
+    selection: text-foreground;
 }
 
+@layer components {
+
+    /* =========================BUTTON========================= */
+    .button {
+        @apply inline-flex items-center justify-center gap-2;
+        @apply px-4 py-2 rounded-md;
+        @apply font-medium tracking-tight;
+        @apply transition-all duration-150;
+        @apply cursor-pointer select-none;
+        @apply focus-visible:outline-none;
+        @apply focus-visible:ring-2 focus-visible:ring-ring;
+        @apply disabled:opacity-50 disabled:pointer-events-none;
+        @apply bg-muted text-muted-foreground;
+        border: 1px solid transparent;
+        font-family: var(--font-sans), serif;
+    }
+
+    .button:active {
+        transform: scale(.97);
+    }
+
+    .button--primary {
+        @apply bg-primary! text-primary-foreground! border! border-primary!;
+    }
+
+    .button--primary:hover {
+        @apply bg-accent-secondary! border-accent-secondary!;
+    }
+
+    .button--secondary {
+        @apply bg-transparent! border! border-border!;
+    }
+
+    .button--secondary:hover {
+        @apply bg-accent-secondary! border-accent-secondary! text-accent!;
+    }
+
+    .button--ghost {
+        @apply bg-transparent! text-foreground! border! border-transparent!;
+    }
+
+    .button--ghost:hover {
+        @apply bg-accent! text-accent-foreground!;
+    }
+
+    .button--glass {
+        @apply bg-white/10 text-white border border-white/20
+
+    }
+
+    .button--glass:hover {
+        @apply bg-white/20;
+    }
+
+    .button--destructive {
+        @apply bg-destructive! text-destructive-foreground! border! border-destructive!;
+    }
+
+    .button--destructive:hover {
+        filter: brightness(.95);
+    }
+
+    .button--sm {
+        @apply px-3! py-1.5! text-sm!;
+    }
+
+    .button--md {
+        @apply px-3! py-2.5! text-sm!;
+    }
+
+    .button--lg {
+        @apply px-6! py-3! ;
+    }
+
+    .button--icon {
+        @apply size-10! p-0!;
+    }
+
+    /* =========================CARD========================= */
+    .card {
+        @apply relative overflow-hidden;
+        @apply rounded-2xl;
+        @apply bg-card text-card-foreground;
+        @apply transition-all duration-200;
+        @apply shadow-sm;
+
+        font-family: var(--font-sans), serif;
+    }
+
+    .card--interactive {
+        @apply cursor-pointer! hover:shadow-xl!;
+    }
+
+    .card--glass {
+        @apply backdrop-blur-xl!;
+        background: rgb(255 255 255 / .70);
+    }
+
+    .dark .card--glass {
+        background: rgb(10 10 10 / .70);
+    }
+
+    .card__header {
+        @apply flex flex-col gap-1.5;
+        @apply px-6 pt-6 pb-4;
+    }
+
+    .card__title {
+        @apply text-lg font-semibold tracking-tight;
+        @apply text-foreground;
+    }
+
+    .card__description {
+        @apply text-sm leading-relaxed text-muted-foreground;
+    }
+
+    .card__content {
+        @apply px-6 py-4;
+    }
+
+    .card__footer {
+        @apply flex items-center justify-between gap-3;
+        @apply px-6 py-4;
+        @apply border-t border-border;
+    }
+
+    .card__badge {
+        @apply inline-flex items-center;
+        @apply rounded-full;
+        @apply px-2.5 py-1;
+        @apply text-xs font-medium;
+        @apply bg-secondary text-secondary-foreground;
+    }
+
+    /* =========================INPUT + TEXTAREA========================= */
+    .input,
+    .textarea {
+        @apply w-full rounded-xl border border-input;
+        @apply bg-background text-foreground;
+        @apply px-4 py-2.5;
+        @apply text-sm;
+        @apply transition-all duration-150;
+        @apply placeholder:text-muted-foreground;
+        @apply focus:outline-none;
+        @apply focus:ring-1 focus:ring-ring;
+        @apply focus:border-ring;
+        @apply disabled:opacity-50 disabled:cursor-not-allowed;
+    }
+
+
+    .input--error {
+        @apply ring-1 ring-destructive border-destructive ;
+    }
+
+    .textarea {
+        @apply min-h-28 resize-none;
+    }
+
+    /* =========================LABEL========================= */
+    .label {
+        @apply inline-block mb-2;
+        @apply text-sm font-medium;
+        @apply text-foreground;
+    }
+
+    .description {
+        @apply text-sm text-muted-foreground
+    }
+
+    .description--error {
+        @apply text-destructive
+    }
+
+    /* =========================BADGE========================= */
+    .badge {
+        @apply inline-flex items-center justify-center;
+        @apply rounded-full;
+        @apply px-2.5 py-1;
+        @apply text-xs font-medium;
+        @apply transition-colors;
+    }
+
+    .badge--primary {
+        @apply bg-primary/10 text-primary;
+    }
+
+    .badge--secondary {
+        @apply bg-secondary text-secondary-foreground;
+    }
+
+    .badge--destructive {
+        @apply bg-destructive/10 text-destructive;
+    }
+
+    /* =========================ALERT========================= */
+    .alert {
+        @apply flex items-start gap-3;
+        @apply rounded-2xl border;
+        @apply px-4 py-3;
+    }
+
+    .alert--info {
+        @apply border-primary/20;
+        @apply bg-primary/5;
+        @apply text-foreground;
+    }
+
+    .alert--destructive {
+        @apply border-destructive/20;
+        @apply bg-destructive/5;
+        @apply text-foreground;
+    }
+
+    /* =========================MODAL========================= */
+    .modal {
+        @apply fixed inset-0 z-50;
+        @apply flex items-center justify-center;
+    }
+
+    .modal__overlay {
+        @apply absolute inset-0;
+        @apply bg-black/50 backdrop-blur-sm;
+    }
+
+    .modal__content {
+        @apply relative z-10;
+        @apply w-full max-w-lg;
+        @apply rounded-2xl border border-border;
+        @apply bg-popover text-popover-foreground;
+        @apply p-6 shadow-2xl;
+    }
+
+    /* =========================DROPDOWN========================= */
+    .dropdown {
+        @apply rounded-xl border border-border;
+        @apply bg-popover text-popover-foreground;
+        @apply p-1 shadow-lg;
+    }
+
+    .dropdown__item {
+        @apply flex items-center gap-2;
+        @apply rounded-lg px-3 py-2;
+        @apply text-sm cursor-pointer;
+        @apply transition-colors;
+        @apply hover:bg-accent;
+        @apply hover:text-accent-foreground;
+    }
+
+    /* =========================NAVBAR========================= */
+    .navbar {
+        @apply sticky top-0 z-40;
+        @apply flex items-center justify-between;
+        @apply border-b border-border;
+        @apply bg-background/80 backdrop-blur-xl;
+        @apply px-6 py-4;
+    }
+
+    .navbar__link {
+        @apply text-sm font-medium;
+        @apply text-muted-foreground;
+        @apply transition-colors;
+        @apply hover:text-foreground;
+    }
+
+    /* =========================TABLE========================= */
+    .table {
+        @apply w-full border-collapse;
+    }
+
+    .table th {
+        @apply border-b border-border;
+        @apply px-4 py-3;
+        @apply text-left text-sm;
+        @apply font-medium text-muted-foreground;
+    }
+
+    .table td {
+        @apply border-b border-border;
+        @apply px-4 py-3;
+        @apply text-sm text-foreground;
+    }
+
+    .table tr:hover td {
+        @apply bg-muted/40;
+    }
+
+    /* =========================POSITIONING========================= */
+    .absolute-center {
+        @apply absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2
+    }
+
+}
