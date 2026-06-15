@@ -1,7 +1,7 @@
 'use client'
 
 import {Heart, ShoppingCart} from 'lucide-react'
-import {useCartStore} from '@/lib/store'
+import {useCartStore} from '#/lib/store'
 import {useState} from 'react'
 import type {Product} from "#/lib/types.ts";
 import {Link} from "@tanstack/react-router";

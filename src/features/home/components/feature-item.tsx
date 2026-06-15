@@ -1,17 +1,23 @@
+import type {ForwardRefExoticComponent, RefAttributes} from "react";
+import type {LucideProps} from "lucide-react";
+
 interface FeatureItemProps {
-    icon: React.ReactNode;
+    icon: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;
     title: string;
     description: string;
+    color: string;
 }
 
 export const FeatureItem = ({
-                                icon,
-                                title,
-                                description,
+    icon,
+    title,
+    description,
+    color
                             }: FeatureItemProps) => {
+    const Icon = icon;
     return (
-        <div className="flex gap-3 p-5 max-w-md min-w-md">
-            <div>{icon}</div>
+        <div className="flex gap-3 p-5 max-w-md ">
+            <div><Icon className={color} /></div>
 
             <div className="space-y-2">
                 <h5 className="font-bold font-serif text-xl">

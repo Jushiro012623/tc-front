@@ -2,6 +2,9 @@ import {HeadContent, Scripts, createRootRoute} from '@tanstack/react-router'
 import appCss from '../styles.css?url'
 import {NavBar} from "#/components/layouts/nav-bar.tsx";
 import {Footer} from "#/components/layouts/footer.tsx";
+import 'lenis/dist/lenis.css'
+import {useEffect, useRef} from "react";
+import {type LenisRef, ReactLenis} from "lenis/react";
 
 export const Route = createRootRoute({
     head: () => ({
@@ -28,15 +31,33 @@ export const Route = createRootRoute({
 })
 
 function RootDocument({children}: { children: React.ReactNode }) {
+
+    const lenisRef = useRef<LenisRef>(null)
+
+    useEffect(() => {
+        let rafId: number
+
+        function update(time: number) {
+            lenisRef.current?.lenis?.raf(time)
+            rafId = requestAnimationFrame(update)
+        }
+
+        rafId = requestAnimationFrame(update)
+
+        return () => cancelAnimationFrame(rafId)
+    }, [])
+
     return (
-        <html lang="en" className="dsark">
+        <html lang="en" className="dark">
         <head>
             <HeadContent/>
         </head>
         <body>
         <NavBar/>
         <section className="min-h-[50vh]">
-            {children}
+            <ReactLenis root options={{autoRaf: false}} ref={lenisRef}>
+                {children}
+            </ReactLenis>
         </section>
         <Footer/>
         {/*<TanStackDevtools*/}
