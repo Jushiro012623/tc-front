@@ -6,10 +6,13 @@ import clsx from "clsx";
 import {NavLinks} from "#/constants";
 import {useState} from "react";
 import {CartDrawer} from "@components/layouts/cart-drawer.tsx";
+import {useUIStore} from "#/lib/store.ts";
+import {Moon, Sun} from "lucide-react";
 
 export const NavBar = () => {
     const navigate = useNavigate()
     const [cartOpen, setCartOpen] = useState(false)
+    const {isDarkMode, toggleDarkMode} = useUIStore()
 
     return (
         <>
@@ -68,7 +71,7 @@ export const NavBar = () => {
                                 <button
                                     onClick={() => navigate(({to: '/auth/sign-in'}))}
                                     className={clsx(
-                                        "p-2 text-muted-foreground hover:text-foreground",
+                                        "p-2 text-muted-foreground hover:text-primary",
                                         "transition-colors rounded-full hover:bg-muted/50")}
                                 >
                                     <CgProfile size={22}/>
@@ -78,13 +81,44 @@ export const NavBar = () => {
                                 <button
                                     onClick={() => setCartOpen(true)}
                                     className={clsx(
-                                        "p-2 text-muted-foreground hover:text-foreground",
+                                        "p-2 text-muted-foreground hover:text-primary",
                                         "transition-colors rounded-full hover:bg-muted/50 relative"
                                     )}
                                 >
                                     <BiCart size={22}/>
                                     <span
                                         className="size-2 bg-primary rounded-full border border-background absolute top-1.5 right-1.5"/>
+                                </button>
+                            </li>
+                            <li>
+                                <button
+                                    onClick={toggleDarkMode}
+                                    className={clsx(
+                                        "relative p-2 text-muted-foreground hover:text-primary",
+                                        "transition-colors rounded-full hover:bg-muted/50"
+                                    )}
+                                >
+                                    <div className="relative size-5.5">
+                                        <Sun
+                                            size={22}
+                                            className={clsx(
+                                                "absolute inset-0 transition-all duration-300",
+                                                isDarkMode
+                                                    ? "rotate-0 scale-100 opacity-100"
+                                                    : "rotate-90 scale-0 opacity-0"
+                                            )}
+                                        />
+
+                                        <Moon
+                                            size={22}
+                                            className={clsx(
+                                                "absolute inset-0 transition-all duration-300",
+                                                isDarkMode
+                                                    ? "-rotate-90 scale-0 opacity-0"
+                                                    : "rotate-0 scale-100 opacity-100"
+                                            )}
+                                        />
+                                    </div>
                                 </button>
                             </li>
                         </ul>

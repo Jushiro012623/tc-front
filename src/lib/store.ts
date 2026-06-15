@@ -19,10 +19,9 @@ interface AuthStore {
 }
 
 interface UIStore {
-    isCartOpen: boolean
-    isMobileMenuOpen: boolean
-    setCartOpen: (open: boolean) => void
-    setMobileMenuOpen: (open: boolean) => void
+    isDarkMode: boolean
+    toggleDarkMode: () => void
+    setDarkMode: (value: boolean) => void
 }
 
 const defaultCart: Cart = {
@@ -132,9 +131,23 @@ export const useAuthStore = create<AuthStore>((set) => ({
         }),
 }))
 
-export const useUIStore = create<UIStore>((set) => ({
-    isCartOpen: false,
-    isMobileMenuOpen: false,
-    setCartOpen: (open) => set({ isCartOpen: open }),
-    setMobileMenuOpen: (open) => set({ isMobileMenuOpen: open }),
-}))
+export const useUIStore = create<UIStore>()(
+    persist(
+        (set) => ({
+            isDarkMode: false,
+
+            toggleDarkMode: () =>
+                set((state) => ({
+                    isDarkMode: !state.isDarkMode,
+                })),
+
+            setDarkMode: (value) =>
+                set({
+                    isDarkMode: value,
+                }),
+        }),
+        {
+            name: "dark-theme",
+        }
+    )
+)

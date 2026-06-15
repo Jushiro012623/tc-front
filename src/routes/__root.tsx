@@ -5,6 +5,7 @@ import {Footer} from "#/components/layouts/footer.tsx";
 import 'lenis/dist/lenis.css'
 import {useEffect, useRef} from "react";
 import {type LenisRef, ReactLenis} from "lenis/react";
+import {ThemeProvider} from "#/providers/theme-provider.tsx";
 
 export const Route = createRootRoute({
     head: () => ({
@@ -54,11 +55,13 @@ function RootDocument({children}: { children: React.ReactNode }) {
         </head>
         <body>
         <ReactLenis root options={{autoRaf: false}} ref={lenisRef}>
-            <NavBar/>
-            <section className="min-h-[50vh]">
-                {children}
-            </section>
-            <Footer/>
+            <ThemeProvider>
+                <NavBar/>
+                <section className="min-h-[50vh]">
+                    {children}
+                </section>
+                <Footer/>
+            </ThemeProvider>
         </ReactLenis>
         {/*<TanStackDevtools*/}
         {/*    config={{*/}
