@@ -6,7 +6,14 @@ import {ProductCard} from "#/components/products/product-card.tsx";
 import {SAMPLE_PRODUCTS} from "#/lib/products.ts";
 import {ShopBadge} from "#/constants.ts";
 
-export const Route = createFileRoute('/')({component: Home})
+export const Route = createFileRoute('/')({
+    component: Home,
+    head: () => ({
+        meta: [
+            {title: `Home | Triumph Co.`}
+        ]
+    })
+})
 
 function Home() {
     const navigate = useNavigate()
@@ -72,7 +79,7 @@ function Home() {
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12 w-full">
-                        {featuredProducts.map((product) => ( <ProductCard key={product.id} product={product}/> ))}
+                        {featuredProducts.map((product) => (<ProductCard key={product.id} product={product}/>))}
                     </div>
 
                     <Button
@@ -94,12 +101,13 @@ function Home() {
                         </h2>
 
                         <p className="mt-4 text-center text-sm lg:text-lg text-muted-foreground max-w-2xl">
-                            Every thrifted piece helps reduce waste, extend the life of quality garments, and make fashion more accessible for everyone.
+                            Every thrifted piece helps reduce waste, extend the life of quality garments, and make
+                            fashion more accessible for everyone.
                         </p>
                         <Link to="/">
                             <Button size="lg" className="mt-5 gap-2">
                                 Why Thrifting Matters
-                                <ArrowRight className="w-5 h-5" />
+                                <ArrowRight className="w-5 h-5"/>
                             </Button>
                         </Link>
                     </div>

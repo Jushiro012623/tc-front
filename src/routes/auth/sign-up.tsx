@@ -1,9 +1,14 @@
-import {createFileRoute} from '@tanstack/react-router'
+import {createFileRoute, Link} from '@tanstack/react-router'
 import {Button, Input, Main} from "#/components/ui";
 import {FacebookIcon, GoogleIcon} from "#/components/icon";
 
 export const Route = createFileRoute('/auth/sign-up')({
     component: RouteComponent,
+    head: () => ({
+        meta: [
+            { title: 'Sign Up | Triumph Co.'}
+        ]
+    })
 })
 
 function RouteComponent() {
@@ -98,12 +103,12 @@ function RouteComponent() {
 
                     <p className="mt-10 text-center text-sm text-muted-foreground">
                         Already part of the thrift community?{" "}
-                        <a
-                            href="/auth/sign-in"
+                        <Link
+                            to="/auth/sign-in"
                             className="font-medium text-primary hover:text-primary/80 underline underline-offset-4 transition-colors"
                         >
                             Sign in
-                        </a>
+                        </Link>
                     </p>
                 </div>
             </div>

@@ -6,13 +6,16 @@ import clsx from "clsx";
 import {NavLinks} from "#/constants";
 import {useState} from "react";
 import {CartDrawer} from "@components/layouts/cart-drawer.tsx";
-import {useUIStore} from "#/lib/store.ts";
+import {useCartStore, useUIStore} from "#/lib/store.ts";
 import {Moon, Sun} from "lucide-react";
+import {MobileNavDrawer} from "@components/layouts/mobile-nav-drawer.tsx";
 
 export const NavBar = () => {
     const navigate = useNavigate()
+    const [mobileOpen, setMobileOpen] = useState(false)
     const [cartOpen, setCartOpen] = useState(false)
     const {isDarkMode, toggleDarkMode} = useUIStore()
+    const {cart} = useCartStore()
 
     return (
         <>
@@ -24,8 +27,10 @@ export const NavBar = () => {
 
                     {/*--------------------------------------Mobile Hamburger Menu--------------------------------------*/}
                     <button
-                        className="md:hidden p-2 -ml-2 text-muted-foreground hover:text-foreground transition-colors">
-                        <BiMenu size={24}/>
+                        onClick={() => setMobileOpen(true)}
+                        className="md:hidden p-2 -ml-2 text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                        <BiMenu size={24} />
                     </button>
 
                     {/*------------------Left: Brand Logo------------------*/}
@@ -86,8 +91,8 @@ export const NavBar = () => {
                                     )}
                                 >
                                     <BiCart size={22}/>
-                                    <span
-                                        className="size-2 bg-primary rounded-full border border-background absolute top-1.5 right-1.5"/>
+                                    {cart.items.length !== 0 && <span
+                                        className="size-2 bg-primary rounded-full border border-background absolute top-1.5 right-1.5"/>}
                                 </button>
                             </li>
                             <li>
@@ -130,6 +135,12 @@ export const NavBar = () => {
             <CartDrawer
                 open={cartOpen}
                 onClose={() => setCartOpen(false)}
-            /></>
+            />
+            <MobileNavDrawer
+                open={mobileOpen}
+                onClose={() => setMobileOpen(false)}
+            />
+        </>
+
     )
 }

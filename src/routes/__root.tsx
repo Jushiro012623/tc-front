@@ -18,7 +18,7 @@ export const Route = createRootRoute({
                 content: 'width=device-width, initial-scale=1',
             },
             {
-                title: 'TanStack Start Starter',
+                title: 'Triumph Co.',
             },
         ],
         links: [
@@ -26,6 +26,12 @@ export const Route = createRootRoute({
                 rel: 'stylesheet',
                 href: appCss,
             },
+            {
+                rel: 'icon',
+                type: 'image/svg+xml',
+                href: '/logo-n0-bg.svg',
+            },
+
         ],
     }),
     shellComponent: RootDocument,
@@ -49,7 +55,7 @@ function RootDocument({children}: { children: React.ReactNode }) {
     }, [])
 
     return (
-        <html lang="en" className="dark">
+        <html lang="en" className="">
         <head>
             <HeadContent/>
         </head>

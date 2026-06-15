@@ -7,11 +7,15 @@ import {useCartStore} from "#/lib/store.ts";
 
 export const Route = createFileRoute('/products/$product')({
     component: RouteComponent,
+    head: ({params}) => ({
+        meta: [
+            { title: `Product ${params.product} | Triumph Co.`}
+        ]
+    })
 })
 
 function RouteComponent() {
     const {product: id} = useParams({from: '/products/$product'})
-
     const {cart, addItem, removeItem} = useCartStore()
 
     const isAlreadyAddedToCard = cart.items.find((item) => item.productId === id)

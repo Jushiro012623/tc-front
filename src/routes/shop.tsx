@@ -7,6 +7,11 @@ import {ShopFilters} from "@components/layouts";
 
 export const Route = createFileRoute('/shop')({
     component: Component,
+    head: () => ({
+        meta: [
+            { title: `Shop | Triumph Co.`}
+        ]
+    })
 })
 
 function Component() {
