@@ -5,7 +5,6 @@ import {useState} from 'react'
 import type {Product} from "#/lib/types.ts";
 import {Link} from "@tanstack/react-router";
 import {Button} from "@components/ui";
-import {BiXCircle} from "react-icons/bi";
 
 interface ProductCardProps {
     product: Product
@@ -17,7 +16,9 @@ export function ProductCard({product}: ProductCardProps) {
     const [showAddedMessage, setShowAddedMessage] = useState(false)
     const [messageText, setMessageText] = useState<string>('')
 
-    const isAlreadyAddedToCard = cart.items.find((item) => item.productId === product.id)
+    const isAlreadyAddedToCard = cart.items.find(
+        (item) => item.productId === product.id
+    )
 
     const handleCartItem = (e: React.MouseEvent) => {
         e.preventDefault()
@@ -27,10 +28,11 @@ export function ProductCard({product}: ProductCardProps) {
             setMessageText('Added to Cart')
         } else {
             removeItem(product.id)
-            setMessageText('Removed to Cart')
+            setMessageText('Removed from Cart')
         }
+
         setShowAddedMessage(true)
-        setTimeout(() => setShowAddedMessage(false), 2000)
+        setTimeout(() => setShowAddedMessage(false), 1500)
     }
 
     const discountPercent = product.compareAtPrice
@@ -39,105 +41,95 @@ export function ProductCard({product}: ProductCardProps) {
 
     return (
         <Link to="/products/$product" params={{product: product.id}}>
-            <div className="group cursor-pointer relative">
-                {/* Image Container */}
-                <div className="relative bg-light-gray rounded-2xl overflow-hidden mb-4 aspect-square">
+            <div className="group relative cursor-pointer">
+
+                {/* IMAGE */}
+                <div className="relative aspect-square bg-light-gray rounded-xl overflow-hidden mb-2">
+
                     <img
                         src={product.image}
                         alt={product.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
 
-                    {/* Badge */}
-                    <div className="absolute top-3 left-3 flex gap-2">
+                    {/* BADGES */}
+                    <div className="absolute top-2 left-2 flex gap-1">
                         {!product.inStock && (
-                            <span
-                                className="bg-destructive text-destructive-foreground px-3 py-1 rounded text-xs font-semibold">
-                                Out of Stock
-                            </span>
+                            <span className="bg-red-500 text-white px-2 py-0.5 rounded text-[10px]">
+                            Out
+                        </span>
                         )}
                         {discountPercent > 0 && (
-                            <span className="bg-primary text-muted px-3 py-1 rounded text-xs font-semibold">
-                                -{discountPercent}%
-                            </span>
+                            <span className="bg-primary text-white px-2 py-0.5 rounded text-[10px]">
+                            -{discountPercent}%
+                        </span>
                         )}
                     </div>
 
-                    {/* Hover Actions */}
+                    {/* wishlist */}
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault()
+                            setIsWishlisted(!isWishlisted)
+                        }}
+                        className="absolute top-2 right-2 p-1.5 bg-white/80 rounded-full"
+                    >
+                        <Heart
+                            className={`w-5 h-5 ${
+                                isWishlisted ? 'fill-red-500 text-red-500' : ''
+                            }`}
+                        />
+                    </button>
                     <div
-                        className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/60 to-transparent p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                        <Button
-                            onClick={handleCartItem}
-                            className="w-full mb-2"
-                            disabled={!product.inStock}
-                        >
-                            {isAlreadyAddedToCard ? (
-                                <>
-                                    <BiXCircle className="w-4 h-4"/>
-                                    Remove from Cart
-                                </>
-                            ) : (
-                                <>
-                                    <ShoppingCart className="w-4 h-4"/>
-                                    Add to Cart
-                                </>
-                            )}
-                        </Button>
-                        <Button
-                            variant="glass"
-                            onClick={(e) => {
-                                e.preventDefault()
-                                setIsWishlisted(!isWishlisted)
-                            }}
-                            className="w-full "
-                        >
-                            <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-current' : ''}`}/>
-                            {isWishlisted ? 'Wishlisted' : 'Add to Wishlist'}
-                        </Button>
-                    </div>
+                        className="absolute bottom-0 left-0 right-0 h-24 bg-linear-to-t from-black/70 via-black/30 to-transparent pointer-events-none"/>
 
+                    {/* ADD TO CART CTA (NEW) */}
+                    <Button
+                        onClick={handleCartItem}
+                        disabled={!product.inStock}
+                        className="absolute bottom-2 left-2 right-2"
+                        variant="glass"
+                    >
+                        <ShoppingCart className="w-3.5 h-3.5"/>
+                        {isAlreadyAddedToCard ? "Remove" : "Add to Cart"}
+                    </Button>
+
+                    {/* feedback overlay */}
                     {showAddedMessage && (
                         <div
-                            className="absolute inset-0 flex items-center justify-center bg-black/50 rounded text-muted font-semibold">
-                            {messageText}!
+                            className="absolute inset-0 flex items-center justify-center bg-black/40 text-white text-xs">
+                            {messageText}
                         </div>
                     )}
                 </div>
+                {/* INFO (compact) */}
+                <div className="space-y-1">
 
-                {/* Product Info */}
-                <div className="space-y-2">
-                    <h3 className="font-heading text-lg font-semibold text-charcoal group-hover:text-sage-green transition-colors line-clamp-2">
+                    <h3 className="text-sm font-medium line-clamp-2 group-hover:text-sage-green">
                         {product.name}
                     </h3>
 
-                    {/* Rating */}
-                    <div className="flex items-center gap-2 text-sm">
-                        <div className="flex gap-0.5">
-                            {[...Array(5)].map((_, i) => (
-                                <span
-                                    key={i}
-                                    className={`text-sm ${i < Math.round(product.rating) ? 'text-amber-600' : 'text-muted-foreground'}`}
-                                >
-                                      ★
-                                </span>
-                            ))}
-                        </div>
-                        <span className="text-medium-gray">({product.reviews})</span>
+                    {/* rating (smaller) */}
+                    <div className="flex items-center gap-1 text-xs">
+                        <span className="text-amber-500">★</span>
+                        <span className="text-muted-foreground">
+                            {product.rating} ({product.reviews})
+                        </span>
                     </div>
 
-                    {/* Price */}
+                    {/* price */}
                     <div className="flex items-center gap-2">
-                        <span className="text-xl font-bold text-sage-green">
+                        <span className="font-bold text-sage-green text-sm">
                             ${product.price.toFixed(2)}
                         </span>
+
                         {product.compareAtPrice && (
-                            <span className="text-sm text-medium-gray line-through">
+                            <span className="text-xs line-through text-muted-foreground">
                                 ${product.compareAtPrice.toFixed(2)}
                             </span>
                         )}
                     </div>
                 </div>
-
             </div>
         </Link>
     )

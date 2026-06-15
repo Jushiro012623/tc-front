@@ -239,7 +239,6 @@ body {
 
     .button--glass {
         @apply bg-white/10 text-white border border-white/20
-
     }
 
     .button--glass:hover {

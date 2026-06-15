@@ -1,6 +1,6 @@
 import clsx from "clsx"
 import {BiX} from "react-icons/bi"
-import {Link, useNavigate} from "@tanstack/react-router"
+import {Link, useLocation, useNavigate} from "@tanstack/react-router"
 import {NavLinks} from "#/constants"
 import {Button} from "@components/ui";
 
@@ -10,6 +10,8 @@ type Props = {
 }
 
 export const MobileNavDrawer = ({open, onClose}: Props) => {
+    const location = useLocation()
+    const path = location.pathname
     const navigation = useNavigate()
     return (
         <>
@@ -51,15 +53,49 @@ export const MobileNavDrawer = ({open, onClose}: Props) => {
 
                 {/* links */}
                 <nav className="p-4 flex flex-col gap-2">
+                    <Link
+                        to="/"
+                        onClick={onClose}
+                        className={clsx(
+                            "flex items-center justify-between px-4 py-2 rounded-lg transition-all",
+                            "text-sm font-medium group",
+                            "hover:bg-muted/60 hover:text-foreground",
+                            path === "/" && "bg-muted text-foreground"
+                        )}
+                    >
+                        <span className="flex items-center gap-2">
+                            <span className={clsx(
+                                "w-1.5 h-1.5 rounded-full",
+                                path === "/" ? "bg-primary" : "bg-transparent"
+                            )}/>
+                            Home
+                        </span>
+
+                        <span className="opacity-0 text-muted-foreground group-hover:opacity-100 transition-colors">
+                            →
+                        </span>
+                    </Link>
                     {NavLinks.map(({href, label}) => (
                         <Link
                             key={href}
                             to={href}
                             onClick={onClose}
-                            className="group px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all flex items-center justify-between"
+                            className={clsx(
+                                "flex items-center justify-between px-4 py-2 rounded-lg transition-all",
+                                "text-sm font-medium group",
+                                "hover:bg-muted/60 hover:text-foreground",
+                                path === href && "bg-muted text-foreground"
+                            )}
                         >
-                            <span>{label}</span>
-                            <span className="opacity-0 group-hover:opacity-100 transition-opacity text-primary">
+                            <span className="flex items-center gap-2">
+                                <span className={clsx(
+                                    "w-1.5 h-1.5 rounded-full",
+                                    path === href ? "bg-primary" : "bg-transparent"
+                                )}/>
+                                {label}
+                            </span>
+
+                            <span className="opacity-0 text-muted-foreground group-hover:opacity-100 transition-colors">
                                 →
                             </span>
                         </Link>
