@@ -3,14 +3,14 @@ import {BiCart, BiMenu, BiSearch} from "react-icons/bi";
 import {CgProfile} from "react-icons/cg";
 import {Link, useNavigate} from "@tanstack/react-router";
 import clsx from "clsx";
-import {NavLinks, SAMPLE_CART_ITEMS} from "#/constants";
+import {NavLinks} from "#/constants";
 import {useState} from "react";
 import {CartDrawer} from "@components/layouts/cart-drawer.tsx";
 
 export const NavBar = () => {
     const navigate = useNavigate()
-
     const [cartOpen, setCartOpen] = useState(false)
+
     return (
         <>
             <header className={clsx(
@@ -96,7 +96,6 @@ export const NavBar = () => {
             <CartDrawer
                 open={cartOpen}
                 onClose={() => setCartOpen(false)}
-                items={SAMPLE_CART_ITEMS}
             /></>
     )
 }

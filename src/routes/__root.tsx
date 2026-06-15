@@ -53,13 +53,13 @@ function RootDocument({children}: { children: React.ReactNode }) {
             <HeadContent/>
         </head>
         <body>
-        <NavBar/>
-        <section className="min-h-[50vh]">
-            <ReactLenis root options={{autoRaf: false}} ref={lenisRef}>
+        <ReactLenis root options={{autoRaf: false}} ref={lenisRef}>
+            <NavBar/>
+            <section className="min-h-[50vh]">
                 {children}
-            </ReactLenis>
-        </section>
-        <Footer/>
+            </section>
+            <Footer/>
+        </ReactLenis>
         {/*<TanStackDevtools*/}
         {/*    config={{*/}
         {/*        position: 'bottom-right',*/}

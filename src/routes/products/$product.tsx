@@ -3,6 +3,7 @@ import {Button, Main} from "@components/ui";
 import {SAMPLE_PRODUCTS} from "#/lib/products.ts";
 import {ArrowLeft} from "lucide-react";
 import {NotFound} from "@components/layouts";
+import {useCartStore} from "#/lib/store.ts";
 
 export const Route = createFileRoute('/products/$product')({
     component: RouteComponent,
@@ -10,6 +11,10 @@ export const Route = createFileRoute('/products/$product')({
 
 function RouteComponent() {
     const {product: id} = useParams({from: '/products/$product'})
+
+    const {cart, addItem, removeItem} = useCartStore()
+
+    const isAlreadyAddedToCard = cart.items.find((item) => item.productId === id)
 
     const product = SAMPLE_PRODUCTS.find((p) => p.id === id)
 
@@ -55,7 +60,7 @@ function RouteComponent() {
 
                         <div>
                             <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                                Women • Knitwear
+                                {product.category} • {product.subcategory}
                             </p>
 
                             <h1 className="font-serif text-4xl font-medium mt-2">
@@ -118,12 +123,14 @@ function RouteComponent() {
                         </div>
 
                         <div className="flex gap-3 pt-4">
-                            <Button className="w-full">
-                                Add to Bag
+                            <Button className="w-full" onClick={() => {
+                                isAlreadyAddedToCard ? removeItem(id) : addItem(product, 1)
+                            }}>
+                                {isAlreadyAddedToCard ? "Remove from Cart" : "Add to Cart"}
                             </Button>
 
                             <Button variant="secondary" className="w-full">
-                                Save
+                                Add to Wishlist
                             </Button>
                         </div>
 

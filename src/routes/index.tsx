@@ -1,7 +1,7 @@
-import {createFileRoute, Link} from '@tanstack/react-router'
+import {createFileRoute, Link, useNavigate} from '@tanstack/react-router'
 import {Button, Main} from "#/components/ui";
 import {ArrowRight} from "lucide-react";
-import {FeatureItem} from "@features/home/components/feature-item.tsx";
+import {FeatureItem} from "#/components/layouts";
 import {ProductCard} from "#/components/products/product-card.tsx";
 import {SAMPLE_PRODUCTS} from "#/lib/products.ts";
 import {ShopBadge} from "#/constants.ts";
@@ -9,6 +9,7 @@ import {ShopBadge} from "#/constants.ts";
 export const Route = createFileRoute('/')({component: Home})
 
 function Home() {
+    const navigate = useNavigate()
     const featuredProducts = SAMPLE_PRODUCTS.slice(0, 4)
     return (
         <Main>
@@ -74,7 +75,12 @@ function Home() {
                         {featuredProducts.map((product) => ( <ProductCard key={product.id} product={product}/> ))}
                     </div>
 
-                    <Button variant="secondary" size="lg" className="mt-10 w-full sm:w-auto">
+                    <Button
+                        onClick={() => navigate({to: '/shop'})}
+                        variant="secondary"
+                        size="lg"
+                        className="mt-10 w-full sm:w-auto"
+                    >
                         Shop All Finds
                         <ArrowRight size={15}/>
                     </Button>
@@ -90,7 +96,7 @@ function Home() {
                         <p className="mt-4 text-center text-sm lg:text-lg text-muted-foreground max-w-2xl">
                             Every thrifted piece helps reduce waste, extend the life of quality garments, and make fashion more accessible for everyone.
                         </p>
-                        <Link to="/sustainability">
+                        <Link to="/">
                             <Button size="lg" className="mt-5 gap-2">
                                 Why Thrifting Matters
                                 <ArrowRight className="w-5 h-5" />

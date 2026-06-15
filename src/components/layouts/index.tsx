@@ -3,3 +3,4 @@ export {NavBar} from './nav-bar.tsx'
 export {NotFound} from './not-found.tsx'
 export {ShopFilters} from './shop-filters.tsx'
 export {CartDrawer} from './cart-drawer.tsx'
+export {FeatureItem} from "./feature-item.tsx";

@@ -108,7 +108,7 @@ export const useCartStore = create<CartStore>()(
                 }),
 
             getTotal: () => {
-                return 0 // Implemented in component
+                return 0
             },
         }),
         {
