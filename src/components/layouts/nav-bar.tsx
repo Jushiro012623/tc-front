@@ -1,7 +1,7 @@
 import {BrandLogo, Input} from "#/components/ui";
 import {BiCart, BiMenu, BiSearch} from "react-icons/bi";
 import {CgProfile} from "react-icons/cg";
-import {Link, useNavigate} from "@tanstack/react-router";
+import {Link, useLocation, useNavigate} from "@tanstack/react-router";
 import clsx from "clsx";
 import {NavLinks} from "#/constants";
 import {useState} from "react";
@@ -12,6 +12,7 @@ import {MobileNavDrawer} from "@components/layouts/mobile-nav-drawer.tsx";
 
 export const NavBar = () => {
     const navigate = useNavigate()
+    const pathname = useLocation().pathname
     const [mobileOpen, setMobileOpen] = useState(false)
     const [cartOpen, setCartOpen] = useState(false)
     const {isDarkMode, toggleDarkMode} = useUIStore()
@@ -47,7 +48,9 @@ export const NavBar = () => {
                             {NavLinks.map(({href, label}: { href: string; label: string; }) => (
                                 <li key={href}>
                                     <Link to={href}
-                                          className="hover:text-foreground transition-colors">{label}</Link>
+                                          className={clsx("hover:text-foreground transition-colors",
+                                            pathname === href ? "text-foreground" : ''
+                                          )}>{label}</Link>
                                 </li>
                             ))}
                         </ul>
