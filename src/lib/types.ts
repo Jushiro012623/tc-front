@@ -15,8 +15,7 @@ export interface Product {
     careInstructions?: string
     inStock: boolean
     inventory: number
-    rating: number
-    reviews: number
+    condition: string
     sku: string
     createdAt: Date
 }
@@ -35,9 +34,6 @@ export interface CartItem {
     id: string
     productId: string
     product: Product
-    quantity: number
-    selectedSize?: string
-    selectedColor?: string
 }
 
 export interface Cart {

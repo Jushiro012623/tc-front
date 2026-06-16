@@ -6,6 +6,8 @@ type ButtonVariant =
     | "secondary"
     | "ghost"
     | "glass"
+    | "muted"
+    | "bordered"
     | "destructive";
 
 type ButtonSize = "sm" | "md" | "lg" | "icon";

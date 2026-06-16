@@ -46,7 +46,7 @@ function Home() {
                             Browse Collection <ArrowRight size={15}/>
                         </Button>
 
-                        <Button variant="secondary" size="lg" className="w-full sm:w-auto text-white">
+                        <Button variant="bordered" size="lg" className="w-full sm:w-auto">
                             Why Thrift?
                         </Button>
                     </div>
@@ -78,13 +78,13 @@ function Home() {
                         Unique vintage and thrifted pieces added to our collection this week.
                     </p>
 
-                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 mt-12 w-full">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-12 w-full">
                         {featuredProducts.map((product) => (<ProductCard key={product.id} product={product}/>))}
                     </div>
 
                     <Button
                         onClick={() => navigate({to: '/shop'})}
-                        variant="secondary"
+                        variant="muted"
                         size="lg"
                         className="mt-10 w-full sm:w-auto"
                     >

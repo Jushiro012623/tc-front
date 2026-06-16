@@ -1,14 +1,20 @@
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import {create} from 'zustand'
+import {persist} from 'zustand/middleware'
 import type {Cart, CartItem, Product} from "#/lib/types.ts";
 
 interface CartStore {
     cart: Cart
-    addItem: (product: Product, quantity: number, selectedSize?: string, selectedColor?: string) => void
+    addItem: (product: Product) => void
     removeItem: (productId: string) => void
-    updateQuantity: (productId: string, quantity: number) => void
     clearCart: () => void
     getTotal: () => number
+}
+
+interface WishListStore {
+    wishlist: Product[]
+    addList: (wishlist: Product) => void
+    removeList: (productId: string) => void
+    clearList: () => void
 }
 
 interface AuthStore {
@@ -32,36 +38,35 @@ const defaultCart: Cart = {
     total: 0,
 }
 
+const defaultWIshlist: Product[] = []
+
 const calculateCartTotals = (items: CartItem[]): Omit<Cart, 'items'> => {
-    const subtotal = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0)
+    const subtotal = items.reduce((sum, item) => sum + item.product.price, 0)
     const tax = subtotal * 0.08 // 8% tax
     const shipping = subtotal > 100 ? 0 : 10 // Free shipping over $100
     const total = subtotal + tax + shipping
 
-    return { subtotal, tax, shipping, total }
+    return {subtotal, tax, shipping, total}
 }
 
 export const useCartStore = create<CartStore>()(
     persist(
         (set) => ({
             cart: defaultCart,
-            addItem: (product, quantity, selectedSize, selectedColor) =>
+            addItem: (product) =>
                 set((state) => {
                     const existingItem = state.cart.items.find((item) => item.productId === product.id)
 
                     let newItems: CartItem[]
                     if (existingItem) {
                         newItems = state.cart.items.map((item) =>
-                            item.productId === product.id ? { ...item, quantity: item.quantity + quantity } : item
+                            item.productId === product.id ? {...item} : item
                         )
                     } else {
                         const newItem: CartItem = {
                             id: `${product.id}-${Date.now()}`,
                             productId: product.id,
                             product,
-                            quantity,
-                            selectedSize,
-                            selectedColor,
                         }
                         newItems = [...state.cart.items, newItem]
                     }
@@ -86,21 +91,6 @@ export const useCartStore = create<CartStore>()(
                         },
                     }
                 }),
-
-            updateQuantity: (productId, quantity) =>
-                set((state) => {
-                    const newItems = state.cart.items.map((item) =>
-                        item.productId === productId ? { ...item, quantity } : item
-                    )
-                    const totals = calculateCartTotals(newItems)
-                    return {
-                        cart: {
-                            items: newItems,
-                            ...totals,
-                        },
-                    }
-                }),
-
             clearCart: () =>
                 set({
                     cart: defaultCart,
@@ -148,6 +138,46 @@ export const useUIStore = create<UIStore>()(
         }),
         {
             name: "dark-theme",
+        }
+    )
+)
+
+export const useWishlistStore = create<WishListStore>()(
+    persist(
+        (set) => ({
+            wishlist: defaultWIshlist,
+            addList: (product) => set((state) => {
+                const existingItem = state.wishlist.find((item) => item.id === product.id)
+
+                let newItems: Product[]
+                if (existingItem) {
+                    newItems = state.wishlist.map((item) =>
+                        item.id === product.id ? {...item} : item
+                    )
+                } else {
+                    const newItem: Product = {
+                        ...product,
+                    }
+                    newItems = [...state.wishlist, newItem]
+                }
+
+                return {
+                    wishlist: newItems
+                }
+            }),
+            removeList: (productId) => set((state) => {
+                const newItems = state.wishlist.filter((item) => item.id !== productId)
+                return {
+                    wishlist: newItems,
+                }
+            }),
+            clearList: () =>
+                set({
+                    wishlist: defaultWIshlist,
+                }),
+        }),
+        {
+            name: 'wish-list'
         }
     )
 )

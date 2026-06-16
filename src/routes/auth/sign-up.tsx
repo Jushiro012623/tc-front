@@ -88,12 +88,12 @@ function RouteComponent() {
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <Button variant="secondary" type="button" className="justify-center gap-2 w-full text-xs py-5">
+                            <Button variant="muted" type="button" className="justify-center gap-2 w-full text-xs py-5">
                                 <GoogleIcon className="size-3.5"/>
                                 Google
                             </Button>
 
-                            <Button variant="secondary" type="button" className="justify-center gap-2 w-full text-xs py-5">
+                            <Button variant="muted" type="button" className="justify-center gap-2 w-full text-xs py-5">
                                 <FacebookIcon className="size-3.5"/>
                                 Facebook
                             </Button>

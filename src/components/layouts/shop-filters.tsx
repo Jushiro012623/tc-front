@@ -21,7 +21,7 @@ export function ShopFilters({onApply}: Props) {
     const [price, setPrice] = useState<[number, number]>([0, 300])
 
     return (
-        <aside className="space-y-8 sticky top-6 h-fit">
+        <aside className="space-y-8 sticky top-25 h-fit">
 
             {/* CATEGORY */}
             <div>
@@ -33,7 +33,7 @@ export function ShopFilters({onApply}: Props) {
                             key={c}
                             onClick={() => setCategory(c)}
                             className="justify-start"
-                            variant={category === c ? "primary" : "secondary"}
+                            variant={category === c ? "primary" : "muted"}
                         >
                             {c}
                         </Button>
@@ -57,7 +57,7 @@ export function ShopFilters({onApply}: Props) {
                                 )
                             }
                             className="size-10"
-                            variant={sizes.includes(size) ? 'primary' : "secondary"}
+                            variant={sizes.includes(size) ? 'primary' : "muted"}
                         >
                             {size}
                         </Button>

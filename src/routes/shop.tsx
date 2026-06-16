@@ -58,7 +58,7 @@ function Component() {
 
     return (
         <Main>
-            <div className="max-w-7xl mx-auto px-6 py-12">
+            <div className="max-w-7xl mx-auto py-12">
 
                 <div className="text-center mb-10">
                     <h1 className="font-serif text-4xl md:text-5xl">

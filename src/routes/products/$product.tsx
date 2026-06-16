@@ -1,5 +1,5 @@
 import {createFileRoute, useParams} from '@tanstack/react-router'
-import {Button, Main} from "@components/ui";
+import {Badge, Button, Main, Chip} from "@components/ui";
 import {SAMPLE_PRODUCTS} from "#/lib/products.ts";
 import {ArrowLeft} from "lucide-react";
 import {NotFound} from "@components/layouts";
@@ -9,7 +9,7 @@ export const Route = createFileRoute('/products/$product')({
     component: RouteComponent,
     head: ({params}) => ({
         meta: [
-            { title: `Product ${params.product} | Triumph Co.`}
+            {title: `Product ${params.product} | Triumph Co.`}
         ]
     })
 })
@@ -29,7 +29,7 @@ function RouteComponent() {
             <div className="max-w-6xl mx-auto px-6 py-10">
 
                 <Button
-                    variant="secondary"
+                    variant="muted"
                     className="flex items-center gap-2 w-fit mb-6"
                     onClick={() => window.history.back()}
                 >
@@ -59,95 +59,94 @@ function RouteComponent() {
                             ))}
                         </div>
                     </div>
-
-                    <div className="flex flex-col gap-5">
-
+                    <div className="flex flex-col gap-6">
+                        {/* HEADER */}
                         <div>
                             <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                                {product.category} • {product.subcategory}
+                                {product.category} / {product.subcategory}
                             </p>
 
-                            <h1 className="font-serif text-4xl font-medium mt-2">
+                            <h1 className="font-serif text-4xl font-medium mt-2 leading-tight">
                                 {product.name}
                             </h1>
 
-                            <p className="text-muted-foreground mt-3">
+                            <p className="text-muted-foreground mt-3 leading-relaxed">
                                 {product.description}
                             </p>
                         </div>
 
-                        <div className="flex items-center gap-3">
-                            <p className="text-2xl font-medium">
-                                ${product.price.toFixed(2)}
-                            </p>
+                        {/* PRICE + CONDITION ROW */}
+                        <div className="flex items-center gap-5">
 
-                            {product.compareAtPrice && (
-                                <p className="text-muted-foreground line-through">
-                                    ${product.compareAtPrice.toFixed(2)}
+                            <div className="flex items-end gap-3">
+                                <p className="text-3xl font-semibold text-foreground">
+                                    ${product.price.toFixed(2)}
                                 </p>
-                            )}
+
+                                {product.compareAtPrice && (
+                                    <p className="text-muted-foreground line-through text-sm">
+                                        ${product.compareAtPrice.toFixed(2)}
+                                    </p>
+                                )}
+                            </div>
+
+                            <Badge variant={
+                                product.condition === "New" ? "success" :
+                                    product.condition === "Like New" ? "info" :
+                                        product.condition === "Good" ? "info" :
+                                            product.condition === "Fair" ? "warning" : "danger"
+                            }>
+                                {product.condition}
+                            </Badge>
                         </div>
 
-                        <div className="text-sm text-muted-foreground space-y-1">
-                            <p>Material: {product.material}</p>
-                            <p>Care: {product.careInstructions}</p>
-                            <p>SKU: {product.sku}</p>
+                        {/* META INFO */}
+                        <div className="flex flex-col gap-2 text-sm text-muted-foreground border-t border-border pt-4">
+                            <p><span className="text-foreground font-medium">Material</span>: {product.material}</p>
+                            <p><span className="text-foreground font-medium">Care</span>: {product.careInstructions}</p>
+                            <p><span className="text-foreground font-medium">SKU</span>: {product.sku}</p>
                         </div>
 
+                        {/* VARIANTS */}
                         <div className="space-y-4">
-
                             <div>
-                                <p className="text-sm font-medium mb-2">Sizes</p>
+                                <p className="text-sm font-medium mb-2 ">Best Fit</p>
                                 <div className="flex flex-wrap gap-2">
                                     {product.sizes?.map((size) => (
-                                        <Button
-                                            key={size}
-                                            className="size-10"
-                                            variant={"secondary"}
-                                        >
-                                            {size}
-                                        </Button>
+                                        <Chip key={size} size="lg" variant="muted" className="rounded-md">
+                                            {size} Fit
+                                        </Chip>
                                     ))}
                                 </div>
                             </div>
 
                             <div>
-                                <p className="text-sm font-medium mb-2">Colors</p>
+                                <p className="text-sm font-medium mb-2">Color</p>
                                 <div className="flex flex-wrap gap-2">
                                     {product.colors?.map((color) => (
-                                        <Button
-                                            key={color}
-                                            variant={"secondary"}
-                                        >
+                                        <Chip key={color} size="lg" variant="muted" className="rounded-md">
                                             {color}
-                                        </Button>
+                                        </Chip>
                                     ))}
                                 </div>
                             </div>
                         </div>
 
-                        <div className="flex gap-3 pt-4">
-                            <Button className="w-full" onClick={() => {
-                                isAlreadyAddedToCard ? removeItem(id) : addItem(product, 1)
-                            }}>
+                        {/* ACTIONS (more premium spacing) */}
+                        <div className="flex gap-3 pt-2">
+
+                            <Button
+                                className="w-full h-11"
+                                onClick={() => {
+                                    isAlreadyAddedToCard ? removeItem(id) : addItem(product, 1)
+                                }}
+                            >
                                 {isAlreadyAddedToCard ? "Remove from Cart" : "Add to Cart"}
                             </Button>
 
-                            <Button variant="secondary" className="w-full">
+                            <Button variant="muted" className="w-full h-11">
                                 Add to Wishlist
                             </Button>
-                        </div>
-
-                        <div className="flex items-center gap-4 text-sm pt-4">
-                            <div className="flex items-center gap-1">
-                                <span className="text-amber-500">★★★★★</span>
-                                <span className="font-medium">
-                                    {product.rating}
-                                </span>
-                            </div>
-                            <span className="text-muted-foreground">
-                                Based on {product.reviews} reviews
-                            </span>
                         </div>
                     </div>
                 </div>

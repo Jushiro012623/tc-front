@@ -1,10 +1,11 @@
 'use client'
 import {Heart, ShoppingCart} from 'lucide-react'
-import {useCartStore} from '#/lib/store'
+import {useCartStore, useWishlistStore} from '#/lib/store'
 import {useState} from 'react'
 import type {Product} from "#/lib/types.ts";
 import {Link} from "@tanstack/react-router";
-import {Button} from "@components/ui";
+import clsx from "clsx";
+import {Badge} from "@components/ui";
 
 interface ProductCardProps {
     product: Product
@@ -12,19 +13,22 @@ interface ProductCardProps {
 
 export function ProductCard({product}: ProductCardProps) {
     const {addItem, cart, removeItem} = useCartStore()
-    const [isWishlisted, setIsWishlisted] = useState(false)
+    const {addList, wishlist, removeList} = useWishlistStore()
     const [showAddedMessage, setShowAddedMessage] = useState(false)
     const [messageText, setMessageText] = useState<string>('')
 
     const isAlreadyAddedToCard = cart.items.find(
         (item) => item.productId === product.id
     )
+    const isAlreadyAddedToList = wishlist.find(
+        (item) => item.id === product.id
+    )
 
     const handleCartItem = (e: React.MouseEvent) => {
         e.preventDefault()
 
         if (!isAlreadyAddedToCard) {
-            addItem(product, 1)
+            addItem(product)
             setMessageText('Added to Cart')
         } else {
             removeItem(product.id)
@@ -32,7 +36,7 @@ export function ProductCard({product}: ProductCardProps) {
         }
 
         setShowAddedMessage(true)
-        setTimeout(() => setShowAddedMessage(false), 1500)
+        setTimeout(() => setShowAddedMessage(false), 2000)
     }
 
     const discountPercent = product.compareAtPrice
@@ -40,67 +44,74 @@ export function ProductCard({product}: ProductCardProps) {
         : 0
 
     return (
-        <Link to="/products/$product" params={{product: product.id}}>
+        <Link to="/products/$product" params={{product: product.id}} disabled={showAddedMessage}
+        >
+
             <div className="group relative cursor-pointer">
 
                 {/* IMAGE */}
-                <div className="relative aspect-square bg-light-gray rounded-xl overflow-hidden mb-2">
+                <div className="relative aspect-square bg-muted rounded-xl overflow-hidden mb-2 shadow-sm">
 
                     <img
                         src={product.image}
                         alt={product.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 
+                        ${!product.inStock ? "opacity-70 grayscale-[0.2]" : ""}`}
                     />
 
                     {/* BADGES */}
                     <div className="absolute top-2 left-2 flex gap-1">
                         {!product.inStock && (
-                            <span className="bg-red-500 text-white px-2 py-0.5 rounded text-[10px]">
-                            Out
+                            <span
+                                className="bg-destructive text-destructive-foreground px-2 py-0.5 rounded text-[12px]">
+                            Out of Stock
                         </span>
                         )}
                         {discountPercent > 0 && (
-                            <span className="bg-primary text-white px-2 py-0.5 rounded text-[10px]">
-                            -{discountPercent}%
-                        </span>
+                            <Badge variant="info">-{discountPercent}%</Badge>
                         )}
                     </div>
+                    {/* bottom actions */}
+                    <div className="absolute bottom-2 left-2 flex items-center gap-2">
 
-                    {/* wishlist */}
-                    <button
-                        onClick={(e) => {
-                            e.preventDefault()
-                            setIsWishlisted(!isWishlisted)
-                        }}
-                        className="absolute top-2 right-2 p-1.5 bg-white/80 rounded-full"
-                    >
-                        <Heart
-                            className={`w-5 h-5 ${
-                                isWishlisted ? 'fill-red-500 text-red-500' : ''
-                            }`}
-                        />
-                    </button>
-                    <div
-                        className="absolute bottom-0 left-0 right-0 h-24 bg-linear-to-t from-black/70 via-black/30 to-transparent pointer-events-none"/>
+                        {/* cart */}
+                        <button
+                            onClick={handleCartItem}
+                            disabled={!product.inStock}
+                            className={'p-2 cursor-pointer rounded-full bg-background/80 backdrop-blur-sm disabled:opacity-50'}
+                        >
+                            <ShoppingCart className={clsx("w-4.5 h-4.5 text-foreground"
+                                , isAlreadyAddedToCard ? 'fill-primary! text-primary!' : 'text-foreground')}
+                            />
+                        </button>
 
-                    {/* ADD TO CART CTA (NEW) */}
-                    <Button
-                        onClick={handleCartItem}
-                        disabled={!product.inStock}
-                        className="absolute bottom-2 left-2 right-2"
-                        variant="glass"
-                    >
-                        <ShoppingCart className="w-3.5 h-3.5"/>
-                        {isAlreadyAddedToCard ? "Remove" : "Add to Cart"}
-                    </Button>
-
+                        {/* wishlist */}
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault()
+                                !isAlreadyAddedToList ? addList(product) : removeList(product.id)
+                            }}
+                            className="p-2 cursor-pointer rounded-full bg-background/80 backdrop-blur-sm"
+                        >
+                            <Heart
+                                className={`w-4.5 h-4.5 ${
+                                    isAlreadyAddedToList ? 'fill-red-500 text-red-500' : 'text-foreground'
+                                }`}
+                            />
+                        </button>
+                    </div>
                     {/* feedback overlay */}
                     {showAddedMessage && (
-                        <div
-                            className="absolute inset-0 flex items-center justify-center bg-black/40 text-white text-xs">
-                            {messageText}
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <div
+                                className="absolute bottom-0 left-0 right-0 h-20 bg-linear-to-t from-black/40 to-transparent pointer-events-none"/>
+                            <div
+                                className="px-3 py-1.5 rounded-full bg-black/70 text-white text-xs backdrop-blur-md shadow-lg animate-in fade-in zoom-in">
+                                {messageText}
+                            </div>
                         </div>
                     )}
+
                 </div>
                 {/* INFO (compact) */}
                 <div className="space-y-1">
@@ -110,11 +121,16 @@ export function ProductCard({product}: ProductCardProps) {
                     </h3>
 
                     {/* rating (smaller) */}
-                    <div className="flex items-center gap-1 text-xs">
-                        <span className="text-amber-500">★</span>
-                        <span className="text-muted-foreground">
-                            {product.rating} ({product.reviews})
-                        </span>
+                    <div className="flex items-center gap-2 text-xs">
+                        <span className="text-muted-foreground">Condition</span>
+                        <Badge size="sm" variant={
+                            product.condition === "New" ? "success" :
+                                product.condition === "Like New" ? "info" :
+                                    product.condition === "Good" ? "info" :
+                                        product.condition === "Fair" ? "warning" : "danger"
+                        }>
+                            {product.condition}
+                        </Badge>
                     </div>
 
                     {/* price */}

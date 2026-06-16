@@ -1,5 +1,5 @@
 import {createFileRoute, Link} from "@tanstack/react-router";
-import {BrandLogo, Button, Input, Main} from "#/components/ui";
+import {Button, Input, Main} from "#/components/ui";
 import {FacebookIcon, GoogleIcon} from "#/components/icon";
 
 export const Route = createFileRoute("/auth/sign-in")({
@@ -17,11 +17,6 @@ function RouteComponent() {
 
             <div className="flex flex-col justify-center w-full lg:w-1/2 h-fit p-6 sm:p-12 md:p-16  mx-auto">
                 <div className="w-full max-w-md mx-auto">
-
-                    <div className="lg:hidden mb-12 flex justify-center">
-                        <BrandLogo iconOnly={false}/>
-                    </div>
-
                     <header className="mb-10 space-y-3 text-center lg:text-left">
                         <span className="font-serif text-sm tracking-[0.25em] uppercase text-muted-foreground">
                             Triumph Co.
@@ -76,12 +71,12 @@ function RouteComponent() {
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <Button variant="secondary" type="button" className="justify-center gap-3 w-full">
+                            <Button variant="muted" type="button" className="justify-center gap-3 w-full">
                                 <GoogleIcon className="size-4"/>
                                 Google
                             </Button>
 
-                            <Button variant="secondary" type="button" className="justify-center gap-3 w-full">
+                            <Button variant="muted" type="button" className="justify-center gap-3 w-full">
                                 <FacebookIcon className="size-4"/>
                                 Facebook
                             </Button>

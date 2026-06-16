@@ -2,7 +2,7 @@ import clsx from "clsx"
 import {BiX} from "react-icons/bi"
 import {Link, useLocation, useNavigate} from "@tanstack/react-router"
 import {NavLinks} from "#/constants"
-import {Button} from "@components/ui";
+import {BrandLogo, Button} from "@components/ui";
 
 type Props = {
     open: boolean
@@ -39,9 +39,10 @@ export const MobileNavDrawer = ({open, onClose}: Props) => {
 
                 {/* header */}
                 <div className="flex items-center justify-between px-5 py-4 border-b border-border/60">
-                    <div className="flex flex-col">
-                        <span className="font-semibold tracking-wide">Menu</span>
-                    </div>
+                    <Link to={'/'}><BrandLogo iconOnly={false}/></Link>
+                    {/*<div className="flex flex-col">*/}
+                    {/*    <span className="font-semibold tracking-wide">Menu</span>*/}
+                    {/*</div>*/}
 
                     <button
                         onClick={onClose}
