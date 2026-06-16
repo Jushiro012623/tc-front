@@ -6,6 +6,7 @@ import 'lenis/dist/lenis.css'
 import {useEffect, useRef} from "react";
 import {type LenisRef, ReactLenis} from "lenis/react";
 import {ThemeProvider} from "#/providers/theme-provider.tsx";
+import {NotFound} from "@components/layouts";
 
 export const Route = createRootRoute({
     head: () => ({
@@ -34,6 +35,7 @@ export const Route = createRootRoute({
 
         ],
     }),
+    notFoundComponent: NotFound,
     shellComponent: RootDocument,
 })
 

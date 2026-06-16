@@ -36,7 +36,7 @@ export function Badge({
 
                 // VARIANT
                 {
-                    default: "bg-primary text-primary-foreground",
+                    default: "bg-muted text-foreground",
                     success: "bg-green-100 text-green-700",
                     info: "bg-blue-100 text-blue-700",
                     warning: "bg-yellow-100 text-yellow-700",

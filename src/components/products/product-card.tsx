@@ -39,6 +39,21 @@ export function ProductCard({product}: ProductCardProps) {
         setTimeout(() => setShowAddedMessage(false), 2000)
     }
 
+    const handleWishItem = (e: React.MouseEvent) => {
+        e.preventDefault()
+
+        if (!isAlreadyAddedToList) {
+            addList(product)
+            setMessageText('Added to Wishlist')
+        } else {
+            removeList(product.id)
+            setMessageText('Removed from Wishlist')
+        }
+
+        setShowAddedMessage(true)
+        setTimeout(() => setShowAddedMessage(false), 2000)
+    }
+
     const discountPercent = product.compareAtPrice
         ? Math.round(((product.compareAtPrice - product.price) / product.compareAtPrice) * 100)
         : 0
@@ -89,7 +104,7 @@ export function ProductCard({product}: ProductCardProps) {
                         <button
                             onClick={(e) => {
                                 e.preventDefault()
-                                !isAlreadyAddedToList ? addList(product) : removeList(product.id)
+                                handleWishItem(e)
                             }}
                             className="p-2 cursor-pointer rounded-full bg-background/80 backdrop-blur-sm"
                         >
@@ -105,10 +120,9 @@ export function ProductCard({product}: ProductCardProps) {
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                             <div
                                 className="absolute bottom-0 left-0 right-0 h-20 bg-linear-to-t from-black/40 to-transparent pointer-events-none"/>
-                            <div
-                                className="px-3 py-1.5 rounded-full bg-black/70 text-white text-xs backdrop-blur-md shadow-lg animate-in fade-in zoom-in">
+                            <Badge>
                                 {messageText}
-                            </div>
+                            </Badge>
                         </div>
                     )}
 

@@ -1,28 +1,43 @@
-import {Button, Main} from "@components/ui";
+import { Link } from "@tanstack/react-router"
+import { Button } from "@components/ui"
 
-export const NotFound = () => {
+export function NotFound() {
     return (
-        <Main className="flex items-center justify-center min-h-[60vh] px-6">
-            <div className="text-center max-w-md space-y-3">
+        <div className="min-h-[70vh] flex items-center justify-center px-6">
+            <div className="max-w-md w-full text-center">
 
-                <p className="text-5xl">🧺</p>
-
-                <h2 className="text-xl font-medium">
-                    This piece wandered off
-                </h2>
-
-                <p className="text-muted-foreground text-sm">
-                    We couldn’t find this item in our thrift collection. It may have been sold or removed.
+                <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3">
+                    Listing Unavailable
                 </p>
 
-                <Button
-                    className="mt-4"
-                    onClick={() => window.location.href = '/'}
-                >
-                    Back to Finds
-                </Button>
+                <h1 className="font-serif text-4xl md:text-5xl leading-tight">
+                    Someone got to it first.
+                </h1>
+
+                <p className="mt-4 text-muted-foreground leading-relaxed">
+                    This item is no longer available. It may have been sold,
+                    removed, or archived.
+                </p>
+
+                <div className="my-8 h-px bg-border" />
+
+                <div className="space-y-3">
+                    <Link to="/shop" className="block">
+                        <Button className="w-full">
+                            Browse More Finds
+                        </Button>
+                    </Link>
+
+                    <Button
+                        variant="muted"
+                        className="w-full"
+                        onClick={() => window.history.back()}
+                    >
+                        Go Back
+                    </Button>
+                </div>
 
             </div>
-        </Main>
+        </div>
     )
 }
