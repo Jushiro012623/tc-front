@@ -22,7 +22,6 @@ export function ShopFilters({ onApply }: Props) {
 
     return (
         <aside className="sticky top-24 h-fit rounded-xl shadow-sm bg-muted/20 backdrop-blur-md p-5 space-y-8">
-
             {/* HEADER */}
             <div>
                 <h2 className="text-sm uppercase tracking-[0.2em] text-muted-foreground">

@@ -1,26 +1,37 @@
+import {BrandLogo} from "@components/ui";
+
 export function Loader() {
     return (
-        <div className="flex min-h-[85vh] flex-col items-center justify-center gap-4">
 
-            <div className="animate-pulse">
-                <svg
-                    width="72"
-                    height="72"
-                    viewBox="0 0 878 878"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-18 w-18"
-                >
-                    <path
-                        d="M363.178 352.684L305.048 361.529V522.019L437.735 653.442L571.688 522.019V485.371H656.355V558.666L437.736 772.23V772.231L220.38 558.666V290.762L363.178 265.488V352.684ZM542.623 105C596.962 108.791 726.112 125.724 808 163.13V233.896L719.541 357.739V238.952L484.493 193.459L481.966 561.195L439 604.161L396.034 561.195L393.507 193.459L158.459 238.952V357.739L70 233.896V163.13C151.888 125.724 281.038 108.791 335.377 105C357.618 161.613 413.726 174.924 439 174.503C464.274 174.924 520.382 161.613 542.623 105ZM656.355 290.762V399.439H571.688V361.529L513.558 352.684V265.488L656.355 290.762Z"
-                        fill="currentColor"
-                    />
-                </svg>
+        <div className="relative flex min-h-[85vh] flex-col items-center justify-center gap-5 overflow-hidden">
+
+            {/* soft ambient background glow */}
+            <div className="absolute inset-0 -z-10">
+                <div
+                    className="absolute top-1/3 left-1/2 size-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-[120px]"/>
+                <div className="absolute bottom-1/4 right-1/3 size-[250px] rounded-full bg-accent/10 blur-[120px]"/>
             </div>
 
-            <p className="text-sm text-muted-foreground tracking-wide">
-                Curating finds...
-            </p>
+            {/* logo container */}
+            <div className="relative flex items-center justify-center">
+                <div className="absolute inset-0 animate-ping rounded-2xl bg-primary/10"/>
+                <div className="animate-pulse">
+                    <BrandLogo size={72} withBackground={false} iconOnly={true}/>
+                </div>
+            </div>
+
+            {/* text block */}
+            <div className="flex flex-col items-center gap-2">
+                <p className="text-xs text-muted-foreground tracking-wide">
+                    Preparing your experience
+                    <span className="inline-flex ml-2 gap-0.5">
+                        <span className="animate-bounce text-2xl [animation-delay:0ms]">.</span>
+                        <span className="animate-bounce text-2xl [animation-delay:150ms]">.</span>
+                        <span className="animate-bounce text-2xl [animation-delay:300ms]">.</span>
+                    </span>
+                </p>
+            </div>
         </div>
+
     )
 }
