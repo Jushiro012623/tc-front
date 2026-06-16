@@ -3,10 +3,8 @@ import appCss from '../styles.css?url'
 import {NavBar} from "#/components/layouts/nav-bar.tsx";
 import {Footer} from "#/components/layouts/footer.tsx";
 import 'lenis/dist/lenis.css'
-import {useEffect, useRef} from "react";
-import {type LenisRef, ReactLenis} from "lenis/react";
-import {ThemeProvider} from "#/providers/theme-provider.tsx";
 import {NotFound} from "@components/layouts";
+import {LenisProvider, ThemeProvider} from "#/providers";
 
 export const Route = createRootRoute({
     head: () => ({
@@ -37,40 +35,25 @@ export const Route = createRootRoute({
     }),
     notFoundComponent: NotFound,
     shellComponent: RootDocument,
+
 })
 
 function RootDocument({children}: { children: React.ReactNode }) {
-
-    const lenisRef = useRef<LenisRef>(null)
-
-    useEffect(() => {
-        let rafId: number
-
-        function update(time: number) {
-            lenisRef.current?.lenis?.raf(time)
-            rafId = requestAnimationFrame(update)
-        }
-
-        rafId = requestAnimationFrame(update)
-
-        return () => cancelAnimationFrame(rafId)
-    }, [])
-
     return (
         <html lang="en" className="">
         <head>
             <HeadContent/>
         </head>
         <body>
-        <ReactLenis root options={{autoRaf: false}} ref={lenisRef}>
+        <LenisProvider>
             <ThemeProvider>
                 <NavBar/>
-                <section className="min-h-[50vh]">
+                <section className="min-h-[50vh] relative">
                     {children}
                 </section>
                 <Footer/>
             </ThemeProvider>
-        </ReactLenis>
+        </LenisProvider>
         {/*<TanStackDevtools*/}
         {/*    config={{*/}
         {/*        position: 'bottom-right',*/}

@@ -1,4 +1,4 @@
-import { type Product } from './types'
+import {type Product} from './types'
 
 export const SAMPLE_PRODUCTS: Product[] = [
     {
@@ -245,7 +245,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
         id: '13',
         name: 'Red/White Striped Basic Crop',
         description: 'Red and white striped crew-neck crop top.',
-        price: 109,
+        price: 139,
         compareAtPrice: 139,
         image: '/crops/crop-14.jpg',
         images: ['/crops/crop-14.jpg'],
@@ -282,3 +282,13 @@ export const SAMPLE_PRODUCTS: Product[] = [
         createdAt: new Date('2024-02-15'),
     },
 ]
+
+export const fetchProducts = async (): Promise<Product[]> => {
+    console.log("START FETCHING")
+    return new Promise((resolve) => {
+        setTimeout(() => {
+        console.log("DONE FETCHING")
+            resolve(SAMPLE_PRODUCTS)
+        }, 1200)
+    })
+}

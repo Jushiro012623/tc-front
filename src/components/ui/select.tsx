@@ -27,6 +27,7 @@ export function Select({
                     className={`
                         appearance-none
                         input
+                        border-border
                         ${className}
                     `}
                     {...props}

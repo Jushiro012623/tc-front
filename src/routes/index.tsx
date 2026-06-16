@@ -3,8 +3,9 @@ import {Button, Main} from "#/components/ui";
 import {ArrowRight} from "lucide-react";
 import {FeatureItem} from "#/components/layouts";
 import {ProductCard} from "#/components/products/product-card.tsx";
-import {SAMPLE_PRODUCTS} from "#/lib/products.ts";
+import {fetchProducts} from "#/lib/products.ts";
 import {ShopBadge} from "#/constants.ts";
+import {Loader} from "@components/layouts/loader.tsx";
 
 export const Route = createFileRoute('/')({
     component: Home,
@@ -12,12 +13,15 @@ export const Route = createFileRoute('/')({
         meta: [
             {title: `Home | Triumph Co.`}
         ]
-    })
+    }),
+    pendingMs: 0,
+    pendingComponent: Loader,
+    loader: async () => fetchProducts()
 })
 
 function Home() {
     const navigate = useNavigate()
-    const featuredProducts = SAMPLE_PRODUCTS.slice(0, 4)
+    const featuredProducts = Route.useLoaderData().slice(0, 4)
     return (
         <Main>
             {/*---------------------------------------------HERO SECTION---------------------------------------------*/}
@@ -42,7 +46,8 @@ function Home() {
                     </p>
 
                     <div className="mt-8 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                        <Button size="lg" className="w-full sm:w-auto">
+                        <Button size="lg" className="w-full sm:w-auto"
+                                onClick={() => navigate({to: '/shop'})}>
                             Browse Collection <ArrowRight size={15}/>
                         </Button>
 
@@ -105,7 +110,7 @@ function Home() {
                             fashion more accessible for everyone.
                         </p>
                         <Link to="/">
-                            <Button size="lg" className="mt-5 gap-2">
+                            <Button size="lg" className="mt-5 w-full sm:w-auto">
                                 Why Thrifting Matters
                                 <ArrowRight className="w-5 h-5"/>
                             </Button>

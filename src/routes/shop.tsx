@@ -1,9 +1,10 @@
 import {createFileRoute} from '@tanstack/react-router'
 import {Main} from '@components/ui'
-import {SAMPLE_PRODUCTS} from '#/lib/products'
+import {fetchProducts} from '#/lib/products'
 import {ProductCard} from '@components/products/product-card'
 import {useMemo, useState} from 'react'
 import {ShopFilters} from "@components/layouts";
+import {Loader} from "@components/layouts/loader.tsx";
 
 export const Route = createFileRoute('/shop')({
     component: Component,
@@ -11,10 +12,14 @@ export const Route = createFileRoute('/shop')({
         meta: [
             { title: `Shop | Triumph Co.`}
         ]
-    })
+    }),
+    pendingMs: 0,
+    pendingComponent: Loader,
+    loader: async () => fetchProducts()
 })
 
 function Component() {
+    const products = Route.useLoaderData()
     const [filters, setFilters] = useState({
         category: 'All',
         sizes: [] as string[],
@@ -23,7 +28,8 @@ function Component() {
     })
 
     const filteredProducts = useMemo(() => {
-        let items = [...SAMPLE_PRODUCTS]
+
+        let items = [...products]
 
         if (filters.category !== 'All') {
             items = items.filter(
@@ -60,7 +66,7 @@ function Component() {
         <Main>
             <div className="max-w-7xl mx-auto px-6 py-12">
 
-                <div className="text-center mb-10">
+                <div className="text-left mb-15">
                     <h1 className="font-serif text-4xl md:text-5xl">
                         Curated Finds
                     </h1>
