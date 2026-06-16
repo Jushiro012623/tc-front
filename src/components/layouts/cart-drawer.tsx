@@ -34,9 +34,12 @@ export const CartDrawer = ({open, onClose}: Props) => {
                         open ? "translate-x-0" : "translate-x-full"
                     )}
                 >
+
+                    <div className="h-1 w-full bg-linear-to-l from-primary/60 via-primary to-transparent"/>
                     {/* HEADER */}
                     <div
                         className="flex items-start justify-between p-5 bg-background/60 backdrop-blur">
+
                         <div className="space-y-1">
                             <h2 className="text-lg font-semibold text-foreground">
                                 Your Cart
