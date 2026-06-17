@@ -131,13 +131,11 @@ export const useUIStore = create<UIStore>()(
                     isDarkMode: !state.isDarkMode,
                 })),
 
-            setDarkMode: (value) =>
-                set({
-                    isDarkMode: value,
-                }),
+            setDarkMode: (value) => set({isDarkMode: value}),
         }),
         {
-            name: "dark-theme",
+            name: "theme",
+            skipHydration: true,
         }
     )
 )

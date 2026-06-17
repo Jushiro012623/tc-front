@@ -17,8 +17,12 @@ export const Route = createRootRoute({
                 content: 'width=device-width, initial-scale=1',
             },
             {
-                title: 'Triumph Co.',
+                title: 'Triumphs Co.',
             },
+            {
+                name: "viewport",
+                content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+            }
         ],
         links: [
             {
@@ -40,7 +44,7 @@ export const Route = createRootRoute({
 
 function RootDocument({children}: { children: React.ReactNode }) {
     return (
-        <html lang="en" className="">
+        <html lang="en">
         <head>
             <HeadContent/>
         </head>

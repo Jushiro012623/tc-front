@@ -6,7 +6,7 @@ export const Route = createFileRoute("/auth/sign-in")({
     component: RouteComponent,
     head: () => ({
         meta: [
-            { title: 'Sign In | Triumph Co.'}
+            { title: 'Sign In | Triumphs Co.'}
         ]
     })
 });
@@ -19,7 +19,7 @@ function RouteComponent() {
                 <div className="w-full max-w-md mx-auto">
                     <header className="mb-10 space-y-3 text-center lg:text-left">
                         <span className="font-serif text-sm tracking-[0.25em] uppercase text-muted-foreground">
-                            Triumph Co.
+                            Triumphs Co.
                         </span>
 
                         <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1]">
@@ -84,7 +84,7 @@ function RouteComponent() {
                     </form>
 
                     <p className="mt-10 text-center text-sm text-muted-foreground">
-                        New to Triumph Co?{" "}
+                        New to Triumphs Co?{" "}
                         <Link to="/auth/sign-up"
                            className="font-medium text-primary hover:text-primary/80 underline underline-offset-4 transition-colors">
                             Join the thrift community

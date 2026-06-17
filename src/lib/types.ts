@@ -134,3 +134,12 @@ export interface ProductFilters {
     inStock?: boolean
     sortBy?: 'newest' | 'price-asc' | 'price-desc' | 'rating' | 'popular'
 }
+
+export type ShopSearch = {
+    category?: string
+    style?: string
+    sizes?: string[]
+    priceMin?: number
+    priceMax?: number
+    name?: string
+}

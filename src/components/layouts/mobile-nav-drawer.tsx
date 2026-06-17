@@ -107,7 +107,11 @@ export const MobileNavDrawer = ({open, onClose}: Props) => {
                 <div className="mt-auto p-4 border-t border-border/60 flex items-center justify-between">
                     <span className="text-xs text-muted-foreground">Guest</span>
                     <Button
-                        onClick={() => navigation({to: "/auth/sign-in"})}
+                        onClick={() => {
+                            onClose()
+                            navigation({to: "/auth/sign-in"})
+
+                        }}
                         className="text-xs text-primary hover:underline">
                         Sign in
                     </Button>

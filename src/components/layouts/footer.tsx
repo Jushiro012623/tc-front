@@ -24,7 +24,7 @@ export const Footer = () => {
                         <div className="grid grid-cols-2 lg:grid-cols-5 gap-10">
                             {/* Brand */}
                             <div className="col-span-2 lg:col-span-2">
-                                <p className="font-display text-3xl font-light tracking-[0.15em] uppercase mb-4">Triumph
+                                <p className="font-display text-3xl font-light tracking-[0.15em] uppercase mb-4">Triumphs
                                     CO.</p>
                                 <p className="font-body text-xs text-white/50 leading-relaxed ">
                                     Curated vintage, thrifted, and pre-loved pieces sourced for style, quality, and individuality.
@@ -82,7 +82,7 @@ export const Footer = () => {
                 <div className="border-t border-white/10 py-6">
                     <div
                         className="max-w-8xl mx-auto px-6 lg:px-10 flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <p className="font-body text-xs text-white/40">© {new Date().getFullYear()} Triumph Thrift. Giving fashion a second life.</p>
+                        <p className="font-body text-xs text-white/40">© {new Date().getFullYear()} Triumphs Thrift. Giving fashion a second life.</p>
                         <div className="flex items-center gap-6">
                             <button
                                 className="font-body text-xs text-white/40 hover:text-sage transition-colors">Privacy

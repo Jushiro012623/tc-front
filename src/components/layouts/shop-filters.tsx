@@ -1,24 +1,27 @@
-import { useState } from 'react'
+import React from 'react'
 import {Button, Input, Select, SeparatorX} from "@components/ui"
 
 type Props = {
-    onApply: (filters: {
+    filters: {
         category: string
-        sizes: string[]
         style: string
+        sizes: string[]
         price: [number, number]
-    }) => void
+    }
+    onApply: (patch: any) => void
 }
 
-export function ShopFilters({ onApply }: Props) {
-    const categories = ['All', 'Women', 'Unisex', 'Accessories', 'Footwear']
-    const sizeOptions = ['XS', 'S', 'M', 'L', 'XL']
-    const styleOptions = ['All', 'Minimal', 'Vintage', 'Streetwear', 'Elegant']
+const categories = ['All', 'Women', 'Unisex', 'Accessories', 'Footwear']
+const sizeOptions = ['XS', 'S', 'M', 'L', 'XL']
+const styleOptions = ['All', 'Minimal', 'Vintage', 'Streetwear', 'Elegant']
 
-    const [category, setCategory] = useState('All')
-    const [sizes, setSizes] = useState<string[]>([])
-    const [style, setStyle] = useState('All')
-    const [price, setPrice] = useState<[number, number]>([0, 300])
+export const ShopFilters = React.memo(({filters, onApply}: Props) => {
+
+    const [draft, setDraft] = React.useState(filters)
+
+    React.useEffect(() => {
+        setDraft(filters)
+    }, [filters])
 
     return (
         <aside className="sticky top-24 h-fit rounded-xl shadow-sm bg-muted/20 backdrop-blur-md p-5 space-y-8">
@@ -32,7 +35,7 @@ export function ShopFilters({ onApply }: Props) {
                 </p>
             </div>
 
-            <SeparatorX />
+            <SeparatorX/>
             {/* CATEGORY */}
             <section className="space-y-3">
                 <h3 className="text-xs uppercase tracking-wider text-muted-foreground">
@@ -43,9 +46,11 @@ export function ShopFilters({ onApply }: Props) {
                     {categories.map((c) => (
                         <button
                             key={c}
-                            onClick={() => setCategory(c)}
+                            onClick={() =>
+                                setDraft(prev => ({...prev, category: c}))
+                            }
                             className={`px-3 py-1.5 rounded-md text-xs border transition
-                                ${category === c
+                                ${draft.category === c
                                 ? "bg-primary text-background border-primary"
                                 : "bg-transparent hover:bg-muted border-border text-muted-foreground"
                             }`}
@@ -67,14 +72,15 @@ export function ShopFilters({ onApply }: Props) {
                         <button
                             key={size}
                             onClick={() =>
-                                setSizes((prev) =>
-                                    prev.includes(size)
-                                        ? prev.filter((s) => s !== size)
-                                        : [...prev, size]
-                                )
+                                setDraft(prev => ({
+                                    ...prev,
+                                    sizes: prev.sizes.includes(size)
+                                        ? prev.sizes.filter(s => s !== size)
+                                        : [...prev.sizes, size],
+                                }))
                             }
                             className={`h-9 w-9 rounded-md border text-xs transition
-                                ${sizes.includes(size)
+                                ${draft.sizes.includes(size)
                                 ? "bg-primary text-background border-primary"
                                 : "border-border text-muted-foreground hover:bg-muted"
                             }`}
@@ -95,9 +101,12 @@ export function ShopFilters({ onApply }: Props) {
                     <Input
                         type="number"
                         size="sm"
-                        value={price[0]}
+                        value={draft.price[0]}
                         onChange={(e) =>
-                            setPrice([Number(e.target.value), price[1]])
+                            setDraft(prev => ({
+                                ...prev,
+                                price: [Number(e.target.value), prev.price[1]],
+                            }))
                         }
                         placeholder="Min"
                     />
@@ -105,9 +114,12 @@ export function ShopFilters({ onApply }: Props) {
                     <Input
                         type="number"
                         size="sm"
-                        value={price[1]}
+                        value={draft.price[1]}
                         onChange={(e) =>
-                            setPrice([price[0], Number(e.target.value)])
+                            setDraft(prev => ({
+                                ...prev,
+                                price: [prev.price[0], Number(e.target.value)],
+                            }))
                         }
                         placeholder="Max"
                     />
@@ -125,8 +137,13 @@ export function ShopFilters({ onApply }: Props) {
                 </h3>
 
                 <Select
-                    value={style}
-                    onChange={(e) => setStyle(e.target.value)}
+                    value={draft.style}
+                    onChange={(e) =>
+                        setDraft(prev => ({
+                            ...prev,
+                            style: e.target.value,
+                        }))
+                    }
                 >
                     {styleOptions.map((s) => (
                         <option key={s} value={s}>
@@ -139,8 +156,10 @@ export function ShopFilters({ onApply }: Props) {
             {/* APPLY */}
             <div className="pt-2">
                 <Button
-                    onClick={() =>
-                        onApply({ category, sizes, style, price })
+                    onClick={(e) => {
+                        e.preventDefault()
+                        onApply(draft)
+                    }
                     }
                     className="w-full h-11"
                 >
@@ -149,10 +168,15 @@ export function ShopFilters({ onApply }: Props) {
 
                 <Button
                     onClick={() => {
-                        setCategory('All')
-                        setSizes([])
-                        setStyle('All')
-                        setPrice([0, 300])
+                        const reset = {
+                            category: 'All',
+                            style: 'All',
+                            sizes: [],
+                            price: [0, 300],
+                            name: undefined
+                        }
+                        setDraft(filters)
+                        onApply(reset)
                     }}
                     variant="muted"
                     className="w-full mt-2 text-xs text-muted-foreground hover:text-foreground transition"
@@ -162,4 +186,4 @@ export function ShopFilters({ onApply }: Props) {
             </div>
         </aside>
     )
-}
+})

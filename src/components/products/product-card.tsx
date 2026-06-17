@@ -1,7 +1,7 @@
 'use client'
 import {Heart, ShoppingCart} from 'lucide-react'
 import {useCartStore, useWishlistStore} from '#/lib/store'
-import {useState} from 'react'
+import React, {useState} from 'react'
 import type {Product} from "#/lib/types.ts";
 import {Link} from "@tanstack/react-router";
 import clsx from "clsx";
@@ -11,7 +11,7 @@ interface ProductCardProps {
     product: Product
 }
 
-export function ProductCard({product}: ProductCardProps) {
+export const  ProductCard = React.memo(({product}: ProductCardProps)=>  {
     const {addItem, cart, removeItem} = useCartStore()
     const {addList, wishlist, removeList} = useWishlistStore()
     const [showAddedMessage, setShowAddedMessage] = useState(false)
@@ -59,7 +59,7 @@ export function ProductCard({product}: ProductCardProps) {
         : 0
 
     return (
-        <Link to="/products/$product" params={{product: product.id}} disabled={showAddedMessage}
+        <Link to="/products/$product" state={{product: product}} params={{product: product.id}}  disabled={showAddedMessage}
         >
 
             <div className="group relative cursor-pointer">
@@ -163,4 +163,4 @@ export function ProductCard({product}: ProductCardProps) {
             </div>
         </Link>
     )
-}
+})

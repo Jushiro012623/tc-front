@@ -2,8 +2,8 @@ import {useEffect} from "react"
 import {useUIStore} from "#/lib/store"
 
 export function ThemeProvider({
-                                  children,
-                              }: {
+      children,
+  }: {
     children: React.ReactNode
 }) {
     const isDarkMode = useUIStore((state) => state.isDarkMode)

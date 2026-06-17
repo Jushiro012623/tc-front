@@ -6,7 +6,7 @@ export const Route = createFileRoute('/auth/sign-up')({
     component: RouteComponent,
     head: () => ({
         meta: [
-            { title: 'Sign Up | Triumph Co.'}
+            { title: 'Sign Up | Triumphs Co.'}
         ]
     })
 })
@@ -21,7 +21,7 @@ function RouteComponent() {
 
                     <header className="mb-10 space-y-3 text-center lg:text-left">
                     <span className="font-serif text-sm tracking-[0.25em] uppercase text-muted-foreground">
-                        Triumph Co.
+                        Triumphs Co.
                     </span>
 
                         <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1]">

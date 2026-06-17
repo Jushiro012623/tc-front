@@ -38,7 +38,7 @@ export const BrandLogo = ({withBackground = true, iconOnly = true, size = 48}: B
 
             {!iconOnly && (
                 <span className="font-serif text-lg font-semibold text-primary">
-                    Triumph Co.
+                    Triumphs Co.
                 </span>
             )}
         </div>

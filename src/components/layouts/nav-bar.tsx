@@ -7,16 +7,41 @@ import {NavLinks} from "#/constants";
 import {useState} from "react";
 import {CartDrawer} from "@components/layouts/cart-drawer.tsx";
 import {useCartStore, useUIStore} from "#/lib/store.ts";
-import {Moon, Sun} from "lucide-react";
+import {Moon, Search, Sun} from "lucide-react";
 import {MobileNavDrawer} from "@components/layouts/mobile-nav-drawer.tsx";
 
 export const NavBar = () => {
     const navigate = useNavigate()
     const pathname = useLocation().pathname
+
     const [mobileOpen, setMobileOpen] = useState(false)
     const [cartOpen, setCartOpen] = useState(false)
     const {isDarkMode, toggleDarkMode} = useUIStore()
+    const [isSearchBarOpen, setIsSearchBarOpen] = useState<boolean>(false)
     const {cart} = useCartStore()
+
+    const handleSearchSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        const formData = new FormData(e.currentTarget)
+        const search = formData.get("search")
+        const active = document.activeElement as HTMLElement | null
+        if(!search) return
+        if(isSearchBarOpen) setIsSearchBarOpen(false)
+        navigate({
+            to: "/shop",
+            search: {
+                category: 'All',
+                style: 'All',
+                sizes: [],
+                priceMin: 0,
+                priceMax: 300,
+                name: search?.toString() || undefined
+            },
+            replace: true
+        })
+        active?.blur?.()
+        e.currentTarget.reset()
+    }
 
     return (
         <>
@@ -31,7 +56,7 @@ export const NavBar = () => {
                         onClick={() => setMobileOpen(true)}
                         className="md:hidden p-2 -ml-2 text-muted-foreground hover:text-foreground transition-colors"
                     >
-                        <BiMenu size={24} />
+                        <BiMenu size={24}/>
                     </button>
 
                     {/*------------------Left: Brand Logo------------------*/}
@@ -49,7 +74,7 @@ export const NavBar = () => {
                                 <li key={href}>
                                     <Link to={href}
                                           className={clsx("hover:text-foreground transition-colors",
-                                            pathname === href ? "text-foreground" : ''
+                                              pathname === href ? "text-foreground" : ''
                                           )}>{label}</Link>
                                 </li>
                             ))}
@@ -60,17 +85,25 @@ export const NavBar = () => {
                     <div className="flex items-center gap-3 md:gap-5 shrink-0">
 
                         {/*---------Desktop Search Bar---------*/}
-                        <div className="hidden lg:block relative">
+                        <form className="hidden lg:block relative" onSubmit={handleSearchSubmit}>
                             <Input
                                 type="search"
-                                placeholder="Search for products..."
+                                name="search"
+                                placeholder="Crop Top, Blouse, SKU-001"
                                 className={clsx(
                                     "border-transparent rounded-full! focus-visible:bg-transparent transition-all",
-                                    "rounded-full w-64 pl-7 xl:w-80 bg-muted/70 ")}
+                                    "rounded-full w-64 pl-7 xl:w-80 ")}
+                                leftIcon={(
+                                    <button>
+                                        <Search className="text-primary/80" size={20}/>
+                                    </button>
+                                )}
                             />
-                        </div>
+                        </form>
 
-                        <button className="lg:hidden p-2 text-muted-foreground hover:text-foreground transition-colors">
+                        <button onClick={() => setIsSearchBarOpen((v) => !v)}
+                                className="lg:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
+                        >
                             <BiSearch size={22}/>
                         </button>
 
@@ -134,7 +167,36 @@ export const NavBar = () => {
 
                 </div>
             </header>
-
+            <div
+                className={clsx(
+                    "lg:hidden overflow-hidden bg-background/95 backdrop-blur-sm",
+                    "transition-all duration-300 ",
+                    isSearchBarOpen
+                        ? "max-h-24 opacity-100"
+                        : "max-h-0 opacity-0 border-transparent"
+                )}
+            >
+                <form
+                    onSubmit={handleSearchSubmit}
+                    className="px-4 py-3"
+                >
+                    <div className="w-full">
+                        <Input
+                            autoFocus
+                            type="search"
+                            name="search"
+                            placeholder="Crop Top, Blouse, SKU-001"
+                            className="w-full"
+                            leftIcon={
+                                <button><Search
+                                    size={18}
+                                    className="text-muted-foreground"
+                                /></button>
+                            }
+                        />
+                    </div>
+                </form>
+            </div>
             <CartDrawer
                 open={cartOpen}
                 onClose={() => setCartOpen(false)}

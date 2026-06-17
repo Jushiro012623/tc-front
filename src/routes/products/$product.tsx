@@ -1,28 +1,46 @@
-import {createFileRoute, useParams} from '@tanstack/react-router'
+import {createFileRoute, notFound, useParams} from '@tanstack/react-router'
 import {Badge, Button, Main, Chip} from "@components/ui";
-import {SAMPLE_PRODUCTS} from "#/lib/products.ts";
 import {ArrowLeft} from "lucide-react";
 import {NotFound} from "@components/layouts";
 import {useCartStore} from "#/lib/store.ts";
+import {Loader} from "@components/layouts/loader.tsx";
+import {fetchProduct} from "#/lib/products.ts";
+import type {Product} from "#/lib/types.ts";
 
 export const Route = createFileRoute('/products/$product')({
     component: RouteComponent,
     head: ({params}) => ({
         meta: [
-            {title: `Product ${params.product} | Triumph Co.`}
+            {title: `Product ${params.product} | Triumphs Co.`}
         ]
-    })
+    }),
+    pendingMs: 0,
+    pendingComponent: Loader,
+    loader: async ({params, location}) => {
+        const stateProduct = location.state?.product
+
+        if (stateProduct) {
+            return stateProduct
+        }
+        const product = await fetchProduct(params.product)
+
+        if (!product) throw notFound()
+
+        return product
+    },
+    notFoundComponent: NotFound
 })
 
 function RouteComponent() {
     const {product: id} = useParams({from: '/products/$product'})
-    const {cart, addItem, removeItem} = useCartStore()
 
-    const isAlreadyAddedToCard = cart.items.find((item) => item.productId === id)
+    const product: Product = Route.useLoaderData()
 
-    const product = SAMPLE_PRODUCTS.find((p) => p.id === id)
+    const {addItem, removeItem} = useCartStore()
 
-    if (!product) return <NotFound/>
+    const isAlreadyAddedToCard = useCartStore((s) => {
+        return s.cart.items.some(i => i.productId === id)
+    })
 
     return (
         <Main>
@@ -138,7 +156,7 @@ function RouteComponent() {
                             <Button
                                 className="w-full h-11"
                                 onClick={() => {
-                                    isAlreadyAddedToCard ? removeItem(id) : addItem(product, 1)
+                                    isAlreadyAddedToCard ? removeItem(id) : addItem(product)
                                 }}
                             >
                                 {isAlreadyAddedToCard ? "Remove from Cart" : "Add to Cart"}

@@ -17,18 +17,20 @@ type InputProps = {
     size?: InputSize;
     className?: string;
     classNames?: ClassNames;
+    leftIcon?: React.ReactNode
 } & Omit<React.ComponentPropsWithoutRef<"input">, "size">;
 
 export const Input = ({
-                          label,
-                          state = "base",
-                          size = 'md',
-                          description,
-                          className,
-                          classNames,
-                          id,
-                          ...props
-                      }: InputProps) => {
+      label,
+      state = "base",
+      size = 'md',
+      description,
+      className,
+      classNames,
+      id,
+      leftIcon,
+      ...props
+  }: InputProps) => {
     const inputId = id ?? React.useId();
 
     const stateClasses: Record<InputState, string> = {
@@ -51,18 +53,24 @@ export const Input = ({
                     {label}
                 </label>
             )}
-
-            <input
-                id={inputId}
-                {...props}
-                className={clsx(
-                    "input w-full rounded-md border border-border bg-background transition focus:outline-none focus:ring-2",
-                    sizeClasses[size],
-                    stateClasses[state],
-                    className,
-                    classNames?.input
+            <div className="w-full relative">
+                <input
+                    id={inputId}
+                    {...props}
+                    className={clsx(
+                        "input w-full rounded-md border border-border bg-background transition",
+                        sizeClasses[size],
+                        stateClasses[state],
+                        className,
+                        classNames?.input
+                    )}
+                />
+                {leftIcon && (
+                    <div className="absolute flex items-center justify-center top-1/2 -translate-y-1/2 right-5">
+                        {leftIcon}
+                    </div>
                 )}
-            />
+            </div>
 
             {description && (
                 <p

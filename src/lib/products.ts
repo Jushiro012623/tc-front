@@ -287,8 +287,21 @@ export const fetchProducts = async (): Promise<Product[]> => {
     console.log("START FETCHING")
     return new Promise((resolve) => {
         setTimeout(() => {
-        console.log("DONE FETCHING")
+            console.log("DONE FETCHING")
             resolve(SAMPLE_PRODUCTS)
+        }, 1200)
+    })
+}
+
+export const fetchProduct = async (
+    id: string | number
+): Promise<Product | undefined> => {
+    console.log("START FETCHING")
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            const product = SAMPLE_PRODUCTS.find((p) => p.id === id)
+            console.log("DONE FETCHING")
+            resolve(product)
         }, 1200)
     })
 }

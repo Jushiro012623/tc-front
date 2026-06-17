@@ -11,7 +11,7 @@ export const Route = createFileRoute('/')({
     component: Home,
     head: () => ({
         meta: [
-            {title: `Home | Triumph Co.`}
+            {title: `Home | Triumphs Co.`}
         ]
     }),
     pendingMs: 0,
