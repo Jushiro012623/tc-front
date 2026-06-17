@@ -91,7 +91,7 @@ export const NavBar = () => {
                                 name="search"
                                 placeholder="Crop Top, Blouse, SKU-001"
                                 className={clsx(
-                                    "border-transparent rounded-full! focus-visible:bg-transparent transition-all",
+                                    "border-transparent rounded-full! bg-muted/50 focus-visible:bg-transparent transition-all",
                                     "rounded-full w-64 pl-7 xl:w-80 ")}
                                 leftIcon={(
                                     <button>
@@ -166,37 +166,38 @@ export const NavBar = () => {
                     </div>
 
                 </div>
-            </header>
-            <div
-                className={clsx(
-                    "lg:hidden overflow-hidden bg-background/95 backdrop-blur-sm",
-                    "transition-all duration-300 ",
-                    isSearchBarOpen
-                        ? "max-h-24 opacity-100"
-                        : "max-h-0 opacity-0 border-transparent"
-                )}
-            >
-                <form
-                    onSubmit={handleSearchSubmit}
-                    className="px-4 py-3"
+                <div
+                    className={clsx(
+                        "lg:hidden overflow-hidden ",
+                        "transition-all duration-300 ",
+                        isSearchBarOpen
+                            ? "max-h-24 opacity-100"
+                            : "max-h-0 opacity-0 border-transparent"
+                    )}
                 >
-                    <div className="w-full">
-                        <Input
-                            autoFocus
-                            type="search"
-                            name="search"
-                            placeholder="Crop Top, Blouse, SKU-001"
-                            className="w-full"
-                            leftIcon={
-                                <button><Search
-                                    size={18}
-                                    className="text-muted-foreground"
-                                /></button>
-                            }
-                        />
-                    </div>
-                </form>
-            </div>
+                    <form
+                        onSubmit={handleSearchSubmit}
+                        className="px-4 py-3"
+                    >
+                        <div className="w-full">
+                            <Input
+                                autoFocus
+                                type="search"
+                                name="search"
+                                placeholder="Crop Top, Blouse, SKU-001"
+                                className="w-full bg-muted/50"
+                                leftIcon={
+                                    <button><Search
+                                        size={18}
+                                        className="text-muted-foreground  "
+                                    /></button>
+                                }
+                            />
+                        </div>
+                    </form>
+                </div>
+            </header>
+
             <CartDrawer
                 open={cartOpen}
                 onClose={() => setCartOpen(false)}
