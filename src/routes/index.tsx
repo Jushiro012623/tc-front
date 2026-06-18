@@ -1,4 +1,4 @@
-import {createFileRoute, Link, useNavigate} from '@tanstack/react-router'
+import {createFileRoute, Link} from '@tanstack/react-router'
 import {Button, Main} from "#/components/ui";
 import {ArrowRight} from "lucide-react";
 import {FeatureItem} from "#/components/layouts";
@@ -20,10 +20,9 @@ export const Route = createFileRoute('/')({
 })
 
 function Home() {
-    const navigate = useNavigate()
     const featuredProducts = Route.useLoaderData().slice(0, 4)
     return (
-        <Main>
+        <Main className="pb-16">
             {/*---------------------------------------------HERO SECTION---------------------------------------------*/}
             <section
                 className="relative w-full min-h-[70vh] lg:min-h-[85vh] flex items-center justify-center px-6 sm:px-8 lg:px-12">
@@ -41,23 +40,25 @@ function Home() {
                         Curated Thrift Finds
                     </h1>
 
-                    <p className="mt-2 max-w-2xl sm:text-lg md:text-xl text-white">
+                    <p className="leading-8 mt-2 max-w-2xl sm:text-lg md:text-xl text-white">
                         Discover handpicked vintage and pre-loved pieces with character, quality, and style.
                     </p>
 
                     <div className="mt-8 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                        <Button size="lg" className="w-full sm:w-auto"
-                                onClick={() => navigate({to: '/shop', search: defaultShopFilter, replace: true})}>
-                            Browse Collection <ArrowRight size={15}/>
-                        </Button>
+                        <Link to="/shop" search={defaultShopFilter}>
+                            <Button size="lg" className="w-full sm:w-auto">
+                                Browse Collection <ArrowRight size={15}/>
+                            </Button>
+                        </Link>
 
-                        <Button
-                            onClick={() => navigate({to: "/about"})}
-                            variant="bordered"
-                            size="lg"
-                            className="w-full sm:w-auto">
-                            Why Thrift?
-                        </Button>
+                        <Link to="/about" search={defaultShopFilter}>
+                            <Button
+                                variant="bordered"
+                                size="lg"
+                                className="w-full sm:w-auto">
+                                Why Thrift?
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -83,7 +84,7 @@ function Home() {
                         Latest Arrivals
                     </h1>
 
-                    <p className="mt-4 text-center text-sm lg:text-lg text-muted-foreground max-w-2xl">
+                    <p className="leading-8 mt-4 text-center text-sm lg:text-lg text-muted-foreground max-w-2xl">
                         Unique vintage and thrifted pieces added to our collection this week.
                     </p>
 
@@ -91,25 +92,26 @@ function Home() {
                         {featuredProducts.map((product) => (<ProductCard key={product.id} product={product}/>))}
                     </div>
 
-                    <Button
-                        onClick={() => navigate({to: '/shop', search: defaultShopFilter, replace: true})}
-                        variant="muted"
-                        size="lg"
-                        className="mt-10 w-full sm:w-auto"
-                    >
-                        Shop All Finds
-                        <ArrowRight size={15}/>
-                    </Button>
+                    <Link to="/shop" search={defaultShopFilter}>
+                        <Button
+                            variant="secondary"
+                            size="lg"
+                            className="mt-10 w-full sm:w-auto"
+                        >
+                            Shop All Finds
+                            <ArrowRight size={15}/>
+                        </Button>
+                    </Link>
                 </div>
             </section>
-            <section className="text-cream py-20">
+            <section className="text-cream py-10 sm:py-24 max-w-7xl mx-auto bg-muted rounded-xl">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-2xl mx-auto text-center space-y-6">
                         <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-center">
                             Give Fashion A Second Life
                         </h2>
 
-                        <p className="mt-4 text-center text-sm lg:text-lg text-muted-foreground max-w-2xl">
+                        <p className="leading-8 max-w-2xl mx-auto mt-6 mb-8 text-muted-foreground">
                             Every thrifted piece helps reduce waste, extend the life of quality garments, and make
                             fashion more accessible for everyone.
                         </p>

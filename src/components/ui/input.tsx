@@ -58,7 +58,7 @@ export const Input = ({
                     id={inputId}
                     {...props}
                     className={clsx(
-                        "input w-full rounded-md border border-border bg-background transition",
+                        "input",
                         sizeClasses[size],
                         stateClasses[state],
                         className,

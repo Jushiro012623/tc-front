@@ -16,7 +16,7 @@ export const FeatureItem = ({
                             }: FeatureItemProps) => {
     const Icon = icon;
     return (
-        <div className="flex gap-3 p-5 max-w-md ">
+        <div className="flex gap-3 p-5 max-w-md rounded-lg bg-muted/50">
             <div><Icon className={color} /></div>
 
             <div className="space-y-2">
@@ -24,7 +24,7 @@ export const FeatureItem = ({
                     {title}
                 </h5>
 
-                <p className="text-muted-foreground text-sm">
+                <p className="leading-8 text-muted-foreground text-sm">
                     {description}
                 </p>
             </div>

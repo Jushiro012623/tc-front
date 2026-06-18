@@ -1,4 +1,4 @@
-import {Heart, Leaf, Zap} from "lucide-react";
+import {Heart, Leaf, Zap, Mail, Phone, MapPin, Clock,} from "lucide-react";
 
 export const NavLinks = [
     {
@@ -23,6 +23,25 @@ export const NavLinks = [
     },
 ]
 
+export const FAQ = [
+    {
+        q: "Are all items second-hand?",
+        a: "Yes. Every item is carefully curated pre-loved clothing.",
+    },
+    {
+        q: "Do you accept returns?",
+        a: "All sales are final unless the item is defective.",
+    },
+    {
+        q: "How often do you restock?",
+        a: "We restock weekly with new thrift finds.",
+    },
+    {
+        q: "Can I reserve items?",
+        a: "Yes, reservations are allowed for a limited time depending on availability.",
+    },
+]
+
 export const values = [
     {
         title: "Sustainability",
@@ -38,6 +57,54 @@ export const values = [
         title: "Accessibility",
         description:
             "We believe everyone deserves access to quality fashion at prices that make sense.",
+    },
+]
+export const contactDetails = [
+    {
+        label: "Email",
+        value: "triumph.co@gmail.com",
+        note: "We reply within 24 hours",
+        icon: Mail,
+    },
+    {
+        label: "Phone",
+        value: "+63 912 345 6789",
+        note: "Available Mon - Sat",
+        icon: Phone,
+    },
+    {
+        label: "Location",
+        value: "Quezon City, Philippines",
+        note: "Visit us for curated thrift finds",
+        icon: MapPin,
+    },
+    {
+        label: "Store Hours",
+        value: "Mon - Sat: 10:00 AM - 7:00 PM",
+        note: "Sunday: Closed",
+        icon: Clock,
+    },
+]
+export const commitments = [
+    {
+        title: "Extending Garment Life",
+        description:
+            "We carefully curate pre-loved clothing to keep wearable garments in use for longer.",
+    },
+    {
+        title: "Reducing Textile Waste",
+        description:
+            "Every thrifted purchase helps reduce the demand for unnecessary production and keeps clothing out of landfills.",
+    },
+    {
+        title: "Encouraging Conscious Shopping",
+        description:
+            "We promote thoughtful purchasing by offering unique pieces that customers truly value and wear.",
+    },
+    {
+        title: "Building a Sustainable Community",
+        description:
+            "We aim to inspire more people to embrace second-hand fashion and make responsible style choices.",
     },
 ]
 export const defaultShopFilter = {

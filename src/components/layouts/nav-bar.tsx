@@ -25,8 +25,8 @@ export const NavBar = () => {
         const formData = new FormData(e.currentTarget)
         const search = formData.get("search")
         const active = document.activeElement as HTMLElement | null
-        if(!search) return
-        if(isSearchBarOpen) setIsSearchBarOpen(false)
+        if (!search) return
+        if (isSearchBarOpen) setIsSearchBarOpen(false)
         navigate({
             to: "/shop",
             search: {
@@ -69,13 +69,13 @@ export const NavBar = () => {
 
                     {/*-----------Center: Desktop Navigation-----------*/}
                     <nav className="hidden md:flex flex-1 justify-center">
-                        <ul className="flex items-center gap-8 text-sm font-medium text-muted-foreground">
+                        <ul className="flex items-center gap-4 text-sm font-medium text-muted-foreground">
                             {NavLinks.map(({href, label}: { href: string; label: string; }) => (
                                 <li key={href}>
-                                    <Link to={href}
-                                          className={clsx("hover:text-foreground transition-colors",
-                                              pathname === href ? "text-foreground" : ''
-                                          )}>{label}</Link>
+                                    <Link to={href} className={clsx("transition-colors rounded-md py-2 px-3 ",
+                                        pathname === href ? "text-primary bg-muted" : 'hover:text-foreground hover:bg-muted'
+                                    )}
+                                    >{label}</Link>
                                 </li>
                             ))}
                         </ul>
