@@ -2,7 +2,7 @@ import {createFileRoute, notFound, useParams} from '@tanstack/react-router'
 import {Badge, Button, Main, Chip} from "@components/ui";
 import {ArrowLeft} from "lucide-react";
 import {NotFound} from "@components/layouts";
-import {useCartStore} from "#/lib/store.ts";
+import {useCartStore, useWishlistStore} from "#/lib/store.ts";
 import {Loader} from "@components/layouts/loader.tsx";
 import {fetchProduct} from "#/lib/products.ts";
 import type {Product} from "#/lib/types.ts";
@@ -37,7 +37,11 @@ function RouteComponent() {
     const product: Product = Route.useLoaderData()
 
     const {addItem, removeItem} = useCartStore()
+    const {addList, removeList, wishlist} = useWishlistStore()
 
+    const isAlreadyAddedToList = wishlist.find(
+        (item) => item.id === product.id
+    )
     const isAlreadyAddedToCard = useCartStore((s) => {
         return s.cart.items.some(i => i.productId === id)
     })
@@ -162,8 +166,14 @@ function RouteComponent() {
                                 {isAlreadyAddedToCard ? "Remove from Cart" : "Add to Cart"}
                             </Button>
 
-                            <Button variant="muted" className="w-full h-11">
-                                Add to Wishlist
+                            <Button
+                                variant="muted"
+                                className="w-full h-11"
+                                onClick={() => {
+                                    isAlreadyAddedToList ? removeList(id) : addList(product)
+                                }}
+                            >
+                                {isAlreadyAddedToList ? "Wishlisted" : "Add to Wishlist"}
                             </Button>
                         </div>
                     </div>
