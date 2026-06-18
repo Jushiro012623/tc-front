@@ -281,6 +281,26 @@ export const SAMPLE_PRODUCTS: Product[] = [
         sku: 'SKU-CROP-014',
         createdAt: new Date('2024-02-15'),
     },
+    {
+        id: '15',
+        name: 'Y2K Mudd Jeffrey Platform Loafer',
+        description: 'Retro-inspired brown lace-up platform shoes featuring a rugged lug sole, contrast stitching, and suede panel accents.',
+        price: 125,
+        compareAtPrice: 150,
+        image: '/footwear/shoes.webp',
+        images: ['/footwear/shoes.webp',],
+        category: 'footwear',
+        subcategory: 'footwear',
+        sizes: ['6', '7', '8', '9'],
+        colors: ['Brown', 'Dark Chocolate'],
+        material: 'Faux Leather/Suede',
+        careInstructions: 'Wipe clean with a damp cloth',
+        condition: 'Good',
+        inStock: true,
+        inventory: 1,
+        sku: 'SKU-SHOE-015',
+        createdAt: new Date('2026-06-17'),
+    },
 ]
 
 export const fetchProducts = async (): Promise<Product[]> => {

@@ -16,7 +16,7 @@ export const Footer = () => {
     };
 
     return (
-        <footer className="bg-footer text-footer-foreground">
+        <footer className="bg-footer text-footer-foreground mt-auto">
             <div className="max-w-330 mx-auto">
                 {/* Links */}
                 <div className="py-14 lg:py-16">

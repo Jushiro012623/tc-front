@@ -48,11 +48,11 @@ function RootDocument({children}: { children: React.ReactNode }) {
         <head>
             <HeadContent/>
         </head>
-        <body>
+        <body className="min-h-screen flex flex-col">
         <LenisProvider>
             <ThemeProvider>
                 <NavBar/>
-                <section className="min-h-[50vh] relative">
+                <section className="flex-1 relative">
                     {children}
                 </section>
                 <Footer/>

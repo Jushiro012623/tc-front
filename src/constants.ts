@@ -1,6 +1,4 @@
 import {Heart, Leaf, Zap} from "lucide-react";
-import {SAMPLE_PRODUCTS} from "#/lib/products.ts";
-import type {CartItem} from "#/lib/types.ts";
 
 export const NavLinks = [
     {
@@ -8,19 +6,48 @@ export const NavLinks = [
         label: "Shop"
     },
     {
-        href: "/sale",
-        label: "On Sale"
-    },
-    {
         href: "/new-arrivals",
         label: "New Arrivals"
     },
     {
-        href: "/brands",
-        label: "Brands"
+        href: "/about",
+        label: "About"
+    },
+    {
+        href: "/sustainability",
+        label: "Sustainability"
+    },
+    {
+        href: "/contact",
+        label: "Contact"
     },
 ]
 
+export const values = [
+    {
+        title: "Sustainability",
+        description:
+            "We promote responsible fashion by extending the life of pre-loved clothing.",
+    },
+    {
+        title: "Community",
+        description:
+            "We create a welcoming space where people can discover, share, and celebrate unique styles.",
+    },
+    {
+        title: "Accessibility",
+        description:
+            "We believe everyone deserves access to quality fashion at prices that make sense.",
+    },
+]
+export const defaultShopFilter = {
+    category: 'All',
+    style: 'All',
+    sizes: [],
+    priceMin: 0,
+    priceMax: 300,
+    name: undefined
+}
 export const FooterLinks = [
     {
         title: 'Shop',
@@ -69,29 +96,3 @@ export const ShopBadge = [
         description: "Look better for less with high-quality thrifted pieces",
     }
 ];
-export const SAMPLE_CART_ITEMS: CartItem[] = [
-    {
-        id: "cart-1",
-        productId: SAMPLE_PRODUCTS[0].id,
-        product: SAMPLE_PRODUCTS[0],
-        quantity: 1,
-        selectedSize: "M",
-        selectedColor: "Ivory",
-    },
-    {
-        id: "cart-2",
-        productId: SAMPLE_PRODUCTS[3].id,
-        product: SAMPLE_PRODUCTS[3],
-        quantity: 2,
-        selectedSize: "L",
-        selectedColor: "Grey",
-    },
-    {
-        id: "cart-3",
-        productId: SAMPLE_PRODUCTS[6].id,
-        product: SAMPLE_PRODUCTS[6],
-        quantity: 1,
-        selectedSize: "28",
-        selectedColor: "Blue",
-    },
-]

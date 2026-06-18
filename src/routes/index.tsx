@@ -4,7 +4,7 @@ import {ArrowRight} from "lucide-react";
 import {FeatureItem} from "#/components/layouts";
 import {ProductCard} from "#/components/products/product-card.tsx";
 import {fetchProducts} from "#/lib/products.ts";
-import {ShopBadge} from "#/constants.ts";
+import {defaultShopFilter, ShopBadge} from "#/constants.ts";
 import {Loader} from "@components/layouts/loader.tsx";
 
 export const Route = createFileRoute('/')({
@@ -28,7 +28,7 @@ function Home() {
             <section
                 className="relative w-full min-h-[70vh] lg:min-h-[85vh] flex items-center justify-center px-6 sm:px-8 lg:px-12">
                 <img
-                    src="/assets/hero2.jpg"
+                    src="/about/hero2.jpg"
                     alt="Apparel"
                     className="absolute inset-0 h-full w-full object-cover object-top opacity-40"
                 />
@@ -47,11 +47,15 @@ function Home() {
 
                     <div className="mt-8 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                         <Button size="lg" className="w-full sm:w-auto"
-                                onClick={() => navigate({to: '/shop'})}>
+                                onClick={() => navigate({to: '/shop', search: defaultShopFilter, replace: true})}>
                             Browse Collection <ArrowRight size={15}/>
                         </Button>
 
-                        <Button variant="bordered" size="lg" className="w-full sm:w-auto">
+                        <Button
+                            onClick={() => navigate({to: "/about"})}
+                            variant="bordered"
+                            size="lg"
+                            className="w-full sm:w-auto">
                             Why Thrift?
                         </Button>
                     </div>
@@ -73,7 +77,7 @@ function Home() {
             </section>
 
             {/*----------------------------FEATURED PRODUCTS SECTION----------------------------*/}
-            <section className="border-t border-border w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-8">
+            <section className="w-full py-16 lg:py-24 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto flex flex-col items-center">
                     <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-center">
                         Latest Arrivals
@@ -88,7 +92,7 @@ function Home() {
                     </div>
 
                     <Button
-                        onClick={() => navigate({to: '/shop'})}
+                        onClick={() => navigate({to: '/shop', search: defaultShopFilter, replace: true})}
                         variant="muted"
                         size="lg"
                         className="mt-10 w-full sm:w-auto"
@@ -98,7 +102,7 @@ function Home() {
                     </Button>
                 </div>
             </section>
-            <section className="border-t border-border text-cream py-20">
+            <section className="text-cream py-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-2xl mx-auto text-center space-y-6">
                         <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-center">
@@ -109,7 +113,7 @@ function Home() {
                             Every thrifted piece helps reduce waste, extend the life of quality garments, and make
                             fashion more accessible for everyone.
                         </p>
-                        <Link to="/">
+                        <Link to="/about">
                             <Button size="lg" className="mt-5 w-full sm:w-auto">
                                 Why Thrifting Matters
                                 <ArrowRight className="w-5 h-5"/>

@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router"
 import { Button } from "@components/ui"
+import {defaultShopFilter} from "#/constants.ts";
 
 export function NotFound() {
     return (
@@ -22,7 +23,7 @@ export function NotFound() {
                 <div className="my-8 h-px bg-border" />
 
                 <div className="space-y-3">
-                    <Link to="/shop" className="block">
+                    <Link to="/shop" search={defaultShopFilter} className="block">
                         <Button className="w-full">
                             Browse More Finds
                         </Button>
