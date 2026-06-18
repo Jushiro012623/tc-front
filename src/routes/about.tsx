@@ -13,7 +13,7 @@ function AboutPage() {
         <main className="max-w-7xl mx-auto px-6 py-16">
             {/* Hero */}
             <section className="flex flex-col text-left">
-                <span className="text-sm font-semibold tracking-wider uppercase text-primary">
+                <span className="font-serif text-sm font-semibold tracking-wider uppercase text-primary">
                     About Us
                 </span>
 

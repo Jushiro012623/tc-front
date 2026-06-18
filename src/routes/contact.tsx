@@ -11,11 +11,11 @@ function RouteComponent() {
         <main className="max-w-7xl mx-auto px-6 py-16">
             {/* Hero */}
             <section className="flex flex-col justify-center text-center mb-20">
-                <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium">
+                <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-tight">
                     Get in Touch
                 </h1>
 
-                <p className="leading-8 max-w-2xl mx-auto mt-6">
+                <p className="leading-8 max-w-3xl mt-6 text-muted-foreground mx-auto">
                     Have questions about our thrift finds, orders, or store?
                     We’d love to hear from you. Reach out anytime and we’ll get back to you as soon as we can.
                 </p>
