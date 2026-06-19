@@ -1,14 +1,14 @@
-import {createFileRoute, Link} from '@tanstack/react-router'
+import {Await, createFileRoute, defer, Link} from '@tanstack/react-router'
 import {Button, Main} from "#/components/ui";
 import {ArrowRight} from "lucide-react";
-import {FeatureItem} from "#/components/layouts";
+import {FeatureItem, ShopSkeleton} from "#/components/layouts";
 import {ProductCard} from "#/components/products/product-card.tsx";
 import {fetchProducts} from "#/lib/products.ts";
 import {defaultShopFilter, ShopBadge} from "#/constants.ts";
-import {Loader} from "@components/layouts/loader.tsx";
 import {AnimatePresence, motion} from "framer-motion";
 import {fadeUp} from "#/lib/framer-motion.ts";
-import {useEffect, useState} from "react";
+import {Suspense, useEffect, useState} from "react";
+import type {Product} from "#/lib/types.ts";
 
 export const Route = createFileRoute('/')({
     component: Home,
@@ -17,9 +17,12 @@ export const Route = createFileRoute('/')({
             {title: `Home | Triumphs Co.`}
         ]
     }),
-    pendingMs: 0,
-    pendingComponent: Loader,
-    loader: async () => fetchProducts()
+    loader: () => {
+        return {
+            productsDeferred: defer(fetchProducts({...defaultShopFilter, count: '4'})
+            )
+        }
+    }
 })
 
 const images = [
@@ -29,7 +32,7 @@ const images = [
 ];
 
 function Home() {
-    const featuredProducts = Route.useLoaderData().slice(0, 4)
+    const {productsDeferred} = Route.useLoaderData()
     const [index, setIndex] = useState<number>(0);
 
     useEffect(() => {
@@ -131,22 +134,41 @@ function Home() {
                         Unique vintage and thrifted pieces added to our collection this week.
                     </p>
 
-                    <motion.div
-                        className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-12 w-full"
-                        initial="hidden"
-                        whileInView="show"
-                        viewport={{once: true, amount: 0.2}}
-                    >
-                        {featuredProducts.map((product, i) => (
+                    <Suspense
+                        fallback={
                             <motion.div
-                                key={product.id}
-                                variants={fadeUp}
-                                custom={i}
+                                className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-12 w-full"
+                                initial="hidden"
+                                whileInView="show"
+                                viewport={{once: true, amount: 0.2}}
                             >
-                                <ProductCard product={product}/>
+                                {[...Array(4)].map((_, i) => (
+                                    <ShopSkeleton key={i}/>
+                                ))}
                             </motion.div>
-                        ))}
-                    </motion.div>
+                        }
+                    >
+                        <Await promise={productsDeferred}>
+                            {(products) => (
+                                <motion.div
+                                    className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-12 w-full"
+                                    initial="hidden"
+                                    whileInView="show"
+                                    viewport={{once: true, amount: 0.2}}
+                                >
+                                    {products.map((product: Product, i: number) => (
+                                        <motion.div
+                                            key={product.id}
+                                            variants={fadeUp}
+                                            custom={i}
+                                        >
+                                            <ProductCard product={product}/>
+                                        </motion.div>
+                                    ))}
+                                </motion.div>
+                            )}
+                        </Await>
+                    </Suspense>
 
                     <Link to="/shop" search={defaultShopFilter}>
                         <Button

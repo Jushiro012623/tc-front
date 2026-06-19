@@ -1,34 +1,6 @@
 import {create} from 'zustand'
 import {persist} from 'zustand/middleware'
-import type {Cart, CartItem, Product} from "#/lib/types.ts";
-
-interface CartStore {
-    cart: Cart
-    addItem: (product: Product) => void
-    removeItem: (productId: string) => void
-    clearCart: () => void
-    getTotal: () => number
-}
-
-interface WishListStore {
-    wishlist: Product[]
-    addList: (wishlist: Product) => void
-    removeList: (productId: string) => void
-    clearList: () => void
-}
-
-interface AuthStore {
-    user: any | null
-    isAuthenticated: boolean
-    setUser: (user: any) => void
-    logout: () => void
-}
-
-interface UIStore {
-    isDarkMode: boolean
-    toggleDarkMode: () => void
-    setDarkMode: (value: boolean) => void
-}
+import type {AuthStore, Cart, CartItem, CartStore, Product, UIStore, WishListStore} from "#/lib/types.ts";
 
 const defaultCart: Cart = {
     items: [],

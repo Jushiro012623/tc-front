@@ -1,4 +1,4 @@
-import {type Product} from './types'
+import {type Product, type ShopSearch} from './types'
 
 export const SAMPLE_PRODUCTS: Product[] = [
     {
@@ -303,12 +303,56 @@ export const SAMPLE_PRODUCTS: Product[] = [
     },
 ]
 
-export const fetchProducts = async (): Promise<Product[]> => {
-    console.log("START FETCHING")
+export const fetchProducts = async (filters: ShopSearch): Promise<Product[]> => {
+    console.log("START FETCHING WITH FILTERS:", filters)
+
     return new Promise((resolve) => {
         setTimeout(() => {
-            console.log("DONE FETCHING")
-            resolve(SAMPLE_PRODUCTS)
+            const filteredData = SAMPLE_PRODUCTS.filter((product) => {
+                const matchesCategory =
+                    filters.category === 'All' ||
+                    product.category.toLowerCase() === filters.category.toLowerCase()
+
+                const matchesSizes =
+                    filters.sizes.length === 0 ||
+                    product.sizes?.some((size) => filters.sizes.includes(size))
+
+                const matchesPrice =
+                    product.price >= filters.priceMin &&
+                    product.price <= filters.priceMax
+
+                const matchesStyle =
+                    filters.style === 'All' ||
+                    product.subcategory
+                        ?.toLowerCase()
+                        .includes(filters.style.toLowerCase())
+
+                const matchesName =
+                    !filters.name ||
+                    filters.name
+                        .toLowerCase()
+                        .split(/\s+/)
+                        .every(
+                            (term) =>
+                                product.name.toLowerCase().includes(term) ||
+                                product.sku.toLowerCase().includes(term)
+                        )
+                return (
+                    matchesCategory &&
+                    matchesSizes &&
+                    matchesPrice &&
+                    matchesStyle &&
+                    matchesName
+                )
+            })
+
+            const startIndex = (Number(filters.page) - 1) * Number(filters.count)
+            const endIndex = startIndex + Number(filters.count)
+            const paginatedData = filteredData.slice(startIndex, endIndex)
+
+            console.log(`DONE FETCHING. TOTAL FOUND: ${filteredData.length}. RETURNING: ${paginatedData.length} (Page ${filters.page})`)
+
+            resolve(paginatedData)
         }, 1200)
     })
 }

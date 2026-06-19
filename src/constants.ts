@@ -113,7 +113,9 @@ export const defaultShopFilter = {
     sizes: [],
     priceMin: 0,
     priceMax: 300,
-    name: undefined
+    name: undefined,
+    page: 1,
+    count: 40
 }
 export const FooterLinks = [
     {

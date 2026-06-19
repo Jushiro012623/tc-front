@@ -3,18 +3,20 @@ import {BiCart, BiMenu, BiSearch} from "react-icons/bi";
 import {CgProfile} from "react-icons/cg";
 import {Link, useLocation, useNavigate} from "@tanstack/react-router";
 import clsx from "clsx";
-import {NavLinks} from "#/constants";
+import {defaultShopFilter, NavLinks} from "#/constants";
 import {useState} from "react";
 import {CartDrawer} from "@components/layouts/cart-drawer.tsx";
 import {useCartStore, useUIStore} from "#/lib/store.ts";
 import {Moon, Search, Sun} from "lucide-react";
 import {MobileNavDrawer} from "@components/layouts/mobile-nav-drawer.tsx";
-import { motion, AnimatePresence } from "framer-motion"
+import {motion, AnimatePresence} from "framer-motion"
+import {useWindowSize} from "usehooks-ts";
 
 export const NavBar = () => {
     const navigate = useNavigate()
     const pathname = useLocation().pathname
 
+    const {width} = useWindowSize()
     const [mobileOpen, setMobileOpen] = useState(false)
     const [cartOpen, setCartOpen] = useState(false)
     const {isDarkMode, toggleDarkMode} = useUIStore()
@@ -31,11 +33,7 @@ export const NavBar = () => {
         navigate({
             to: "/shop",
             search: {
-                category: 'All',
-                style: 'All',
-                sizes: [],
-                priceMin: 0,
-                priceMax: 300,
+                ...defaultShopFilter,
                 name: search?.toString() || undefined
             },
             replace: true
@@ -47,35 +45,28 @@ export const NavBar = () => {
     return (
         <>
             <header className={clsx(
-                "w-full py-4 px-6 md:px-12 bg-background/80 backdrop-blur-md",
+                "w-full py-3 md:py-4 px-4 md:px-8 xl:px-12 bg-background/80 backdrop-blur-md",
                 "sticky top-0 z-50")
             }>
-                <div className="max-w-7xl w-full mx-auto flex justify-between items-center gap-6">
-
-                    {/*--------------------------------------Mobile Hamburger Menu--------------------------------------*/}
-                    <button
-                        onClick={() => setMobileOpen(true)}
-                        className="md:hidden p-2 -ml-2 text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                        <BiMenu size={24}/>
-                    </button>
+                <div className="max-w-7xl w-full mx-auto flex justify-between items-center gap-3 lg:gap-6">
 
                     {/*------------------Left: Brand Logo------------------*/}
                     <div
                         onClick={() => navigate(({to: '/'}))}
-                        className={clsx("md:flex hidden items-center justify-center md:justify-start flex-1 md:flex-none",
-                            "shrink-0 cursor-pointer")}>
-                        <BrandLogo iconOnly={false}/>
+                        className="flex items-center justify-center shrink-0 cursor-pointer">
+                        {/* Switches to icon-only on screens smaller than 768px */}
+                        <BrandLogo iconOnly={width !== 0 && width < 768}/>
                     </div>
 
                     {/*-----------Center: Desktop Navigation-----------*/}
-                    <nav className="hidden md:flex flex-1 justify-center">
-                        <ul className="flex items-center gap-4 text-sm font-medium text-muted-foreground">
+                    <nav className="hidden lg:flex flex-1 justify-center">
+                        <ul className="flex items-center gap-1 xl:gap-4 text-sm font-medium text-muted-foreground">
                             {NavLinks.map(({href, label}: { href: string; label: string; }) => (
                                 <li key={href}>
-                                    <Link to={href} className={clsx("transition-colors rounded-md py-2 px-3 ",
-                                        pathname === href ? "text-primary bg-muted" : 'hover:text-foreground hover:bg-muted'
-                                    )}
+                                    <Link to={href}
+                                          className={clsx("transition-colors rounded-md py-2 px-2 xl:px-3 whitespace-nowrap",
+                                              pathname === href ? "text-primary bg-muted" : 'hover:text-foreground hover:bg-muted'
+                                          )}
                                     >{label}</Link>
                                 </li>
                             ))}
@@ -83,17 +74,17 @@ export const NavBar = () => {
                     </nav>
 
                     {/*---------------Right: Search & Actions---------------*/}
-                    <div className="flex items-center gap-3 md:gap-5 shrink-0">
+                    <div className="flex items-center gap-1 md:gap-3 shrink-0">
 
                         {/*---------Desktop Search Bar---------*/}
                         <form className="hidden lg:block relative" onSubmit={handleSearchSubmit}>
                             <Input
                                 type="search"
                                 name="search"
-                                placeholder="Crop Top, Blouse, SKU-001"
+                                placeholder="Crop Top, SKU-001..."
                                 className={clsx(
                                     "border-transparent rounded-full! bg-muted/50 focus-visible:bg-transparent transition-all",
-                                    "rounded-full w-64 pl-7 xl:w-80 ")}
+                                    "rounded-full w-48 lg:w-56 xl:w-80 pl-7")}
                                 leftIcon={(
                                     <button>
                                         <Search className="text-primary/80" size={20}/>
@@ -102,13 +93,14 @@ export const NavBar = () => {
                             />
                         </form>
 
+                        {/* Mobile/Tablet Search Toggle */}
                         <button onClick={() => setIsSearchBarOpen((v) => !v)}
                                 className="lg:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
                         >
                             <BiSearch size={22}/>
                         </button>
 
-                        <ul className="flex items-center gap-2 sm:gap-4">
+                        <ul className="flex items-center gap-1 sm:gap-2">
                             <li>
                                 <button
                                     onClick={() => navigate(({to: '/auth/sign-in'}))}
@@ -163,6 +155,16 @@ export const NavBar = () => {
                                     </div>
                                 </button>
                             </li>
+
+                            {/*--------------------------------------Mobile Hamburger Menu--------------------------------------*/}
+                            <li>
+                                <button
+                                    onClick={() => setMobileOpen(true)}
+                                    className="lg:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
+                                >
+                                    <BiMenu size={24}/>
+                                </button>
+                            </li>
                         </ul>
                     </div>
 
@@ -170,10 +172,10 @@ export const NavBar = () => {
                 <AnimatePresence>
                     {isSearchBarOpen && (
                         <motion.div
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            transition={{ duration: 0.2 }}
+                            initial={{opacity: 0, y: -10}}
+                            animate={{opacity: 1, y: 0}}
+                            exit={{opacity: 0, y: -10}}
+                            transition={{duration: 0.2}}
                             className="lg:hidden overflow-hidden"
                         >
                             <form
