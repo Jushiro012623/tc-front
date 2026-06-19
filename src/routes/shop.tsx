@@ -16,7 +16,9 @@ export const Route = createFileRoute('/shop')({
             {title: `Shop | Triumphs Co.`}
         ]
     }),
-    loaderDeps: ({search}) => search,
+    loaderDeps: ({search}) => {
+        return search
+    },
     loader: ({deps}) => {
         return {
             productsDeferred: defer(fetchProducts(deps))
@@ -24,8 +26,14 @@ export const Route = createFileRoute('/shop')({
     },
     validateSearch: (search: ShopSearch): ShopSearch => {
         return {
-            ...defaultShopFilter,
-            name: search.name?.trim() ? search.name : undefined,
+            category: (search.category as string) ?? defaultShopFilter.category,
+            style: (search.style as string) ?? defaultShopFilter.style,
+            sizes: (search.sizes as string[] | undefined) ?? defaultShopFilter.sizes,
+            priceMin: Number(search.priceMin ?? defaultShopFilter.priceMin),
+            priceMax: Number(search.priceMax ?? defaultShopFilter.priceMax),
+            name: search.name?.trim() ? search.name : defaultShopFilter.name,
+            page: search.page ?? defaultShopFilter.page,
+            count: search.count ?? defaultShopFilter.count
         }
     },
 })
