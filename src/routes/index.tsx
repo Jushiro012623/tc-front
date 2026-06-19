@@ -6,6 +6,9 @@ import {ProductCard} from "#/components/products/product-card.tsx";
 import {fetchProducts} from "#/lib/products.ts";
 import {defaultShopFilter, ShopBadge} from "#/constants.ts";
 import {Loader} from "@components/layouts/loader.tsx";
+import {AnimatePresence, motion} from "framer-motion";
+import {fadeUp} from "#/lib/framer-motion.ts";
+import {useEffect, useState} from "react";
 
 export const Route = createFileRoute('/')({
     component: Home,
@@ -19,32 +22,67 @@ export const Route = createFileRoute('/')({
     loader: async () => fetchProducts()
 })
 
+const images = [
+    "/carousel/hero2.jpg",
+    "/carousel/hero3.jpg",
+    "/carousel/hero4.jpg",
+];
+
 function Home() {
     const featuredProducts = Route.useLoaderData().slice(0, 4)
+    const [index, setIndex] = useState<number>(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setIndex((prev) => (prev + 1) % images.length);
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <Main className="pb-16">
             {/*---------------------------------------------HERO SECTION---------------------------------------------*/}
             <section
-                className="relative w-full min-h-[70vh] lg:min-h-[85vh] flex items-center justify-center px-6 sm:px-8 lg:px-12">
-                <img
-                    src="/about/hero2.jpg"
-                    alt="Apparel"
-                    className="absolute inset-0 h-full w-full object-cover object-top opacity-40"
-                />
+                className="overflow-hidden  relative w-full min-h-[70vh] lg:min-h-[85vh] flex items-center justify-center px-6 sm:px-8 lg:px-12">
+                <AnimatePresence mode="wait">
+                    <motion.img
+                        key={images[index]}
+                        src={images[index]}
+                        alt="Apparel"
+                        className="absolute inset-0 h-full w-full object-cover object-top"
+                        initial={{opacity: 0, scale: 1.05}}
+                        animate={{opacity: 1, scale: 1}}
+                        exit={{opacity: 0, scale: 1.05}}
+                        transition={{duration: 0.8, ease: "easeInOut"}}
+                    />
+                </AnimatePresence>
 
                 <div className="absolute inset-0 bg-black/20"/>
                 <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent"/>
 
-                <div className="relative z-10 max-w-4xl text-center flex flex-col items-center">
-                    <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white leading-tight">
+                <motion.div
+                    initial="hidden"
+                    animate="show"
+                    className="relative z-10 max-w-4xl text-center flex flex-col items-center">
+                    <motion.h1
+                        variants={fadeUp}
+                        custom={0}
+                        className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white leading-tight">
                         Curated Thrift Finds
-                    </h1>
+                    </motion.h1>
 
-                    <p className="leading-8 mt-2 max-w-2xl sm:text-lg md:text-xl text-white">
+                    <motion.p
+                        variants={fadeUp}
+                        custom={1}
+                        className="leading-8 mt-2 max-w-2xl sm:text-lg md:text-xl text-white">
                         Discover handpicked vintage and pre-loved pieces with character, quality, and style.
-                    </p>
+                    </motion.p>
 
-                    <div className="mt-8 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                    <motion.div
+                        variants={fadeUp}
+                        custom={2}
+                        className="mt-8 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                         <Link to="/shop" search={defaultShopFilter}>
                             <Button size="lg" className="w-full sm:w-auto">
                                 Browse Collection <ArrowRight size={15}/>
@@ -59,22 +97,27 @@ function Home() {
                                 Why Thrift?
                             </Button>
                         </Link>
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
             </section>
             {/*----------------------------BADGE SECTION----------------------------*/}
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-12 lg:my-16">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {ShopBadge.map(({icon, title, description, color}) => (
-                        <FeatureItem
-                            key={title}
-                            icon={icon}
-                            color={color}
-                            title={title}
-                            description={description}
-                        />
+                <motion.div
+                    className="grid grid-cols-1 md:grid-cols-3 gap-8"
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{once: true, amount: 0.2}}
+                >
+                    {ShopBadge.map((item, i) => (
+                        <motion.div
+                            key={item.title}
+                            variants={fadeUp}
+                            custom={i}
+                        >
+                            <FeatureItem {...item} />
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </section>
 
             {/*----------------------------FEATURED PRODUCTS SECTION----------------------------*/}
@@ -88,9 +131,22 @@ function Home() {
                         Unique vintage and thrifted pieces added to our collection this week.
                     </p>
 
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-12 w-full">
-                        {featuredProducts.map((product) => (<ProductCard key={product.id} product={product}/>))}
-                    </div>
+                    <motion.div
+                        className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-12 w-full"
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{once: true, amount: 0.2}}
+                    >
+                        {featuredProducts.map((product, i) => (
+                            <motion.div
+                                key={product.id}
+                                variants={fadeUp}
+                                custom={i}
+                            >
+                                <ProductCard product={product}/>
+                            </motion.div>
+                        ))}
+                    </motion.div>
 
                     <Link to="/shop" search={defaultShopFilter}>
                         <Button
@@ -104,7 +160,13 @@ function Home() {
                     </Link>
                 </div>
             </section>
-            <section className="text-cream py-10 sm:py-24 max-w-7xl mx-auto bg-muted rounded-xl">
+            <motion.section
+                className="text-cream py-10 sm:py-24 max-w-7xl mx-auto bg-muted rounded-xl"
+                initial={{opacity: 0, y: 30}}
+                whileInView={{opacity: 1, y: 0}}
+                transition={{duration: 1}}
+                viewport={{once: true}}
+            >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-2xl mx-auto text-center space-y-6">
                         <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-center">
@@ -123,7 +185,7 @@ function Home() {
                         </Link>
                     </div>
                 </div>
-            </section>
+            </motion.section>
         </Main>
     )
 }

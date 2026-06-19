@@ -2,6 +2,8 @@ import {createFileRoute, Link} from "@tanstack/react-router"
 import {defaultShopFilter, values} from "#/constants.ts";
 import {Button} from "@components/ui";
 import {ArrowRight} from "lucide-react";
+import {fadeUp, staggerContainer} from "#/lib/framer-motion.ts";
+import {motion} from 'framer-motion'
 
 export const Route = createFileRoute("/about")({
     component: AboutPage,
@@ -12,24 +14,42 @@ function AboutPage() {
     return (
         <main className="max-w-7xl mx-auto px-6 py-16">
             {/* Hero */}
-            <section className="flex flex-col text-left">
-                <span className="font-serif text-sm font-semibold tracking-wider uppercase text-primary">
+            <motion.section
+                className="flex flex-col text-left"
+                variants={staggerContainer}
+                initial="hidden"
+                animate="show"
+            >
+                <motion.span
+                    variants={fadeUp}
+                    className="font-serif text-sm font-semibold tracking-wider uppercase text-primary"
+                >
                     About Us
-                </span>
+                </motion.span>
 
-                <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-tight">
+                <motion.h1
+                    variants={fadeUp}
+                    className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-tight"
+                >
                     Style That Deserves a Second Chance
-                </h1>
+                </motion.h1>
 
-                <p className="mt-4 text-sm lg:text-lg text-muted-foreground max-w-2xl leading-8">
-                    At TC, we curate quality pre-loved pieces that help you express your style
-                    while making fashion more affordable and sustainable.
-                </p>
-            </section>
+                <motion.p
+                    variants={fadeUp}
+                    className="mt-4 text-sm lg:text-lg text-muted-foreground max-w-2xl leading-8"
+                >
+                    At Triumphs Co, we curate quality pre-loved pieces that help you express your style while making fashion more affordable and sustainable.
+                </motion.p>
+            </motion.section>
             {/* About TC */}
             <section className="mb-35 mt-15">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
-                    <div>
+                    <motion.div
+                        initial={{ opacity: 0, x: -40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.7 }}
+                    >
                         <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium mb-6">
                             About Triumphs Co.
                         </h2>
@@ -45,21 +65,39 @@ function AboutPage() {
                             everyday essentials, we aim to make sustainable fashion an easy and exciting
                             choice for everyone.
                         </p>
-                    </div>
+                    </motion.div>
 
-                    <div className="rounded-2xl overflow-hidden bg-muted min-h-96 flex items-center justify-center">
-                        <img
+                    <motion.div
+                        className="rounded-2xl overflow-hidden bg-muted min-h-96"
+                        initial={{ opacity: 0, x: 40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.7 }}
+                    >
+                        <motion.img
                             src="/about/hero1.jpg"
                             alt="TC thrift shop collection"
                             className="w-full h-100 object-cover"
+                            whileHover={{
+                                scale: 1.05,
+                            }}
+                            transition={{
+                                duration: 0.4,
+                            }}
                         />
-                    </div>
+                    </motion.div>
                 </div>
             </section>
             {/* Mission */}
             <section className="mb-20 mt-30">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
-                    <div className="lg:col-start-2">
+                    <motion.div
+                        initial={{ opacity: 0, x: 40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.7 }}
+                        className="lg:col-start-2"
+                    >
                         <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium mb-6">
                             Our Mission
                         </h2>
@@ -77,15 +115,26 @@ function AboutPage() {
                             a more sustainable future by keeping wearable garments in circulation
                             and out of landfills.
                         </p>
-                    </div>
+                    </motion.div>
 
-                    <div className="lg:row-start-1 lg:col-start-1 rounded-2xl overflow-hidden min-h-96">
-                        <img
+                    <motion.div
+                        initial={{ opacity: 0, x: -40 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.7 }}
+                        className="lg:row-start-1 lg:col-start-1 rounded-2xl overflow-hidden min-h-96">
+                        <motion.img
                             src="/about/mission.jpg"
                             alt="TC thrift shop collection"
                             className="w-full h-full min-h-96 object-cover"
+                            whileHover={{
+                                scale: 1.05,
+                            }}
+                            transition={{
+                                duration: 0.4,
+                            }}
                         />
-                    </div>
+                    </motion.div>
                 </div>
             </section>
 
@@ -95,26 +144,43 @@ function AboutPage() {
                     Our Values
                 </h2>
 
-                <div className="grid md:grid-cols-3 gap-6">
+                <motion.div
+                    className="grid md:grid-cols-3 gap-6"
+                    variants={staggerContainer}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, amount: 0.2 }}
+                >
                     {values.map((value) => (
-                        <div
+                        <motion.div
                             key={value.title}
+                            variants={fadeUp}
+                            whileHover={{
+                                y: -5,
+                                transition: { duration: 0.2 },
+                            }}
                             className="bg-muted/50 rounded-xl p-8 text-center"
                         >
                             <h3 className="font-serif text-2xl font-semibold mb-3">
                                 {value.title}
                             </h3>
 
-                            <p className="mt-4 text-muted-foreground max-w-2xl leading-8 ">
+                            <p className="mt-4 text-muted-foreground leading-8">
                                 {value.description}
                             </p>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </section>
 
 
-            <section className="text-cream py-10 sm:py-24 bg-muted rounded-xl ">
+            <motion.section
+                className="text-cream py-10 sm:py-24 bg-muted rounded-xl"
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1}}
+            >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-2xl mx-auto text-center space-y-6">
                         <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-center">
@@ -133,7 +199,7 @@ function AboutPage() {
                         </Link>
                     </div>
                 </div>
-            </section>
+            </motion.section>
         </main>
     )
 }

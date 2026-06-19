@@ -1,6 +1,8 @@
 import {createFileRoute} from '@tanstack/react-router'
-import {Button, Input} from "@components/ui";
+import {Button, Input, Main} from "@components/ui";
 import {contactDetails, FAQ} from "#/constants.ts";
+import {fadeUp, staggerContainer} from "#/lib/framer-motion.ts";
+import {motion} from 'framer-motion'
 
 export const Route = createFileRoute('/contact')({
     component: RouteComponent,
@@ -8,32 +10,53 @@ export const Route = createFileRoute('/contact')({
 
 function RouteComponent() {
     return (
-        <main className="max-w-7xl mx-auto px-6 py-16">
+        <Main className="max-w-7xl mx-auto px-6 py-16">
             {/* Hero */}
-            <section className="flex flex-col justify-center text-center mb-20">
-                <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-tight">
+            <motion.section
+                className="flex flex-col justify-center text-center mb-20"
+                variants={staggerContainer}
+                initial="hidden"
+                animate="show"
+            >
+                <motion.h1
+                    variants={fadeUp}
+                    className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium leading-tight"
+                >
                     Get in Touch
-                </h1>
+                </motion.h1>
 
-                <p className="leading-8 max-w-3xl mt-6 text-muted-foreground mx-auto">
+                <motion.p
+                    variants={fadeUp}
+                    className="leading-8 max-w-3xl mt-6 text-muted-foreground mx-auto"
+                >
                     Have questions about our thrift finds, orders, or store?
-                    We’d love to hear from you. Reach out anytime and we’ll get back to you as soon as we can.
-                </p>
-            </section>
+                    We'd love to hear from you.
+                </motion.p>
+            </motion.section>
 
             <section className="grid lg:grid-cols-2 gap-15 mb-24 items-stretch">
                 {/* LEFT */}
-                <div className="space-y-4.5 h-full">
+                <motion.div
+                    className="space-y-4.5 h-full"
+                    initial={{opacity: 0, x: -40}}
+                    whileInView={{opacity: 1, x: 0}}
+                    viewport={{once: true}}
+                    transition={{duration: 0.7}}
+                >
                     {contactDetails.map((item) => {
                         const Icon = item.icon
 
                         return (
-                            <div
+                            <motion.div
                                 key={item.label}
+                                whileHover={{
+                                    y: -4,
+                                    transition: {duration: 0.2}
+                                }}
                                 className="bg-muted/50 rounded-2xl px-5 py-4"
                             >
                                 <p className="text-xl font-serif font-bold flex items-center gap-2">
-                                    <Icon className="text-primary" size={16} />
+                                    <Icon className="text-primary" size={16}/>
                                     {item.label}
                                 </p>
 
@@ -44,52 +67,91 @@ function RouteComponent() {
                                 <p className="text-xs text-muted-foreground mt-1">
                                     {item.note}
                                 </p>
-                            </div>
+                            </motion.div>
                         )
                     })}
-                </div>
+                </motion.div>
 
                 {/* RIGHT */}
-                <div className="h-full flex flex-col">
+                <motion.div
+                    className="h-full flex flex-col"
+                    initial={{opacity: 0, x: 40}}
+                    whileInView={{opacity: 1, x: 0}}
+                    viewport={{once: true}}
+                    transition={{duration: 0.7}}
+                >
                     <h2 className="font-serif text-3xl font-semibold mb-6">
                         Send us a Message
                     </h2>
 
                     <form className="space-y-4 flex-1 flex flex-col">
-                        <Input type="text" placeholder="Your name" />
-                        <Input type="email" placeholder="Your email" />
-                        <Input placeholder="How can we help you?" />
+                        <Input type="text" placeholder="Your name"/>
+                        <Input type="email" placeholder="Your email"/>
+                        <Input placeholder="How can we help you?"/>
 
                         <textarea
                             placeholder="Tell us more..."
                             rows={5}
                             className="flex-1 input w-full border rounded-lg px-4 py-3"
                         />
-
-                        <Button className="w-full rounded-full mt-auto">
-                            Send Message
-                        </Button>
+                        <motion.div
+                            whileHover={{scale: 1.02}}
+                            whileTap={{scale: 0.98}}
+                        >
+                            <Button className="w-full rounded-full mt-auto">
+                                Send Message
+                            </Button>
+                        </motion.div>
                     </form>
-                </div>
+                </motion.div>
             </section>
 
             {/* FAQ */}
             <section>
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-left mb-12">
+                <motion.h2
+                    initial={{opacity: 0, y: 30}}
+                    whileInView={{opacity: 1, y: 0}}
+                    viewport={{once: true}}
+                    transition={{duration: 0.6}}
+                    className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-left mb-12"
+                >
                     Frequently Asked Questions
-                </h2>
+                </motion.h2>
 
-                <div className="max-w-3xl space-y-4">
+                <motion.div
+                    className="max-w-3xl space-y-4"
+                    variants={staggerContainer}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{once: true, amount: 0.1}}
+                >
                     {FAQ.map((item) => (
-                        <div key={item.q} className="border bg-muted/20 border-muted rounded-xl p-6">
+                        <motion.div
+                            key={item.q}
+                            variants={{
+                                hidden: {
+                                    opacity: 0,
+                                    y: 20,
+                                },
+                                show: {
+                                    opacity: 1,
+                                    y: 0,
+                                },
+                            }}
+                            whileHover={{
+                                x: 4,
+                            }}
+                            className="border bg-muted/20 border-muted rounded-xl p-6"
+                        >
                             <p className="font-medium">{item.q}</p>
+
                             <p className="text-muted-foreground mt-2 leading-7">
                                 {item.a}
                             </p>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </section>
-        </main>
+        </Main>
     )
 }

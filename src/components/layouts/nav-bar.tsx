@@ -9,6 +9,7 @@ import {CartDrawer} from "@components/layouts/cart-drawer.tsx";
 import {useCartStore, useUIStore} from "#/lib/store.ts";
 import {Moon, Search, Sun} from "lucide-react";
 import {MobileNavDrawer} from "@components/layouts/mobile-nav-drawer.tsx";
+import { motion, AnimatePresence } from "framer-motion"
 
 export const NavBar = () => {
     const navigate = useNavigate()
@@ -166,36 +167,38 @@ export const NavBar = () => {
                     </div>
 
                 </div>
-                <div
-                    className={clsx(
-                        "lg:hidden overflow-hidden ",
-                        "transition-all duration-300 ",
-                        isSearchBarOpen
-                            ? "max-h-24 opacity-100"
-                            : "max-h-0 opacity-0 border-transparent"
+                <AnimatePresence>
+                    {isSearchBarOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.2 }}
+                            className="lg:hidden overflow-hidden"
+                        >
+                            <form
+                                onSubmit={handleSearchSubmit}
+                                className="px-4 py-3"
+                            >
+                                <div className="w-full">
+                                    <Input
+                                        autoFocus
+                                        type="search"
+                                        name="search"
+                                        placeholder="Crop Top, Blouse, SKU-001"
+                                        className="w-full bg-muted/50"
+                                        leftIcon={
+                                            <button><Search
+                                                size={18}
+                                                className="text-muted-foreground  "
+                                            /></button>
+                                        }
+                                    />
+                                </div>
+                            </form>
+                        </motion.div>
                     )}
-                >
-                    <form
-                        onSubmit={handleSearchSubmit}
-                        className="px-4 py-3"
-                    >
-                        <div className="w-full">
-                            <Input
-                                autoFocus
-                                type="search"
-                                name="search"
-                                placeholder="Crop Top, Blouse, SKU-001"
-                                className="w-full bg-muted/50"
-                                leftIcon={
-                                    <button><Search
-                                        size={18}
-                                        className="text-muted-foreground  "
-                                    /></button>
-                                }
-                            />
-                        </div>
-                    </form>
-                </div>
+                </AnimatePresence>
             </header>
 
             <CartDrawer

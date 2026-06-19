@@ -6,6 +6,7 @@ import {useCartStore, useWishlistStore} from "#/lib/store.ts";
 import {Loader} from "@components/layouts/loader.tsx";
 import {fetchProduct} from "#/lib/products.ts";
 import type {Product} from "#/lib/types.ts";
+import {motion} from 'framer-motion'
 
 export const Route = createFileRoute('/products/$product')({
     component: RouteComponent,
@@ -48,8 +49,11 @@ function RouteComponent() {
 
     return (
         <Main>
-            <div className="max-w-6xl mx-auto px-6 py-10">
-
+            <motion.div
+                initial={{opacity: 0}}
+                animate={{opacity: 1}}
+                transition={{duration: 0.3}}
+                className="max-w-6xl mx-auto px-6 py-10">
                 <Button
                     variant="muted"
                     className="flex items-center gap-2 w-fit mb-6"
@@ -59,9 +63,27 @@ function RouteComponent() {
                     Back
                 </Button>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-
-                    <div className="w-full">
+                <motion.div
+                    className="grid grid-cols-1 lg:grid-cols-2 gap-10"
+                    initial="hidden"
+                    animate="show"
+                    variants={{
+                        hidden: {},
+                        show: {
+                            transition: {
+                                staggerChildren: 0.08,
+                                delayChildren: 0.05
+                            }
+                        }
+                    }}
+                >
+                    <motion.div className="w-full"
+                                variants={{
+                                    hidden: {opacity: 0, y: 20},
+                                    show: {opacity: 1, y: 0}
+                                }}
+                                transition={{duration: 0.4, ease: "easeOut"}}
+                    >
                         <div className="aspect-square overflow-hidden rounded-2xl border border-border">
                             <img
                                 src={product.image}
@@ -80,9 +102,15 @@ function RouteComponent() {
                                 />
                             ))}
                         </div>
-                    </div>
-                    <div className="flex flex-col gap-6">
-                        {/* HEADER */}
+                    </motion.div>
+                    <motion.div
+                        variants={{
+                            hidden: {opacity: 0, y: 20},
+                            show: {opacity: 1, y: 0}
+                        }}
+                        className="flex flex-col gap-6"
+                        transition={{duration: 0.4, ease: "easeOut"}}
+                    >
                         <div>
                             <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
                                 {product.category} / {product.subcategory}
@@ -176,9 +204,9 @@ function RouteComponent() {
                                 {isAlreadyAddedToList ? "Wishlisted" : "Add to Wishlist"}
                             </Button>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    </motion.div>
+                </motion.div>
+            </motion.div>
         </Main>
     )
 }

@@ -1,7 +1,9 @@
 import {createFileRoute, Link} from '@tanstack/react-router'
 import {commitments, defaultShopFilter} from "#/constants.ts";
 import {ArrowRight} from "lucide-react";
-import {Button} from "@components/ui";
+import {Button, Main} from "@components/ui";
+import {motion} from "framer-motion"
+import {fadeUp, staggerContainer} from "#/lib/framer-motion.ts";
 
 export const Route = createFileRoute('/sustainability')({
     component: RouteComponent,
@@ -9,32 +11,61 @@ export const Route = createFileRoute('/sustainability')({
 
 function RouteComponent() {
     return (
-        <main className="max-w-7xl mx-auto px-6 py-16">
-            <section className="flex flex-col items-center justify-center">
-                <h1 className="font-serif text-4xl sm:text-5xl lg:text-7xl font-medium leading-tight">
+        <Main className="max-w-7xl mx-auto px-6 py-16">
+            <motion.section
+                className="flex flex-col items-center justify-center text-center"
+                variants={staggerContainer}
+                initial="hidden"
+                animate="show"
+            >
+                <motion.h1
+                    variants={fadeUp}
+                    className="font-serif text-4xl sm:text-5xl lg:text-7xl font-medium leading-tight"
+                >
                     Our Sustainability Journey
-                </h1>
+                </motion.h1>
 
-                <p className="leading-8 max-w-3xl mt-6 text-muted-foreground">
+                <motion.p
+                    variants={fadeUp}
+                    className="leading-8 max-w-3xl mt-6 text-muted-foreground"
+                >
                     At Triumph Co, sustainability isn't a buzzword—it's embedded in every decision we make.
-                </p>
+                </motion.p>
+            </motion.section>
 
-            </section>
-
-            <section className="my-24">
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-center">
+            <motion.section
+                className="my-24"
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.15 }}
+            >
+                <motion.h2 variants={fadeUp}
+                    className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-center">
                     Our Commitments
-                </h2>
+                </motion.h2>
 
-                <p className="leading-8 text-center max-w-xl mx-auto mt-6 mb-12 text-muted-foreground">
+                <motion.p variants={fadeUp}
+                   className="leading-8 text-center max-w-xl mx-auto mt-6 mb-12 text-muted-foreground">
                     These commitments guide how we operate and help us create a more
                     sustainable future through conscious fashion.
-                </p>
+                </motion.p>
 
-                <div className="grid md:grid-cols-2 gap-6">
+                <motion.div
+                    className="grid md:grid-cols-2 gap-6"
+                    variants={staggerContainer}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{once: true, amount: 0.2}}
+                >
                     {commitments.map((item) => (
-                        <div
+                        <motion.div
                             key={item.title}
+                            variants={fadeUp}
+                            whileHover={{
+                                y: -6,
+                                transition: {duration: 0.2}
+                            }}
                             className="bg-muted/50 rounded-xl p-8"
                         >
                             <h3 className="font-serif text-2xl font-bold mb-3">
@@ -44,12 +75,18 @@ function RouteComponent() {
                             <p className="leading-8 max-w-2xl text-muted-foreground">
                                 {item.description}
                             </p>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
-            </section>
+                </motion.div>
+            </motion.section>
 
-            <section className="my-24">
+            <motion.section
+                className="my-24"
+                initial={{opacity: 0, y: 40}}
+                whileInView={{opacity: 1, y: 0}}
+                viewport={{once: true, amount: 0.2}}
+                transition={{duration: 0.7}}
+            >
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium">
                         Why Thrifting Matters
@@ -68,9 +105,15 @@ function RouteComponent() {
                         kept in use for as long as possible.
                     </p>
                 </div>
-            </section>
+            </motion.section>
 
-            <section className="text-cream py-10 sm:py-24 bg-muted rounded-xl">
+            <motion.section
+                className="text-cream py-10 sm:py-24 bg-muted rounded-xl"
+                initial={{opacity: 0, scale: 0.96}}
+                whileInView={{opacity: 1, scale: 1}}
+                viewport={{once: true}}
+                transition={{duration: 1}}
+            >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-2xl mx-auto text-center space-y-6">
                         <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-center">
@@ -82,14 +125,16 @@ function RouteComponent() {
                             collective action. By choosing thrifted fashion, you're helping create
                             a future where style and responsibility go hand in hand.
                         </p>
+
                         <Link to="/shop" search={defaultShopFilter}>
                             <Button size="lg" className="w-full sm:w-auto">
-                                Explore Our Collection <ArrowRight size={15}/>
+                                Explore Our Collection
+                                <ArrowRight size={15}/>
                             </Button>
                         </Link>
                     </div>
                 </div>
-            </section>
-        </main>
+            </motion.section>
+        </Main>
     )
 }

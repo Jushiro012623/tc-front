@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router"
-import { Button } from "@components/ui"
+import {Link} from "@tanstack/react-router"
+import {Button} from "@components/ui"
 import {defaultShopFilter} from "#/constants.ts";
 
 export function NotFound() {
@@ -20,7 +20,7 @@ export function NotFound() {
                     removed, or archived.
                 </p>
 
-                <div className="my-8 h-px bg-border" />
+                <div className="my-8 h-px bg-border"/>
 
                 <div className="space-y-3">
                     <Link to="/shop" search={defaultShopFilter} className="block">

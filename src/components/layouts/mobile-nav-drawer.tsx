@@ -3,6 +3,7 @@ import {BiX} from "react-icons/bi"
 import {Link, useLocation, useNavigate} from "@tanstack/react-router"
 import {NavLinks} from "#/constants"
 import {BrandLogo, Button} from "@components/ui";
+import {AnimatePresence, motion} from "framer-motion";
 
 type Props = {
     open: boolean
@@ -16,107 +17,114 @@ export const MobileNavDrawer = ({open, onClose}: Props) => {
     return (
         <>
             {/* overlay */}
-            <div
-                onClick={onClose}
-                className={clsx(
-                    "fixed inset-0 bg-black/60 backdrop-blur-[2px] z-50 transition-opacity duration-300",
-                    open ? "opacity-100" : "opacity-0 pointer-events-none"
-                )}
-            />
-
-            {/* drawer */}
-            <aside
-                className={clsx(
-                    "fixed top-0 left-0 h-full w-80 max-w-[85vw]",
-                    "bg-background border-r border-border",
-                    "z-50 shadow-2xl",
-                    "transition-transform duration-300 ease-out flex flex-col",
-                    open ? "translate-x-0" : "-translate-x-full"
-                )}
-            >
-                {/* top accent bar */}
-                <div className="h-1 w-full bg-linear-to-r from-primary/60 via-primary to-transparent"/>
-
-                {/* header */}
-                <div className="flex items-center justify-between px-5 py-4 border-b border-border/60">
-                    <Link to={'/'}><BrandLogo iconOnly={false}/></Link>
-                    {/*<div className="flex flex-col">*/}
-                    {/*    <span className="font-semibold tracking-wide">Menu</span>*/}
-                    {/*</div>*/}
-
-                    <button
+            <AnimatePresence>
+                {open && (
+                    <motion.div
+                        className="fixed inset-0 bg-black/40 z-50"
+                        initial={{opacity: 0}}
+                        animate={{opacity: 1}}
+                        exit={{opacity: 0}}
+                        transition={{duration: 0.2}}
                         onClick={onClose}
-                        className="p-2 rounded-full hover:bg-muted/60 transition-colors"
+                    />
+                )}
+            </AnimatePresence>
+            <AnimatePresence>
+                {open && (
+                    <motion.aside
+                        className="fixed top-0 left-0 h-full w-80 bg-background z-50 flex flex-col"
+                        initial={{x: "-100%"}}
+                        animate={{x: 0}}
+                        exit={{x: "-100%"}}
+                        transition={{type: "tween", duration: 0.25}}
                     >
-                        <BiX size={22}/>
-                    </button>
-                </div>
+                        {/* top accent bar */}
+                        <div className="h-1 w-full bg-linear-to-r from-primary/60 via-primary to-transparent"/>
 
-                {/* links */}
-                <nav className="p-4 flex flex-col gap-2">
-                    <Link
-                        to="/"
-                        onClick={onClose}
-                        className={clsx(
-                            "flex items-center justify-between px-4 py-2 rounded-lg transition-all",
-                            "text-sm font-medium group",
-                            "hover:bg-muted/60 hover:text-foreground",
-                            path === "/" && "bg-muted text-foreground"
-                        )}
-                    >
-                        <span className="flex items-center gap-2">
-                            <span className={clsx(
-                                "w-1.5 h-1.5 rounded-full",
-                                path === "/" ? "bg-primary" : "bg-transparent"
-                            )}/>
-                            Home
-                        </span>
+                        {/* header */}
+                        <div className="flex items-center justify-between px-5 py-4 border-b border-border/60">
+                            <Link to={'/'}><BrandLogo iconOnly={false}/></Link>
+                            {/*<div className="flex flex-col">*/}
+                            {/*    <span className="font-semibold tracking-wide">Menu</span>*/}
+                            {/*</div>*/}
 
-                        <span className="opacity-0 text-muted-foreground group-hover:opacity-100 transition-colors">
-                            →
-                        </span>
-                    </Link>
-                    {NavLinks.map(({href, label}) => (
-                        <Link
-                            key={href}
-                            to={href}
-                            onClick={onClose}
-                            className={clsx(
-                                "flex items-center justify-between px-4 py-2 rounded-lg transition-all",
-                                "text-sm font-medium group",
-                                "hover:bg-muted/60 hover:text-foreground",
-                                path === href && "bg-muted text-foreground"
-                            )}
-                        >
+                            <button
+                                onClick={onClose}
+                                className="p-2 rounded-full hover:bg-muted/60 transition-colors"
+                            >
+                                <BiX size={22}/>
+                            </button>
+                        </div>
+
+                        {/* links */}
+                        <nav className="p-4 flex flex-col gap-2">
+                            <Link
+                                to="/"
+                                onClick={onClose}
+                                className={clsx(
+                                    "flex items-center justify-between px-4 py-2 rounded-lg transition-all",
+                                    "text-sm font-medium group",
+                                    "hover:bg-muted/60 hover:text-foreground",
+                                    path === "/" && "bg-muted text-foreground"
+                                )}
+                            >
                             <span className="flex items-center gap-2">
                                 <span className={clsx(
                                     "w-1.5 h-1.5 rounded-full",
-                                    path === href ? "bg-primary" : "bg-transparent"
+                                    path === "/" ? "bg-primary" : "bg-transparent"
                                 )}/>
-                                {label}
+                                Home
                             </span>
 
-                            <span className="opacity-0 text-muted-foreground group-hover:opacity-100 transition-colors">
+                                <span
+                                    className="opacity-0 text-muted-foreground group-hover:opacity-100 transition-colors">
                                 →
                             </span>
-                        </Link>
-                    ))}
-                </nav>
+                            </Link>
+                            {NavLinks.map(({href, label}) => (
+                                <Link
+                                    key={href}
+                                    to={href}
+                                    onClick={onClose}
+                                    className={clsx(
+                                        "flex items-center justify-between px-4 py-2 rounded-lg transition-all",
+                                        "text-sm font-medium group",
+                                        "hover:bg-muted/60 hover:text-foreground",
+                                        path === href && "bg-muted text-foreground"
+                                    )}
+                                >
+                                <span className="flex items-center gap-2">
+                                    <span className={clsx(
+                                        "w-1.5 h-1.5 rounded-full",
+                                        path === href ? "bg-primary" : "bg-transparent"
+                                    )}/>
+                                    {label}
+                                </span>
 
-                {/* footer hint */}
-                <div className="mt-auto p-4 border-t border-border/60 flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground">Guest</span>
-                    <Button
-                        onClick={() => {
-                            onClose()
-                            navigation({to: "/auth/sign-in"})
+                                    <span
+                                        className="opacity-0 text-muted-foreground group-hover:opacity-100 transition-colors">
+                                    →
+                                </span>
+                                </Link>
+                            ))}
+                        </nav>
 
-                        }}
-                        className="text-xs text-primary hover:underline">
-                        Sign in
-                    </Button>
-                </div>
-            </aside>
+                        {/* footer hint */}
+                        <div className="mt-auto p-4 border-t border-border/60 flex items-center justify-between">
+                            <span className="text-xs text-muted-foreground">Guest</span>
+                            <Button
+                                onClick={() => {
+                                    onClose()
+                                    navigation({to: "/auth/sign-in"})
+
+                                }}
+                                className="text-xs text-primary hover:underline">
+                                Sign in
+                            </Button>
+                        </div>
+                    </motion.aside>
+                )}
+            </AnimatePresence>
         </>
     )
 }
