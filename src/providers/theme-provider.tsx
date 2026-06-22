@@ -1,7 +1,7 @@
-import {useEffect, useState} from "react"
+import {Fragment, useEffect, useState} from "react"
 import {useUIStore} from "#/lib/store"
 
-export function ThemeProvider({children}: { children: React.ReactNode }) {
+export function ThemeProvider() {
     const isDarkMode = useUIStore((state) => state.isDarkMode)
     const [hydrated, setHydrated] = useState(false)
 
@@ -13,5 +13,5 @@ export function ThemeProvider({children}: { children: React.ReactNode }) {
 
     if (!hydrated) return null
 
-    return children
+    return <Fragment />
 }

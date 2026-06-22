@@ -61,18 +61,17 @@ function RootDocument({children}: { children: React.ReactNode }) {
         <html lang="en">
         <head>
             <HeadContent/>
-            <script dangerouslySetInnerHTML={{__html: THEME_DARK}} />
+            <script dangerouslySetInnerHTML={{__html: THEME_DARK}}/>
         </head>
         <body className="min-h-screen flex flex-col">
-        <ToastProvider />
+        <ToastProvider/>
+        <ThemeProvider/>
         <LenisProvider>
-            <ThemeProvider>
-                <NavBar/>
-                <section className="flex-1 relative">
-                    {children}
-                </section>
-                <Footer/>
-            </ThemeProvider>
+            <NavBar/>
+            <section className="flex-1 relative">
+                {children}
+            </section>
+            <Footer/>
         </LenisProvider>
         {/*<TanStackDevtools*/}
         {/*    config={{*/}
