@@ -7,6 +7,7 @@ import {Link} from "@tanstack/react-router";
 import clsx from "clsx";
 import {Badge} from "@components/ui";
 import {motion} from "framer-motion";
+import {toast} from "#/lib/utils.ts";
 
 interface ProductCardProps {
     product: Product
@@ -18,7 +19,7 @@ export const ProductCard = React.memo(({product}: ProductCardProps) => {
     const [showAddedMessage, setShowAddedMessage] = useState<boolean>(false)
     const [messageText, setMessageText] = useState<string>('')
 
-    const isAlreadyAddedToCard = cart.items.find(
+    const isAlreadyAddedToCart = cart.items.find(
         (item) => item.productId === product.id
     )
     const isAlreadyAddedToList = wishlist.find(
@@ -28,12 +29,20 @@ export const ProductCard = React.memo(({product}: ProductCardProps) => {
     const handleCartItem = (e: React.MouseEvent) => {
         e.preventDefault()
 
-        if (!isAlreadyAddedToCard) {
+        if (!isAlreadyAddedToCart) {
             addItem(product)
-            setMessageText('Added to Cart')
+            setMessageText("Added to Cart")
+            toast.success(
+                "Added to Cart",
+                product.name
+            )
         } else {
             removeItem(product.id)
-            setMessageText('Removed from Cart')
+            setMessageText("Removed from Cart")
+            toast.info(
+                "Removed from Cart",
+                product.name
+            )
         }
 
         setShowAddedMessage(true)
@@ -45,10 +54,20 @@ export const ProductCard = React.memo(({product}: ProductCardProps) => {
 
         if (!isAlreadyAddedToList) {
             addList(product)
-            setMessageText('Added to Wishlist')
+
+            setMessageText("Added to Wishlist")
+            toast.success(
+                "Added to Wishlist",
+                product.name
+            )
         } else {
             removeList(product.id)
-            setMessageText('Removed from Wishlist')
+
+            setMessageText("Removed from Wishlist")
+            toast.info(
+                "Removed from Wishlist",
+                product.name
+            )
         }
 
         setShowAddedMessage(true)
@@ -113,7 +132,7 @@ export const ProductCard = React.memo(({product}: ProductCardProps) => {
                                 className={'p-2 cursor-pointer rounded-full bg-background/80 backdrop-blur-sm disabled:opacity-50'}
                             >
                                 <ShoppingCart className={clsx("w-4.5 h-4.5 text-foreground"
-                                    , isAlreadyAddedToCard ? 'fill-primary! text-primary!' : 'text-foreground')}
+                                    , isAlreadyAddedToCart ? 'fill-primary! text-primary!' : 'text-foreground')}
                                 />
                             </motion.button>
 
@@ -152,7 +171,6 @@ export const ProductCard = React.memo(({product}: ProductCardProps) => {
                             {product.name}
                         </h3>
 
-                        {/* rating (smaller) */}
                         <div className="flex items-center gap-2 text-xs">
                             <span className="text-muted-foreground">Condition</span>
                             <Badge size="sm" variant={

@@ -1,4 +1,4 @@
-import {useUIStore} from "#/lib/store.ts";
+import {useUIStore} from "#/lib/store";
 import clsx from "clsx";
 
 type BrandLogoProps = {

@@ -3,7 +3,7 @@ import {motion} from "framer-motion";
 import type {Product} from "#/lib/types.ts";
 import {fadeUp, staggerContainer} from "#/lib/framer-motion.ts";
 import {ProductCard} from "@components/products/product-card.tsx";
-import {useWishlistStore} from "#/lib/store.ts";
+import {useWishlistStore} from "#/lib/store";
 import {Button} from "@components/ui";
 import {Heart} from "lucide-react";
 import {defaultShopFilter} from "#/constants.ts";

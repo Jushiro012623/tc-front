@@ -69,6 +69,18 @@
     --font-display: "Cormorant Garamond", serif;
     --radius: 0.5rem;
     --tracking-normal: -0.02em;
+
+    --toast-success-border: #8fb397;
+    --toast-success-title: #2f5d3b;
+    --toast-success-desc: #52705a;
+
+    --toast-error-border: #d59b8f;
+    --toast-error-title: #8b3c30;
+    --toast-error-desc: #a15a4d;
+
+    --toast-info-border: #9eb4c9;
+    --toast-info-title: #3d556e;
+    --toast-info-desc: #61758a;
 }
 
 .dark {
@@ -120,6 +132,18 @@
 
     --footer: #0b0a09;
     --footer-foreground: #ddcdc5;
+
+    --toast-success-border: #2d523b;
+    --toast-success-title: #82b396;
+    --toast-success-desc: #82b396;
+
+    --toast-error-border: #5c2d25;
+    --toast-error-title: #e58b7a;
+    --toast-error-desc: #e58b7a;
+
+    --toast-info-border: #2b3d4f;
+    --toast-info-title: #8bb0d2;
+    --toast-info-desc: #8bb0d2;
 }
 
 @theme inline {
@@ -537,4 +561,94 @@ input[type="search"]::-ms-reveal {
     .description {
         @apply text-muted-foreground max-w-2xl leading-8;
     }
+
+    /* ========================= TOAST BASE & ANIMATION ========================= */
+    @keyframes toast-slide-in {
+        0% {
+            transform: translateY(1rem) scale(0.98);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+    }
+
+    /* Common layout for your toasts (apply this class to your toast wrapper) */
+    .toast {
+        @apply flex items-start gap-3 p-4 rounded-xl shadow-lg border;
+        @apply transition-all duration-300 ease-out;
+        animation: toast-slide-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* ========================= TOAST SUCCESS ========================= */
+    .toast__success {
+        border-color: color-mix(in srgb, var(--toast-success-border) 60%, transparent);
+        @apply bg-background shadow-[#1f1a17]/5 dark:shadow-black/40;
+    }
+
+    .toast-x__success,
+    .toast-title__success {
+        color: var(--toast-success-title);
+    }
+
+    .toast-desc__success {
+        color: color-mix(in srgb, var(--toast-success-desc) 80%, transparent);
+    }
+
+    /* ========================= TOAST ERROR ========================= */
+    .toast__error {
+        border-color: color-mix(in srgb, var(--toast-error-border) 60%, transparent);
+        @apply bg-background shadow-[#1f1a17]/5 dark:shadow-black/40;
+    }
+
+    .toast-x__error,
+    .toast-title__error {
+        color: var(--toast-error-title);
+    }
+
+    .toast-desc__error {
+        color: color-mix(in srgb, var(--toast-error-desc) 80%, transparent);
+    }
+
+    /* ========================= TOAST INFO ========================= */
+    .toast__info {
+        border-color: color-mix(in srgb, var(--toast-info-border) 60%, transparent);
+        @apply bg-background shadow-[#1f1a17]/5 dark:shadow-black/40;
+    }
+
+    .toast-x__info,
+    .toast-title__info {
+        color: var(--toast-info-title);
+    }
+
+    .toast-desc__info {
+        color: color-mix(in srgb, var(--toast-info-desc) 80%, transparent);
+    }
+
+
+}
+body::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+}
+
+::-webkit-scrollbar{
+    width: 8px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--muted);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--secondary);
+    border-radius: 5px;
+}
+
+/* The thumb change on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
 }

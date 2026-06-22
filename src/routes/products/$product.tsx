@@ -2,11 +2,12 @@ import {createFileRoute, notFound, useParams} from '@tanstack/react-router'
 import {Badge, Button, Main, Chip} from "@components/ui";
 import {ArrowLeft} from "lucide-react";
 import {NotFound} from "@components/layouts";
-import {useCartStore, useWishlistStore} from "#/lib/store.ts";
+import {useCartStore, useWishlistStore} from "#/lib/store";
 import {Loader} from "@components/layouts/loader.tsx";
 import {fetchProduct} from "#/lib/products.ts";
 import type {Product} from "#/lib/types.ts";
 import {motion} from 'framer-motion'
+import {toast} from "#/lib/utils.ts";
 
 export const Route = createFileRoute('/products/$product')({
     component: RouteComponent,
@@ -49,7 +50,7 @@ function RouteComponent() {
     const isAlreadyAddedToList = wishlist.find(
         (item) => item.id === product.id
     )
-    const isAlreadyAddedToCard = useCartStore((s) => {
+    const isAlreadyAddedToCart = useCartStore((s) => {
         return s.cart.items.some(i => i.productId === id)
     })
 
@@ -194,17 +195,29 @@ function RouteComponent() {
                             <Button
                                 className="w-full h-11"
                                 onClick={() => {
-                                    isAlreadyAddedToCard ? removeItem(id) : addItem(product)
+                                    if(isAlreadyAddedToCart){
+                                        toast.info("Removed from Cart",product.name)
+                                        removeItem(product.id)
+                                        return
+                                    }
+                                    toast.success("Added to Cart",product.name)
+                                    addItem(product)
                                 }}
                             >
-                                {isAlreadyAddedToCard ? "Remove from Cart" : "Add to Cart"}
+                                {isAlreadyAddedToCart ? "Remove from Cart" : "Add to Cart"}
                             </Button>
 
                             <Button
                                 variant="muted"
                                 className="w-full h-11"
                                 onClick={() => {
-                                    isAlreadyAddedToList ? removeList(id) : addList(product)
+                                    if(isAlreadyAddedToList){
+                                        toast.info("Removed from Wishlist",product.name)
+                                        removeList(product.id)
+                                        return
+                                    }
+                                    toast.success("Added to Wishlist",product.name)
+                                    addList(product)
                                 }}
                             >
                                 {isAlreadyAddedToList ? "Wishlisted" : "Add to Wishlist"}

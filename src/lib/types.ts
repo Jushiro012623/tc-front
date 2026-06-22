@@ -146,31 +146,3 @@ export type ShopSearch = {
     page: number
 }
 
-
-export interface CartStore {
-    cart: Cart
-    addItem: (product: Product) => void
-    removeItem: (productId: string) => void
-    clearCart: () => void
-    getTotal: () => number
-}
-
-export interface WishListStore {
-    wishlist: Product[]
-    addList: (wishlist: Product) => void
-    removeList: (productId: string) => void
-    clearList: () => void
-}
-
-export interface AuthStore {
-    user: any | null
-    isAuthenticated: boolean
-    setUser: (user: any) => void
-    logout: () => void
-}
-
-export interface UIStore {
-    isDarkMode: boolean
-    toggleDarkMode: () => void
-    setDarkMode: (value: boolean) => void
-}

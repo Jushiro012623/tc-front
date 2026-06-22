@@ -6,7 +6,7 @@ import clsx from "clsx";
 import {defaultShopFilter, NavLinks} from "#/constants";
 import {useState} from "react";
 import {CartDrawer} from "@components/layouts/cart-drawer.tsx";
-import {useCartStore, useUIStore} from "#/lib/store.ts";
+import {useCartStore, useUIStore} from "#/lib/store";
 import {Heart, Moon, Search, Sun} from "lucide-react";
 import {MobileNavDrawer} from "@components/layouts/mobile-nav-drawer.tsx";
 import {motion, AnimatePresence} from "framer-motion"
@@ -34,7 +34,7 @@ export const NavBar = () => {
             to: "/shop",
             search: {
                 ...defaultShopFilter,
-                name: search?.toString() || undefined
+                name: search.toString()
             },
             replace: true
         })

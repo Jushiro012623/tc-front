@@ -6,7 +6,7 @@ import { BrandLogo, Button } from "@components/ui"
 import { AnimatePresence, motion } from "framer-motion"
 import { CgProfile } from "react-icons/cg"
 import {Heart, Moon, Sun} from "lucide-react"
-import { useUIStore } from "#/lib/store.ts"
+import { useUIStore } from "#/lib/store"
 
 type Props = {
     open: boolean

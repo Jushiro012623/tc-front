@@ -4,7 +4,7 @@ import {NavBar} from "#/components/layouts/nav-bar.tsx";
 import {Footer} from "#/components/layouts/footer.tsx";
 import 'lenis/dist/lenis.css'
 import {NotFound} from "@components/layouts";
-import {LenisProvider, ThemeProvider} from "#/providers";
+import {LenisProvider, ThemeProvider, ToastProvider} from "#/providers";
 
 const THEME_DARK = `
 (function () {
@@ -64,6 +64,7 @@ function RootDocument({children}: { children: React.ReactNode }) {
             <script dangerouslySetInnerHTML={{__html: THEME_DARK}} />
         </head>
         <body className="min-h-screen flex flex-col">
+        <ToastProvider />
         <LenisProvider>
             <ThemeProvider>
                 <NavBar/>

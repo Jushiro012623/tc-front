@@ -1,8 +1,7 @@
 import {BiX} from "react-icons/bi"
 import {Button, SeparatorX} from "@components/ui"
 import {Fragment} from "react"
-import {useCartStore} from "#/lib/store.ts";
-import {useLockScroll} from "#/hooks";
+import {useCartStore} from "#/lib/store";
 import {AnimatePresence, motion} from "framer-motion";
 
 type Props = {
@@ -12,7 +11,6 @@ type Props = {
 
 export const CartDrawer = ({open, onClose}: Props) => {
     const {cart} = useCartStore()
-    useLockScroll(open)
 
     return (
         <Fragment>
