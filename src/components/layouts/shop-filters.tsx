@@ -6,7 +6,8 @@ type Props = {
         category: string
         style: string
         sizes: string[]
-        price: [number, number]
+        priceMin: number
+        priceMax: number
     }
     onApply: (patch: any) => void
 }
@@ -101,11 +102,11 @@ export const ShopFilters = React.memo(({filters, onApply}: Props) => {
                     <Input
                         type="number"
                         size="sm"
-                        value={draft.price[0]}
+                        value={draft.priceMin}
                         onChange={(e) =>
                             setDraft(prev => ({
                                 ...prev,
-                                price: [Number(e.target.value), prev.price[1]],
+                                priceMin: Number(e.target.value),
                             }))
                         }
                         placeholder="Min"
@@ -114,11 +115,11 @@ export const ShopFilters = React.memo(({filters, onApply}: Props) => {
                     <Input
                         type="number"
                         size="sm"
-                        value={draft.price[1]}
+                        value={draft.priceMax}
                         onChange={(e) =>
                             setDraft(prev => ({
                                 ...prev,
-                                price: [prev.price[0], Number(e.target.value)],
+                                priceMax: Number(e.target.value),
                             }))
                         }
                         placeholder="Max"

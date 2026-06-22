@@ -107,7 +107,6 @@ export const useUIStore = create<UIStore>()(
         }),
         {
             name: "theme",
-            skipHydration: true,
         }
     )
 )

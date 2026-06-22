@@ -112,7 +112,7 @@ export const defaultShopFilter = {
     style: 'All',
     sizes: [],
     priceMin: 0,
-    priceMax: 300,
+    priceMax: 2000,
     name: undefined,
     page: 1,
     count: 40

@@ -7,6 +7,25 @@ import {motion} from 'framer-motion'
 
 export const Route = createFileRoute("/about")({
     component: AboutPage,
+    head: () => ({
+        meta: [
+            {
+                title: 'About Us | Triumphs Co.'
+            },
+            {
+                name: 'description',
+                content: 'Learn about Triumphs Co., our mission to make sustainable fashion accessible through carefully curated thrifted and pre-loved clothing.'
+            },
+            {
+                property: 'og:title',
+                content: 'About Us | Triumphs Co.'
+            },
+            {
+                property: 'og:description',
+                content: 'Discover the story behind Triumphs Co. and our commitment to sustainable fashion.'
+            }
+        ],
+    })
 })
 
 function AboutPage() {
@@ -38,17 +57,18 @@ function AboutPage() {
                     variants={fadeUp}
                     className="mt-4 text-sm lg:text-lg text-muted-foreground max-w-2xl leading-8"
                 >
-                    At Triumphs Co, we curate quality pre-loved pieces that help you express your style while making fashion more affordable and sustainable.
+                    At Triumphs Co, we curate quality pre-loved pieces that help you express your style while making
+                    fashion more affordable and sustainable.
                 </motion.p>
             </motion.section>
             {/* About TC */}
             <section className="mb-35 mt-15">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <motion.div
-                        initial={{ opacity: 0, x: -40 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, amount: 0.2 }}
-                        transition={{ duration: 0.7 }}
+                        initial={{opacity: 0, x: -40}}
+                        whileInView={{opacity: 1, x: 0}}
+                        viewport={{once: true, amount: 0.2}}
+                        transition={{duration: 0.7}}
                     >
                         <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium mb-6">
                             About Triumphs Co.
@@ -69,10 +89,10 @@ function AboutPage() {
 
                     <motion.div
                         className="rounded-2xl overflow-hidden bg-muted min-h-96"
-                        initial={{ opacity: 0, x: 40 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, amount: 0.2 }}
-                        transition={{ duration: 0.7 }}
+                        initial={{opacity: 0, x: 40}}
+                        whileInView={{opacity: 1, x: 0}}
+                        viewport={{once: true, amount: 0.2}}
+                        transition={{duration: 0.7}}
                     >
                         <motion.img
                             src="/about/hero1.jpg"
@@ -92,10 +112,10 @@ function AboutPage() {
             <section className="mb-20 mt-30">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <motion.div
-                        initial={{ opacity: 0, x: 40 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.7 }}
+                        initial={{opacity: 0, x: 40}}
+                        whileInView={{opacity: 1, x: 0}}
+                        viewport={{once: true}}
+                        transition={{duration: 0.7}}
                         className="lg:col-start-2"
                     >
                         <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium mb-6">
@@ -118,10 +138,10 @@ function AboutPage() {
                     </motion.div>
 
                     <motion.div
-                        initial={{ opacity: 0, x: -40 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.7 }}
+                        initial={{opacity: 0, x: -40}}
+                        whileInView={{opacity: 1, x: 0}}
+                        viewport={{once: true}}
+                        transition={{duration: 0.7}}
                         className="lg:row-start-1 lg:col-start-1 rounded-2xl overflow-hidden min-h-96">
                         <motion.img
                             src="/about/mission.jpg"
@@ -149,7 +169,7 @@ function AboutPage() {
                     variants={staggerContainer}
                     initial="hidden"
                     whileInView="show"
-                    viewport={{ once: true, amount: 0.2 }}
+                    viewport={{once: true, amount: 0.2}}
                 >
                     {values.map((value) => (
                         <motion.div
@@ -157,7 +177,7 @@ function AboutPage() {
                             variants={fadeUp}
                             whileHover={{
                                 y: -5,
-                                transition: { duration: 0.2 },
+                                transition: {duration: 0.2},
                             }}
                             className="bg-muted/50 rounded-xl p-8 text-center"
                         >
@@ -176,10 +196,10 @@ function AboutPage() {
 
             <motion.section
                 className="text-cream py-10 sm:py-24 bg-muted rounded-xl"
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1}}
+                initial={{opacity: 0, scale: 0.95}}
+                whileInView={{opacity: 1, scale: 1}}
+                viewport={{once: true}}
+                transition={{duration: 1}}
             >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-2xl mx-auto text-center space-y-6">

@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WishlistsRouteImport } from './routes/wishlists'
 import { Route as SustainabilityRouteImport } from './routes/sustainability'
 import { Route as ShopRouteImport } from './routes/shop'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -18,6 +19,11 @@ import { Route as ProductsProductRouteImport } from './routes/products/$product'
 import { Route as AuthSignUpRouteImport } from './routes/auth/sign-up'
 import { Route as AuthSignInRouteImport } from './routes/auth/sign-in'
 
+const WishlistsRoute = WishlistsRouteImport.update({
+  id: '/wishlists',
+  path: '/wishlists',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SustainabilityRoute = SustainabilityRouteImport.update({
   id: '/sustainability',
   path: '/sustainability',
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/shop': typeof ShopRoute
   '/sustainability': typeof SustainabilityRoute
+  '/wishlists': typeof WishlistsRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
   '/products/$product': typeof ProductsProductRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/shop': typeof ShopRoute
   '/sustainability': typeof SustainabilityRoute
+  '/wishlists': typeof WishlistsRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
   '/products/$product': typeof ProductsProductRoute
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/shop': typeof ShopRoute
   '/sustainability': typeof SustainabilityRoute
+  '/wishlists': typeof WishlistsRoute
   '/auth/sign-in': typeof AuthSignInRoute
   '/auth/sign-up': typeof AuthSignUpRoute
   '/products/$product': typeof ProductsProductRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/shop'
     | '/sustainability'
+    | '/wishlists'
     | '/auth/sign-in'
     | '/auth/sign-up'
     | '/products/$product'
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/shop'
     | '/sustainability'
+    | '/wishlists'
     | '/auth/sign-in'
     | '/auth/sign-up'
     | '/products/$product'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/shop'
     | '/sustainability'
+    | '/wishlists'
     | '/auth/sign-in'
     | '/auth/sign-up'
     | '/products/$product'
@@ -129,6 +141,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   ShopRoute: typeof ShopRoute
   SustainabilityRoute: typeof SustainabilityRoute
+  WishlistsRoute: typeof WishlistsRoute
   AuthSignInRoute: typeof AuthSignInRoute
   AuthSignUpRoute: typeof AuthSignUpRoute
   ProductsProductRoute: typeof ProductsProductRoute
@@ -136,6 +149,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wishlists': {
+      id: '/wishlists'
+      path: '/wishlists'
+      fullPath: '/wishlists'
+      preLoaderRoute: typeof WishlistsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sustainability': {
       id: '/sustainability'
       path: '/sustainability'
@@ -201,6 +221,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ShopRoute: ShopRoute,
   SustainabilityRoute: SustainabilityRoute,
+  WishlistsRoute: WishlistsRoute,
   AuthSignInRoute: AuthSignInRoute,
   AuthSignUpRoute: AuthSignUpRoute,
   ProductsProductRoute: ProductsProductRoute,

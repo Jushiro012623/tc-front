@@ -13,7 +13,21 @@ export const Route = createFileRoute('/shop')({
     component: Component,
     head: () => ({
         meta: [
-            {title: `Shop | Triumphs Co.`}
+            {
+                title: `Shop | Triumphs Co.`
+            },
+            {
+                name: 'description',
+                content: 'Browse curated thrifted, vintage, and one-of-a-kind fashion pieces from Triumphs Co.',
+            },
+            {
+                property: 'og:title',
+                content: 'Shop | Triumphs Co.',
+            },
+            {
+                property: 'og:description',
+                content: 'Browse curated thrifted, vintage, and one-of-a-kind fashion pieces.',
+            },
         ]
     }),
     loaderDeps: ({search}) => {
@@ -47,7 +61,8 @@ function Component() {
         category: search.category,
         sizes: search.sizes,
         style: search.style,
-        price: [search.priceMin, search.priceMax] as [number, number],
+        priceMin: search.priceMin,
+        priceMax: search.priceMax,
         name: search.name
     }
 

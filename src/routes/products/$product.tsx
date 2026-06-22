@@ -10,9 +10,15 @@ import {motion} from 'framer-motion'
 
 export const Route = createFileRoute('/products/$product')({
     component: RouteComponent,
-    head: ({params}) => ({
+    head: ({loaderData}: { loaderData?: Product }) => ({
         meta: [
-            {title: `Product ${params.product} | Triumphs Co.`}
+            {
+                title: `Product ${loaderData?.name ?? "Not Found"} | Triumphs Co.`
+            },
+            {
+                name: 'description',
+                content: loaderData?.description ?? "No content",
+            }
         ]
     }),
     pendingMs: 0,
@@ -130,12 +136,12 @@ function RouteComponent() {
 
                             <div className="flex items-end gap-3">
                                 <p className="text-3xl font-semibold text-foreground">
-                                    ${product.price.toFixed(2)}
+                                    ₱{product.price.toFixed(2)}
                                 </p>
 
                                 {product.compareAtPrice && (
                                     <p className="text-muted-foreground line-through text-sm">
-                                        ${product.compareAtPrice.toFixed(2)}
+                                        ₱{product.compareAtPrice.toFixed(2)}
                                     </p>
                                 )}
                             </div>

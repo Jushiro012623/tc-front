@@ -7,7 +7,7 @@ import {defaultShopFilter, NavLinks} from "#/constants";
 import {useState} from "react";
 import {CartDrawer} from "@components/layouts/cart-drawer.tsx";
 import {useCartStore, useUIStore} from "#/lib/store.ts";
-import {Moon, Search, Sun} from "lucide-react";
+import {Heart, Moon, Search, Sun} from "lucide-react";
 import {MobileNavDrawer} from "@components/layouts/mobile-nav-drawer.tsx";
 import {motion, AnimatePresence} from "framer-motion"
 import {useWindowSize} from "usehooks-ts";
@@ -101,7 +101,7 @@ export const NavBar = () => {
                         </button>
 
                         <ul className="flex items-center gap-1 sm:gap-2">
-                            <li>
+                            <li className="hidden lg:block">
                                 <button
                                     onClick={() => navigate(({to: '/auth/sign-in'}))}
                                     className={clsx(
@@ -124,7 +124,18 @@ export const NavBar = () => {
                                         className="size-2 bg-primary rounded-full border border-background absolute top-1.5 right-1.5"/>}
                                 </button>
                             </li>
-                            <li>
+                            <li className="hidden lg:block">
+                                <button
+                                    onClick={() => navigate(({to: '/wishlists'}))}
+                                    className={clsx(
+                                        "p-2 text-muted-foreground hover:text-primary",
+                                        "transition-colors rounded-full hover:bg-muted/50 relative"
+                                    )}
+                                >
+                                    <Heart size={22}/>
+                                </button>
+                            </li>
+                            <li className="hidden lg:block">
                                 <button
                                     onClick={toggleDarkMode}
                                     className={clsx(

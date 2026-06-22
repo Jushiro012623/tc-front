@@ -168,12 +168,11 @@ export const ProductCard = React.memo(({product}: ProductCardProps) => {
                         {/* price */}
                         <div className="flex items-center gap-2">
                         <span className="font-bold text-sage-green text-sm">
-                            ${product.price.toFixed(2)}
+                            ₱{product.price.toFixed(2)}
                         </span>
-
                             {product.compareAtPrice && (
                                 <span className="text-xs line-through text-muted-foreground">
-                                ${product.compareAtPrice.toFixed(2)}
+                                ₱{product.compareAtPrice.toFixed(2)}
                             </span>
                             )}
                         </div>

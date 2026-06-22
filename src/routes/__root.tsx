@@ -6,6 +6,20 @@ import 'lenis/dist/lenis.css'
 import {NotFound} from "@components/layouts";
 import {LenisProvider, ThemeProvider} from "#/providers";
 
+const THEME_DARK = `
+(function () {
+  try {
+    const theme = localStorage.getItem("theme");
+    const isDark = theme ? JSON.parse(theme)?.state?.isDarkMode : false;
+
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  } catch (e) {}
+})();
+`
 export const Route = createRootRoute({
     head: () => ({
         meta: [
@@ -47,6 +61,7 @@ function RootDocument({children}: { children: React.ReactNode }) {
         <html lang="en">
         <head>
             <HeadContent/>
+            <script dangerouslySetInnerHTML={{__html: THEME_DARK}} />
         </head>
         <body className="min-h-screen flex flex-col">
         <LenisProvider>

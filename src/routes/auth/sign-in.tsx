@@ -6,7 +6,26 @@ export const Route = createFileRoute("/auth/sign-in")({
     component: RouteComponent,
     head: () => ({
         meta: [
-            { title: 'Sign In | Triumphs Co.'}
+            {title: 'Sign In | Triumphs Co.'},
+            {
+                name: 'description',
+                content:
+                    'Sign in to Triumphs Co. to access your saved thrift finds, order history, and early access to curated drops.'
+            },
+            {
+                property: 'og:title',
+                content: 'Sign In | Triumphs Co.'
+            },
+            {
+                property: 'og:description',
+                content:
+                    'Access your Triumphs Co. account to manage orders and saved thrifted pieces.'
+            },
+            {
+                property: 'og:type',
+                content: 'website'
+            },
+            { name: 'robots', content: 'noindex, nofollow' }
         ]
     })
 });
@@ -86,7 +105,7 @@ function RouteComponent() {
                     <p className="mt-10 text-center text-sm text-muted-foreground">
                         New to Triumphs Co?{" "}
                         <Link to="/auth/sign-up"
-                           className="font-medium text-primary hover:text-primary/80 underline underline-offset-4 transition-colors">
+                              className="font-medium text-primary hover:text-primary/80 underline underline-offset-4 transition-colors">
                             Join the thrift community
                         </Link>
                     </p>

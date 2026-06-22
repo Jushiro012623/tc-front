@@ -6,7 +6,25 @@ export const Route = createFileRoute('/auth/sign-up')({
     component: RouteComponent,
     head: () => ({
         meta: [
-            { title: 'Sign Up | Triumphs Co.'}
+            {title: 'Sign Up | Triumphs Co.'},
+            {
+                name: 'description',
+                content:
+                    'Sign up for Triumphs Co. to save thrift finds, track orders, and get early access to curated vintage drops.'
+            },
+            {
+                property: 'og:title',
+                content: 'Join Triumphs Co.'
+            },
+            {
+                property: 'og:description',
+                content:
+                    'Create an account to access saved finds, order tracking, and exclusive thrift drops.'
+            },
+            {
+                property: 'og:type',
+                content: 'website'
+            }
         ]
     })
 })
@@ -29,7 +47,8 @@ function RouteComponent() {
                         </h1>
 
                         <p className="mt-4 text-muted-foreground text-sm leading-relaxed">
-                            Create an account to save your finds, track orders, and get early access to new thrift drops.
+                            Create an account to save your finds, track orders, and get early access to new thrift
+                            drops.
                         </p>
                     </header>
 
@@ -67,11 +86,13 @@ function RouteComponent() {
 
                         <p className="text-xs text-center text-muted-foreground leading-relaxed pt-2">
                             By joining, you agree to our{" "}
-                            <a href="/privacy-policy" className="text-primary hover:text-primary/80 hover:underline transition-colors">
+                            <a href="/privacy-policy"
+                               className="text-primary hover:text-primary/80 hover:underline transition-colors">
                                 Privacy Policy
                             </a>{" "}
                             and{" "}
-                            <a href="/terms" className="text-primary hover:text-primary/80 hover:underline transition-colors">
+                            <a href="/terms"
+                               className="text-primary hover:text-primary/80 hover:underline transition-colors">
                                 Terms of Service
                             </a>.
                         </p>
@@ -81,7 +102,8 @@ function RouteComponent() {
                                 <span className="w-full border-t border-border"/>
                             </div>
                             <div className="relative flex justify-center">
-                            <span className="bg-background px-3 text-[10px] font-semibold tracking-widest text-muted-foreground uppercase">
+                            <span
+                                className="bg-background px-3 text-[10px] font-semibold tracking-widest text-muted-foreground uppercase">
                                 Or sign up with
                             </span>
                             </div>

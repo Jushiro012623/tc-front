@@ -5,10 +5,29 @@ import {fadeUp, staggerContainer} from "#/lib/framer-motion.ts";
 import {motion} from 'framer-motion'
 
 export const Route = createFileRoute('/contact')({
-    component: RouteComponent,
+    component: ContactPage,
+    head: () => ({
+        meta: [
+            {
+                title: 'Contact Us | Triumphs Co.'
+            },
+            {
+                name: 'description',
+                content: 'Contact Triumphs Co. for questions about orders, thrift finds, shipping, returns, or general inquiries.'
+            },
+            {
+                property: 'og:title',
+                content: 'Contact Us | Triumphs Co.'
+            },
+            {
+                property: 'og:description',
+                content: 'Get in touch with Triumphs Co. We are here to help with orders, products, and customer support.'
+            }
+        ],
+    })
 })
 
-function RouteComponent() {
+function ContactPage() {
     return (
         <Main className="max-w-7xl mx-auto px-6 py-16">
             {/* Hero */}
@@ -43,6 +62,9 @@ function RouteComponent() {
                     viewport={{once: true}}
                     transition={{duration: 0.7}}
                 >
+                    <h2 className="font-serif text-3xl font-semibold mb-6">
+                        Reach Out to Us
+                    </h2>
                     {contactDetails.map((item) => {
                         const Icon = item.icon
 
@@ -85,10 +107,9 @@ function RouteComponent() {
                     </h2>
 
                     <form className="space-y-4 flex-1 flex flex-col">
-                        <Input type="text" placeholder="Your name"/>
-                        <Input type="email" placeholder="Your email"/>
-                        <Input placeholder="How can we help you?"/>
-
+                        <Input type="text" placeholder="Your name" label="Full Name"/>
+                        <Input type="email" placeholder="Your email" label="Email"/>
+                        <Input placeholder="How can we help you?" label="Subject"/>
                         <textarea
                             placeholder="Tell us more..."
                             rows={5}

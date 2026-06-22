@@ -14,12 +14,49 @@ export const Route = createFileRoute('/')({
     component: Home,
     head: () => ({
         meta: [
-            {title: `Home | Triumphs Co.`}
-        ]
+            {
+                title: 'Triumphs Co. | Curated Thrift & Vintage Clothing'
+            },
+            {
+                name: 'description',
+                content:
+                    'Shop curated thrifted and vintage clothing. Discover unique, high-quality pre-loved fashion pieces at Triumphs Co.'
+            },
+            {
+                property: 'og:title',
+                content: 'Triumphs Co. | Curated Thrift & Vintage Clothing'
+            },
+            {
+                property: 'og:description',
+                content:
+                    'Discover handpicked vintage and pre-loved fashion pieces with character and style.'
+            },
+            {
+                property: 'og:type',
+                content: 'website'
+            },
+            {
+                property: 'og:image',
+                content: '/og/home.jpg'
+            },
+            {
+                name: 'twitter:card',
+                content: 'summary_large_image'
+            },
+            {
+                name: 'twitter:title',
+                content: 'Triumphs Co.'
+            },
+            {
+                name: 'twitter:description',
+                content:
+                    'Curated thrifted and vintage fashion made accessible.'
+            }
+        ],
     }),
     loader: () => {
         return {
-            productsDeferred: defer(fetchProducts({...defaultShopFilter, count: '4'})
+            productsDeferred: defer(fetchProducts({...defaultShopFilter, count: 4})
             )
         }
     }

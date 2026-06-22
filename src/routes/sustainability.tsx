@@ -7,6 +7,31 @@ import {fadeUp, staggerContainer} from "#/lib/framer-motion.ts";
 
 export const Route = createFileRoute('/sustainability')({
     component: RouteComponent,
+    head: () => ({
+        meta: [
+            {
+                title: 'Sustainability | Triumphs Co.'
+            },
+            {
+                name: 'description',
+                content:
+                    'Learn how Triumphs Co. promotes sustainable fashion through thrifted clothing, circular economy practices, and reduced textile waste.'
+            },
+            {
+                property: 'og:title',
+                content: 'Sustainability | Triumphs Co.'
+            },
+            {
+                property: 'og:description',
+                content:
+                    'Discover our sustainability mission and how thrifting helps reduce fashion waste.'
+            },
+            {
+                property: 'og:type',
+                content: 'website'
+            }
+        ],
+    })
 })
 
 function RouteComponent() {
