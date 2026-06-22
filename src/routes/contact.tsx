@@ -115,14 +115,9 @@ function ContactPage() {
                             rows={5}
                             className="flex-1 input w-full border rounded-lg px-4 py-3"
                         />
-                        <motion.div
-                            whileHover={{scale: 1.02}}
-                            whileTap={{scale: 0.98}}
-                        >
-                            <Button className="w-full rounded-full mt-auto">
-                                Send Message
-                            </Button>
-                        </motion.div>
+                        <Button className="w-full rounded-full mt-auto">
+                            Send Message
+                        </Button>
                     </form>
                 </motion.div>
             </section>

@@ -219,7 +219,7 @@ export const NavBar = () => {
                 onClose={() => setCartOpen(false)}
             />
             <MobileNavDrawer
-                open={mobileOpen}
+                open={mobileOpen && width < 1024}
                 onClose={() => setMobileOpen(false)}
             />
         </>
