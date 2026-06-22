@@ -3,7 +3,7 @@ import appCss from '../styles.css?url'
 import {NavBar} from "#/components/layouts/nav-bar.tsx";
 import {Footer} from "#/components/layouts/footer.tsx";
 import 'lenis/dist/lenis.css'
-import {NotFound} from "@components/layouts";
+import {ErrorComponent, NotFound} from "@components/layouts";
 import {LenisProvider, ThemeProvider, ToastProvider} from "#/providers";
 
 const THEME_DARK = `
@@ -53,6 +53,7 @@ export const Route = createRootRoute({
     }),
     notFoundComponent: NotFound,
     shellComponent: RootDocument,
+    errorComponent: ErrorComponent
 
 })
 

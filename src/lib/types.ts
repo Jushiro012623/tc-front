@@ -110,20 +110,6 @@ export interface WishlistItem {
     addedAt: Date
 }
 
-// Review Types
-export interface Review {
-    id: string
-    productId: string
-    userId: string
-    rating: number
-    title: string
-    comment: string
-    images?: string[]
-    helpful: number
-    createdAt: Date
-    updatedAt: Date
-}
-
 // Filter Types
 export interface ProductFilters {
     categories?: string[]

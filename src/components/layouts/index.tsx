@@ -6,3 +6,4 @@ export {ShopFilters} from './shop-filters.tsx'
 export {CartDrawer} from './cart-drawer.tsx'
 export {ShopSkeleton} from './shop-skeleton.tsx'
 export {FeatureItem} from "./feature-item.tsx";
+export {ErrorComponent} from "./error-component.tsx";
