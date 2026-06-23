@@ -1,5 +1,5 @@
 import React, {Fragment, useState} from 'react';
-import {Instagram, ArrowRight, CheckCircle} from 'lucide-react';
+import {Instagram, ArrowRight, CheckCircle, Facebook} from 'lucide-react';
 import {Button} from "#/components/ui";
 import {FooterLinks} from "#/constants";
 import {motion} from "framer-motion";
@@ -139,18 +139,28 @@ export const Footer = () => {
                             </button>
 
                             <p className="text-xs text-white/40">
-                                Follow us on Instagram for daily thrift drops.
+                                Follow us on Social Media for daily thrift drops.
                             </p>
-
-                            <a
-                                href="https://instagram.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-white/40 hover:text-sage transition-colors"
-                                aria-label="Instagram"
-                            >
-                                <Instagram size={16}/>
-                            </a>
+                            <div className="flex gap-3">
+                                <a
+                                    href="https://www.instagram.com/lovetriumph_co"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-white/40 hover:text-sage transition-colors"
+                                    aria-label="Instagram"
+                                >
+                                    <Instagram size={16}/>
+                                </a>
+                                <a
+                                    href="https://www.facebook.com/profile.php?id=100094760036889"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-white/40 hover:text-sage transition-colors"
+                                    aria-label="Instagram"
+                                >
+                                    <Facebook size={16}/>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </motion.div>
