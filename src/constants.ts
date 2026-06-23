@@ -1,4 +1,5 @@
 import {Heart, Leaf, Zap, Mail, Phone, MapPin, Clock,} from "lucide-react";
+import type {ShopSearch} from "#/lib/types.ts";
 
 export const NavLinks = [
     {
@@ -107,9 +108,10 @@ export const commitments = [
             "We aim to inspire more people to embrace second-hand fashion and make responsible style choices.",
     },
 ]
-export const defaultShopFilter = {
+
+export const defaultShopFilter: ShopSearch = {
     category: 'All',
-    style: 'All',
+    subcategory: [],
     sizes: [],
     priceMin: 0,
     priceMax: 2000,

@@ -8,7 +8,7 @@ export interface Product {
     image: string
     images: string[]
     category: string
-    subcategory?: string
+    subcategory?: string[]
     sizes?: string[]
     colors?: string[]
     material?: string
@@ -123,7 +123,7 @@ export interface ProductFilters {
 
 export type ShopSearch = {
     category: string
-    style: string
+    subcategory: string[]
     sizes: string[]
     priceMin: number
     priceMax: number

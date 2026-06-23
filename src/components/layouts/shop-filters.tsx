@@ -1,10 +1,11 @@
 import React from 'react'
-import {Button, Input, Select, SeparatorX} from "@components/ui"
+import {Button, Input, SeparatorX} from "@components/ui"
+import {defaultShopFilter} from "#/constants.ts";
 
 type Props = {
     filters: {
         category: string
-        style: string
+        subcategory: string[]
         sizes: string[]
         priceMin: number
         priceMax: number
@@ -12,9 +13,9 @@ type Props = {
     onApply: (patch: any) => void
 }
 
-const categories = ['All', 'Women', 'Unisex', 'Accessories', 'Footwear']
+const categories = ['All', 'Women', 'Men', 'Kids', 'Unisex']
 const sizeOptions = ['XS', 'S', 'M', 'L', 'XL']
-const styleOptions = ['All', 'Minimal', 'Vintage', 'Streetwear', 'Elegant']
+const subcategoryOptions = ['Select Subcategory', 'Footwear', 'Accessories', 'Tops', 'Bottoms', 'Outerwear', 'Dresses']
 
 export const ShopFilters = React.memo(({filters, onApply}: Props) => {
 
@@ -62,6 +63,34 @@ export const ShopFilters = React.memo(({filters, onApply}: Props) => {
                 </div>
             </section>
 
+            {/* SUBCATEGORY */}
+            <section className="space-y-3">
+                <h3 className="text-xs uppercase tracking-wider text-muted-foreground">
+                    Subcategory
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                    {subcategoryOptions.slice(1).map((sub) => (
+                        <button
+                            key={sub}
+                            onClick={() =>
+                                setDraft(prev => ({
+                                    ...prev,
+                                    subcategory: prev.subcategory.includes(sub)
+                                        ? prev.subcategory.filter(s => s !== sub)
+                                        : [...prev.subcategory, sub],
+                                }))
+                            }
+                            className={`px-3 py-1.5 rounded-md text-xs border transition ${
+                                draft.subcategory.includes(sub)
+                                    ? "bg-primary text-background border-primary"
+                                    : "bg-transparent hover:bg-muted border-border text-muted-foreground"
+                            }`}
+                        >
+                            {sub}
+                        </button>
+                    ))}
+                </div>
+            </section>
             {/* SIZES */}
             <section className="space-y-3">
                 <h3 className="text-xs uppercase tracking-wider text-muted-foreground">
@@ -131,29 +160,6 @@ export const ShopFilters = React.memo(({filters, onApply}: Props) => {
                 </div>
             </section>
 
-            {/* STYLE */}
-            <section className="space-y-3">
-                <h3 className="text-xs uppercase tracking-wider text-muted-foreground">
-                    Style
-                </h3>
-
-                <Select
-                    value={draft.style}
-                    onChange={(e) =>
-                        setDraft(prev => ({
-                            ...prev,
-                            style: e.target.value,
-                        }))
-                    }
-                >
-                    {styleOptions.map((s) => (
-                        <option key={s} value={s}>
-                            {s}
-                        </option>
-                    ))}
-                </Select>
-            </section>
-
             {/* APPLY */}
             <div className="pt-2">
                 <Button
@@ -166,18 +172,10 @@ export const ShopFilters = React.memo(({filters, onApply}: Props) => {
                 >
                     Apply Filters
                 </Button>
-
                 <Button
                     onClick={() => {
-                        const reset = {
-                            category: 'All',
-                            style: 'All',
-                            sizes: [],
-                            price: [0, 300],
-                            name: undefined
-                        }
                         setDraft(filters)
-                        onApply(reset)
+                        onApply(defaultShopFilter)
                     }}
                     variant="muted"
                     className="w-full mt-2 text-xs text-muted-foreground hover:text-foreground transition"

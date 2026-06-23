@@ -10,7 +10,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
         image: '/crops/crop-2.jpg',
         images: ['/crops/crop-2.jpg'],
         category: 'women',
-        subcategory: 'crop-tops',
+        subcategory: ['Tops'],
         sizes: ['XS', 'S', 'M', 'L'],
         colors: ['Blue', 'White', 'Black'],
         material: 'Cotton Blend',
@@ -30,7 +30,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
         image: '/crops/crop-1.jpg',
         images: ['/crops/crop-1.jpg'],
         category: 'women',
-        subcategory: 'crop-tops',
+        subcategory: ['Tops'],
         sizes: ['XS', 'S', 'M'],
         colors: ['Red'],
         material: 'Cotton',
@@ -50,7 +50,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
         image: '/crops/crop-3.jpg',
         images: ['/crops/crop-3.jpg'],
         category: 'women',
-        subcategory: 'crop-tops',
+        subcategory: ['Tops'],
         sizes: ['XS', 'S', 'M', 'L'],
         colors: ['Yellow', 'White', 'Black'],
         material: 'Cotton Blend',
@@ -70,7 +70,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
         image: '/crops/crop-4.jpg',
         images: ['/crops/crop-4.jpg'],
         category: 'women',
-        subcategory: 'crop-tops',
+        subcategory: ['Tops'],
         sizes: ['XS', 'S', 'M', 'L', 'XL'],
         colors: ['Navy', 'White'],
         material: 'Cotton',
@@ -90,7 +90,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
         image: '/crops/crop-5.jpg',
         images: ['/crops/crop-5.jpg'],
         category: 'women',
-        subcategory: 'crop-tops',
+        subcategory: ['Tops'],
         sizes: ['XS', 'S', 'M', 'L'],
         colors: ['Grey', 'Beige'],
         material: 'Knit Blend',
@@ -110,7 +110,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
         image: '/crops/crop-6.jpg',
         images: ['/crops/crop-6.jpg'],
         category: 'women',
-        subcategory: 'crop-tops',
+        subcategory: ['Tops'],
         sizes: ['XS', 'S', 'M'],
         colors: ['Green', 'White'],
         material: 'Cotton',
@@ -130,7 +130,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
         image: '/crops/crop-7.jpg',
         images: ['/crops/crop-7.jpg'],
         category: 'women',
-        subcategory: 'crop-tops',
+        subcategory: ['Tops'],
         sizes: ['XS', 'S', 'M', 'L'],
         colors: ['Brown', 'Tan'],
         material: 'Cotton',
@@ -150,7 +150,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
         image: '/crops/crop-8.jpg',
         images: ['/crops/crop-8.jpg'],
         category: 'women',
-        subcategory: 'crop-tops',
+        subcategory: ['Tops'],
         sizes: ['XS', 'S', 'M', 'L'],
         colors: ['Green', 'Cream', 'White'],
         material: 'Cotton Blend',
@@ -170,7 +170,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
         image: '/crops/crop-9.jpg',
         images: ['/crops/crop-9.jpg'],
         category: 'women',
-        subcategory: 'crop-tops',
+        subcategory: ['Tops'],
         sizes: ['XS', 'S', 'M', 'L'],
         colors: ['Blue-Grey'],
         material: 'Jersey Cotton',
@@ -190,7 +190,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
         image: '/crops/crop-10.jpg',
         images: ['/crops/crop-10.jpg'],
         category: 'women',
-        subcategory: 'crop-tops',
+        subcategory: ['Tops'],
         sizes: ['XS', 'S', 'M', 'L'],
         colors: ['Dark Grey'],
         material: 'Knit',
@@ -210,7 +210,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
         image: '/crops/crop-11.jpg',
         images: ['/crops/crop-11.jpg'],
         category: 'women',
-        subcategory: 'crop-tops',
+        subcategory: ['Tops'],
         sizes: ['XS', 'S', 'M', 'L', 'XL'],
         colors: ['Cream', 'Black'],
         material: 'Cotton Blend',
@@ -230,7 +230,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
         image: '/crops/crop-12.jpg',
         images: ['/crops/crop-12.jpg'],
         category: 'women',
-        subcategory: 'crop-tops',
+        subcategory: ['Tops'],
         sizes: ['XS', 'S', 'M'],
         colors: ['Mint Green', 'Sage'],
         material: 'Cotton',
@@ -250,7 +250,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
         image: '/crops/crop-14.jpg',
         images: ['/crops/crop-14.jpg'],
         category: 'women',
-        subcategory: 'crop-tops',
+        subcategory: ['Tops'],
         sizes: ['XS', 'S', 'M', 'L'],
         colors: ['Red', 'White'],
         material: 'Cotton',
@@ -270,7 +270,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
         image: '/crops/crop-13.jpg',
         images: ['/crops/crop-13.jpg'],
         category: 'women',
-        subcategory: 'crop-tops',
+        subcategory: ['Tops'],
         sizes: ['XS', 'S', 'M', 'L'],
         colors: ['Dusty Pink', 'Mauve'],
         material: 'Cotton',
@@ -289,8 +289,8 @@ export const SAMPLE_PRODUCTS: Product[] = [
         compareAtPrice: 1450,
         image: '/footwear/shoes.webp',
         images: ['/footwear/shoes.webp',],
-        category: 'footwear',
-        subcategory: 'footwear',
+        category: 'Womens',
+        subcategory: ['Footwear'],
         sizes: ['6', '7', '8', '9'],
         colors: ['Brown', 'Dark Chocolate'],
         material: 'Faux Leather/Suede',
@@ -321,11 +321,12 @@ export const fetchProducts = async (filters: ShopSearch): Promise<Product[]> => 
                     product.price >= filters.priceMin &&
                     product.price <= filters.priceMax
 
-                const matchesStyle =
-                    filters.style === 'All' ||
-                    product.subcategory
-                        ?.toLowerCase()
-                        .includes(filters.style.toLowerCase())
+                const matchesSubCategory =
+                    filters.subcategory.length === 0 ||
+                    product.subcategory?.some((sub) => {
+                        const currentSub = filters.subcategory
+                        return currentSub.includes(sub)
+                    })
 
                 const matchesName =
                     !filters.name ||
@@ -341,7 +342,7 @@ export const fetchProducts = async (filters: ShopSearch): Promise<Product[]> => 
                     matchesCategory &&
                     matchesSizes &&
                     matchesPrice &&
-                    matchesStyle &&
+                    matchesSubCategory &&
                     matchesName
                 )
             })

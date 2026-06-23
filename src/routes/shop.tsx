@@ -41,7 +41,7 @@ export const Route = createFileRoute('/shop')({
     validateSearch: (search: ShopSearch): ShopSearch => {
         return {
             category: (search.category as string) ?? defaultShopFilter.category,
-            style: (search.style as string) ?? defaultShopFilter.style,
+            subcategory: (search.subcategory as string[]) ?? defaultShopFilter.subcategory,
             sizes: (search.sizes as string[] | undefined) ?? defaultShopFilter.sizes,
             priceMin: Number(search.priceMin ?? defaultShopFilter.priceMin),
             priceMax: Number(search.priceMax ?? defaultShopFilter.priceMax),
@@ -60,7 +60,7 @@ function Component() {
     const filters = {
         category: search.category,
         sizes: search.sizes,
-        style: search.style,
+        subcategory: search.subcategory,
         priceMin: search.priceMin,
         priceMax: search.priceMax,
         name: search.name
