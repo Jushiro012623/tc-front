@@ -159,7 +159,6 @@ export const ShopFilters = React.memo(({filters, onApply}: Props) => {
                     Budget in PHP / USD equivalent
                 </div>
             </section>
-
             {/* APPLY */}
             <div className="pt-2">
                 <Button

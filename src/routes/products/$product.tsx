@@ -8,6 +8,7 @@ import {fetchProduct} from "#/lib/products.ts";
 import type {Product} from "#/lib/types.ts";
 import {motion} from 'framer-motion'
 import {toast} from "#/lib/utils.ts";
+import React from "react";
 
 export const Route = createFileRoute('/products/$product')({
     component: RouteComponent,
@@ -43,6 +44,13 @@ function RouteComponent() {
     const {product: id} = useParams({from: '/products/$product'})
 
     const product: Product = Route.useLoaderData()
+
+    const [selectedImage, setSelectedImage] = React.useState(
+        product.images?.[0] ?? product.image
+    )
+    React.useEffect(() => {
+        setSelectedImage(product.images?.[0] ?? product.image)
+    }, [product])
 
     const {addItem, removeItem} = useCartStore()
     const {addList, removeList, wishlist} = useWishlistStore()
@@ -91,22 +99,39 @@ function RouteComponent() {
                                 }}
                                 transition={{duration: 0.4, ease: "easeOut"}}
                     >
-                        <div className="aspect-square overflow-hidden rounded-2xl border border-border">
-                            <img
-                                src={product.image}
+                        <div className="aspect-square overflow-hidden rounded-2xl border border-muted">
+                            <motion.img
+                                key={selectedImage}
+                                initial={{ opacity: 0, scale: 0.50 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.25 }}
+                                whileHover={{ scale: 1.08 }}
+                                src={selectedImage}
                                 alt={product.name}
                                 className="w-full h-full object-cover"
                             />
                         </div>
-
                         <div className="flex gap-3 mt-4 overflow-x-auto">
-                            {product.images?.map((img, i) => (
-                                <img
+                            {(product.images?.length
+                                    ? product.images
+                                    : [product.image]
+                            ).map((img, i) => (
+                                <button
                                     key={i}
-                                    src={img}
-                                    alt={`${product.name} ${i}`}
-                                    className="w-20 h-20 min-w-20 object-cover rounded-lg border border-border"
-                                />
+                                    onClick={() => setSelectedImage(img)}
+                                    className={`overflow-hidden rounded-lg border-2 transition
+                                    ${
+                                        selectedImage === img
+                                            ? "border-secondary"
+                                            : "border-muted"
+                                    }`}
+                                >
+                                    <img
+                                        src={img}
+                                        alt={`${product.name} ${i + 1}`}
+                                        className="w-20 h-20 min-w-20 object-cover"
+                                    />
+                                </button>
                             ))}
                         </div>
                     </motion.div>
@@ -195,12 +220,12 @@ function RouteComponent() {
                             <Button
                                 className="w-full h-11"
                                 onClick={() => {
-                                    if(isAlreadyAddedToCart){
-                                        toast.info("Removed from Cart",product.name)
+                                    if (isAlreadyAddedToCart) {
+                                        toast.info("Removed from Cart", product.name)
                                         removeItem(product.id)
                                         return
                                     }
-                                    toast.success("Added to Cart",product.name)
+                                    toast.success("Added to Cart", product.name)
                                     addItem(product)
                                 }}
                             >
@@ -211,12 +236,12 @@ function RouteComponent() {
                                 variant="muted"
                                 className="w-full h-11"
                                 onClick={() => {
-                                    if(isAlreadyAddedToList){
-                                        toast.info("Removed from Wishlist",product.name)
+                                    if (isAlreadyAddedToList) {
+                                        toast.info("Removed from Wishlist", product.name)
                                         removeList(product.id)
                                         return
                                     }
-                                    toast.success("Added to Wishlist",product.name)
+                                    toast.success("Added to Wishlist", product.name)
                                     addList(product)
                                 }}
                             >
