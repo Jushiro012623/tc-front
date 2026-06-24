@@ -1,5 +1,3 @@
-import type {SVGProps} from "#/type";
-
 export const FacebookIcon = (props: SVGProps) => {
     return (
         <svg

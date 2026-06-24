@@ -4,7 +4,6 @@ import {fetchProducts} from '#/lib/products'
 import {ProductCard} from '@components/products/product-card'
 import {Suspense} from 'react'
 import {ShopFilters, ShopSkeleton} from "@components/layouts"
-import type {ShopSearch} from "#/lib/types.ts"
 import {motion} from "framer-motion"
 import {fadeUp} from "#/lib/framer-motion.ts"
 import {defaultShopFilter} from "#/constants.ts";

@@ -121,14 +121,4 @@ export interface ProductFilters {
     sortBy?: 'newest' | 'price-asc' | 'price-desc' | 'rating' | 'popular'
 }
 
-export type ShopSearch = {
-    category: string
-    subcategory: string[]
-    sizes: string[]
-    priceMin: number
-    priceMax: number
-    name?: string
-    count: number
-    page: number
-}
 

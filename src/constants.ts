@@ -1,5 +1,4 @@
 import {Heart, Leaf, Zap, Mail, Phone, MapPin, Clock,} from "lucide-react";
-import type {ShopSearch} from "#/lib/types.ts";
 
 export const NavLinks = [
     {
