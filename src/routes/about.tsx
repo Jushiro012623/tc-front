@@ -4,6 +4,7 @@ import {defaultShopFilter, values} from "#/constants.ts";
 import {ArrowRight} from "lucide-react";
 import {fadeUp, staggerContainer} from "#/lib/framer-motion.ts";
 import {motion} from 'framer-motion'
+import {Button} from "@components/ui";
 
 export const Route = createFileRoute("/about")({
     component: AboutPage,

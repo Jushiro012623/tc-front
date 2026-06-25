@@ -1,5 +1,5 @@
 import {createFileRoute, defer, Await} from '@tanstack/react-router'
-import {Button, GlareCard, Main} from '@components/ui'
+import {Button, Main} from '@components/ui'
 import {fetchProducts} from '#/lib/products'
 import {ProductCard} from '@components/products/product-card'
 import {Suspense} from 'react'

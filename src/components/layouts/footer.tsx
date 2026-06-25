@@ -19,8 +19,7 @@ export const Footer = () => {
 
     return (
         <motion.footer
-            className="bg-footer text-footer-foreground mt-auto"
-            initial="hidden"
+            className="bg-footer text-footer-foreground mt-auto rounded-t-3xl mx-0.5"
             whileInView="show"
             viewport={{once: true, amount: 0.2}}
             variants={staggerContainer}
