@@ -1,1 +1,0 @@
-export {useLockScroll} from './use-lock-scroll.tsx'
