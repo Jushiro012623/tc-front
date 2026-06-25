@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6252978c-f306-4ad9-9e68-2d630a701973" name="Changes" comment="Clean up deprecated UI components, routes, and configuration files that are no longer used in the application." />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="101" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="AISelfReview" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3Et0CesFs2lVEPg5Iyu1UU7INoC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "backend",
+    "javascript.preferred.runtime.type.id": "node",
+    "last_opened_file_path": "/home/ivan/Projects/my-e-commerce/public/announcement",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/home/ivan/Projects/my-e-commerce/frontend/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/announcement" />
+      <recent name="$PROJECT_DIR$/public/skirt" />
+      <recent name="$PROJECT_DIR$/public/footwear" />
+      <recent name="$PROJECT_DIR$/src/providers" />
+      <recent name="$PROJECT_DIR$/public/about" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/public/carousel" />
+      <recent name="$PROJECT_DIR$/public" />
+      <recent name="$PROJECT_DIR$/src/components/layouts" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-WS-261.23567.141" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6252978c-f306-4ad9-9e68-2d630a701973" name="Changes" comment="" />
+      <created>1780982432010</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1780982432010</updated>
+      <workItem from="1780982433330" duration="127816000" />
+      <workItem from="1781684524890" duration="35432000" />
+      <workItem from="1781857706701" duration="35401000" />
+      <workItem from="1782201513691" duration="8219000" />
+      <workItem from="1782351096213" duration="5339000" />
+      <workItem from="1782365463464" duration="643000" />
+      <workItem from="1782366233003" duration="1052000" />
+    </task>
+    <task id="LOCAL-00001" summary="Set up project skeleton with TanStack Router, Tailwind CSS, and initial routes">
+      <option name="closed" value="true" />
+      <created>1780982519087</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1780982519087</updated>
+    </task>
+    <task id="LOCAL-00002" summary="AUTH/HOMEPAGE/PRODUCT/COMPONENTS">
+      <option name="closed" value="true" />
+      <created>1781084393556</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1781084393556</updated>
+    </task>
+    <task id="LOCAL-00003" summary="SHOP DONE STATIC DATA ONLY, STATIC COMPONENT, NO INTERACTION">
+      <option name="closed" value="true" />
+      <created>1781504104325</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1781504104325</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Add Feature Cart">
+      <option name="closed" value="true" />
+      <created>1781508919885</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1781508919885</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add Vercel Deployment">
+      <option name="closed" value="true" />
+      <created>1781509135269</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1781509135269</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Add Vercel Deployment 1">
+      <option name="closed" value="true" />
+      <created>1781509527398</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1781509527398</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Added Dark Mode">
+      <option name="closed" value="true" />
+      <created>1781510245020</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1781510245020</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added the Original Logo and Burger Menu Drawer in Mobile">
+      <option name="closed" value="true" />
+      <created>1781515705614</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1781515705614</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added active and add to cart button simplified">
+      <option name="closed" value="true" />
+      <created>1781517417429</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1781517417429</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Added active and add to cart button simplified">
+      <option name="closed" value="true" />
+      <created>1781517489336</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1781517489336</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added the images assets and added ui componensts (CHIP and BADGE) added the wishlist store and recolor the web">
+      <option name="closed" value="true" />
+      <created>1781590643527</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1781590643527</updated>
+    </task>
+    <task id="LOCAL-00012" summary="added not found component">
+      <option name="closed" value="true" />
+      <created>1781591723184</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1781591723184</updated>
+    </task>
+    <task id="LOCAL-00013" summary="added accent at the top of cart drawer">
+      <option name="closed" value="true" />
+      <created>1781592013528</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1781592013528</updated>
+    </task>
+    <task id="LOCAL-00014" summary="badges updated to red">
+      <option name="closed" value="true" />
+      <created>1781592531120</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1781592531120</updated>
+    </task>
+    <task id="LOCAL-00015" summary="recolor and added loader for testing">
+      <option name="closed" value="true" />
+      <created>1781599467840</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1781599467840</updated>
+    </task>
+    <task id="LOCAL-00016" summary="recolor and added loader for testing">
+      <option name="closed" value="true" />
+      <created>1781599569864</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1781599569864</updated>
+    </task>
+    <task id="LOCAL-00017" summary="recolor and added loader for testing">
+      <option name="closed" value="true" />
+      <created>1781603857572</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1781603857572</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Updated company branding to “Triumphs Co.” throughout the app, added a full search bar with route validation and filter handling, enhanced `ShopFilters` and loaders, added left‑icon support to inputs, and updated product card routing and state handling.">
+      <option name="closed" value="true" />
+      <created>1781685146722</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1781685146723</updated>
+    </task>
+    <task id="LOCAL-00019" summary="fix navbar positioning">
+      <option name="closed" value="true" />
+      <created>1781688769807</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1781688769807</updated>
+    </task>
+    <task id="LOCAL-00020" summary="add an about page">
+      <option name="closed" value="true" />
+      <created>1781749311069</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1781749311069</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Add sustainability &amp; contact pages, extend constants with FAQ, contact details, and commitments, and update the About page layout, CTA, and navigation styling. Also improve input styling and update the route tree accordingly.">
+      <option name="closed" value="true" />
+      <created>1781754386803</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1781754386803</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Add sustainability &amp; contact pages, extend constants with FAQ, contact details, and commitments, and update the About page layout, CTA, and navigation styling. Also improve input styling and update the route tree accordingly.">
+      <option name="closed" value="true" />
+      <created>1781754529449</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1781754529449</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Add sustainability &amp; contact pages, extend constants with FAQ, contact details, and commitments, and update the About page layout, CTA, and navigation styling. Also improve input styling and update the route tree accordingly.">
+      <option name="closed" value="true" />
+      <created>1781754906349</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1781754906349</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Add framer‑motion animations to cart drawer, mobile nav drawer, hero carousel, and page elements for smoother transitions and improved visual flow.">
+      <option name="closed" value="true" />
+      <created>1781840113747</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1781840113747</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Added Skeleton Loading changed the Loading from Generic to Skeleton">
+      <option name="closed" value="true" />
+      <created>1781857908842</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1781857908843</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Added Skeleton Loading changed the Loading from Generic to Skeleton">
+      <option name="closed" value="true" />
+      <created>1781859090447</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1781859090447</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Added SEO and Wishlist Page">
+      <option name="closed" value="true" />
+      <created>1782099488698</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1782099488698</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Added SEO and Wishlist Page">
+      <option name="closed" value="true" />
+      <created>1782099768903</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1782099768903</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Modularize state stores and add toast notification system&#10;&#10;- Split the combined store into separate modules: useCartStore, useWishlistStore, useUIStore, useAuthStore, useToastStore&#10;- Add UUID support for unique toast IDs&#10;- Introduce ToastProvider and toast utilities&#10;- Update components, routes, and providers to use the new stores and toast functions&#10;- Add toast styling and update imports throughout the project&#10;- Adjust CSS variables for toast themes and animations">
+      <option name="closed" value="true" />
+      <created>1782114802702</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1782114802702</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Refactor ThemeProvider to a stateless root‑wrapper:  &#10;- Remove `children` prop and adjust its implementation.  &#10;- Clean up JSX in `__root.tsx` (self‑closing tags and redundant wrapper).  &#10;- Update imports accordingly.">
+      <option name="closed" value="true" />
+      <created>1782115050609</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1782115050609</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Add ErrorComponent, enable root error handling, update layout exports and manifest, remove Review type and favicon.">
+      <option name="closed" value="true" />
+      <created>1782119196888</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1782119196888</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Switch shop filters from style → subcategory array; update constants, routes, and product data to use the new subcategory structure and reset default filter values.">
+      <option name="closed" value="true" />
+      <created>1782182385151</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1782182385151</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Switch shop filters from style → subcategory array; update constants, routes, and product data to use the new subcategory structure and reset default filter values.">
+      <option name="closed" value="true" />
+      <created>1782185433183</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1782185433183</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Add Facebook link to footer and update social media text to “Follow us on Social Media”">
+      <option name="closed" value="true" />
+      <created>1782194115583</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1782194115583</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Refactor global type declarations: move SVGProps and ShopSearch into globals.d.ts, delete the legacy type module, and update icon and route imports to use the shared globals.">
+      <option name="closed" value="true" />
+      <created>1782266346145</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1782266346145</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Refactor UI components and layout&#10;&#10;- Remove unused imports and simplify component signatures (e.g., `ErrorComponent` no longer requires an error prop).  &#10;- Integrate `GlareCard` into shop route and update imports.  &#10;- Update toast styling and class names (`toast__${toast.type}`).  &#10;- Modernize cart drawer: add proper links to product pages, adjust positioning classes, and clean up markup.  &#10;- Adjust mobile navigation drawer accent bar and overlay handling.  &#10;- Add required imports and class names (`Banner` now typed with `React.FC`).  &#10;- Improve spacing in `about` and `product-card` components and clean up trailing whitespace.  &#10;- Minor tweaks to `index.tsx` and banner layout for consistent styling.">
+      <option name="closed" value="true" />
+      <created>1782354385691</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1782354385691</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Drop unused GlareCard export and imports, update Footer styling, and add Button import to About page.">
+      <option name="closed" value="true" />
+      <created>1782354819745</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1782354819745</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Clean up deprecated UI components, routes, and configuration files that are no longer used in the application.">
+      <option name="closed" value="true" />
+      <created>1782366523337</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1782366523337</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added active and add to cart button simplified" />
+    <MESSAGE value="added the images assets and added ui componensts (CHIP and BADGE) added the wishlist store and recolor the web" />
+    <MESSAGE value="added not found component" />
+    <MESSAGE value="added accent at the top of cart drawer" />
+    <MESSAGE value="badges updated to red" />
+    <MESSAGE value="recolor and added loader for testing" />
+    <MESSAGE value="Updated company branding to “Triumphs Co.” throughout the app, added a full search bar with route validation and filter handling, enhanced `ShopFilters` and loaders, added left‑icon support to inputs, and updated product card routing and state handling." />
+    <MESSAGE value="fix navbar positioning" />
+    <MESSAGE value="add an about page" />
+    <MESSAGE value="Add sustainability &amp; contact pages, extend constants with FAQ, contact details, and commitments, and update the About page layout, CTA, and navigation styling. Also improve input styling and update the route tree accordingly." />
+    <MESSAGE value="Add framer‑motion animations to cart drawer, mobile nav drawer, hero carousel, and page elements for smoother transitions and improved visual flow." />
+    <MESSAGE value="Change " />
+    <MESSAGE value="Added Skeleton Loader, Change Loader from Generic Loader to Await for dynamic data loading" />
+    <MESSAGE value="Added Skeleton Loading changed the Loading from Generic to Skeleton" />
+    <MESSAGE value="Added SEO and Wishlist Page" />
+    <MESSAGE value="Modularize state stores and add toast notification system&#10;&#10;- Split the combined store into separate modules: useCartStore, useWishlistStore, useUIStore, useAuthStore, useToastStore&#10;- Add UUID support for unique toast IDs&#10;- Introduce ToastProvider and toast utilities&#10;- Update components, routes, and providers to use the new stores and toast functions&#10;- Add toast styling and update imports throughout the project&#10;- Adjust CSS variables for toast themes and animations" />
+    <MESSAGE value="Refactor ThemeProvider to a stateless root‑wrapper:  &#10;- Remove `children` prop and adjust its implementation.  &#10;- Clean up JSX in `__root.tsx` (self‑closing tags and redundant wrapper).  &#10;- Update imports accordingly." />
+    <MESSAGE value="Add ErrorComponent, enable root error handling, update layout exports and manifest, remove Review type and favicon." />
+    <MESSAGE value="Switch shop filters from style → subcategory array; update constants, routes, and product data to use the new subcategory structure and reset default filter values." />
+    <MESSAGE value="Add Facebook link to footer and update social media text to “Follow us on Social Media”" />
+    <MESSAGE value="Refactor global type declarations: move SVGProps and ShopSearch into globals.d.ts, delete the legacy type module, and update icon and route imports to use the shared globals." />
+    <MESSAGE value="Refactor component implementations and improve navigation&#10;&#10;- Update component type signatures to `React.FC` and drop unused imports&#10;- Consolidate and clean up comment blocks across several UI files&#10;- Simplify toast styling and progress bar logic&#10;- Add `useCallback` for product list rendering in shop route&#10;- Remove unnecessary `setTimeout` around navigation&#10;- Replace direct DOM rendering in `CartDrawer` with `Link` navigation and parameter handling&#10;- Minor UI class refactor in mobile nav drawer and banner for consistency and accessibility" />
+    <MESSAGE value="Refactor UI components and layout&#10;&#10;- Remove unused imports and simplify component signatures (e.g., `ErrorComponent` no longer requires an error prop).  &#10;- Integrate `GlareCard` into shop route and update imports.  &#10;- Update toast styling and class names (`toast__${toast.type}`).  &#10;- Modernize cart drawer: add proper links to product pages, adjust positioning classes, and clean up markup.  &#10;- Adjust mobile navigation drawer accent bar and overlay handling.  &#10;- Add required imports and class names (`Banner` now typed with `React.FC`).  &#10;- Improve spacing in `about` and `product-card` components and clean up trailing whitespace.  &#10;- Minor tweaks to `index.tsx` and banner layout for consistent styling." />
+    <MESSAGE value="Drop unused GlareCard export and imports, update Footer styling, and add Button import to About page." />
+    <MESSAGE value="Clean up deprecated UI components, routes, and configuration files that are no longer used in the application." />
+    <option name="LAST_COMMIT_MESSAGE" value="Clean up deprecated UI components, routes, and configuration files that are no longer used in the application." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/routes/sustainability.tsx</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
