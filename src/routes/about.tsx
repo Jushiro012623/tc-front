@@ -1,6 +1,6 @@
+
 import {createFileRoute, Link} from "@tanstack/react-router"
 import {defaultShopFilter, values} from "#/constants.ts";
-import {Button} from "@components/ui";
 import {ArrowRight} from "lucide-react";
 import {fadeUp, staggerContainer} from "#/lib/framer-motion.ts";
 import {motion} from 'framer-motion'
@@ -137,23 +137,24 @@ function AboutPage() {
                         </p>
                     </motion.div>
 
+
                     <motion.div
                         initial={{opacity: 0, x: -40}}
                         whileInView={{opacity: 1, x: 0}}
                         viewport={{once: true}}
                         transition={{duration: 0.7}}
                         className="lg:row-start-1 lg:col-start-1 rounded-2xl overflow-hidden min-h-96">
-                        <motion.img
-                            src="/about/mission.jpg"
-                            alt="TC thrift shop collection"
-                            className="w-full h-full min-h-96 object-cover"
-                            whileHover={{
-                                scale: 1.05,
-                            }}
-                            transition={{
-                                duration: 0.4,
-                            }}
-                        />
+                            <motion.img
+                                src="/about/mission.jpg"
+                                alt="TC thrift shop collection"
+                                className="w-full h-full min-h-96 object-cover"
+                                whileHover={{
+                                    scale: 1.05,
+                                }}
+                                transition={{
+                                    duration: 0.4,
+                                }}
+                            />
                     </motion.div>
                 </div>
             </section>

@@ -10,11 +10,7 @@ interface BannerProps {
     image: string;
 }
 
-export const Banner = ({
-                           id,
-                           announcement,
-                           image,
-                       }: BannerProps) => {
+export const Banner: React.FC<BannerProps> = ({id, announcement, image,}) => {
     const [visible, setVisible] = useState(false);
 
     useEffect(() => {
@@ -31,17 +27,13 @@ export const Banner = ({
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
-            {/* overlay */}
             <div
                 className="absolute inset-0 bg-black/60 backdrop-blur-sm"
                 onClick={handleClose}
             />
-
-            {/* modal */}
             <div
                 className="relative w-full max-w-2xl bg-background rounded-3xl overflow-hidden shadow-2xl animate-fadeIn">
 
-                {/* close */}
                 <button
                     onClick={handleClose}
                     className="absolute top-4 right-4 bg-background text-foreground shadow-md p-2 rounded-full hover:scale-105 transition"
@@ -49,7 +41,6 @@ export const Banner = ({
                     <X size={18}/>
                 </button>
 
-                {/* image */}
                 <div className="w-full h-105 bg-gray-100">
                     <img
                         src={image}
@@ -58,7 +49,6 @@ export const Banner = ({
                     />
                 </div>
 
-                {/* content */}
                 <div className="p-6 text-center space-y-2">
                     <p className="font-serif text-3xl font-semibold text-foreground">
                         {announcement}
@@ -69,7 +59,6 @@ export const Banner = ({
                     </p>
                 </div>
 
-                {/* CTA */}
                 <div className="p-6 pt-0">
                     <Link to={'/shop'} search={defaultShopFilter} onClick={handleClose}>
                         <Button className="w-full py-6 text-base">

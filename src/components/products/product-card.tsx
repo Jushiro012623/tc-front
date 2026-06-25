@@ -97,7 +97,6 @@ export const ProductCard = React.memo(({product}: ProductCardProps) => {
 
                     {/* IMAGE */}
                     <div className="relative aspect-square bg-muted rounded-xl overflow-hidden mb-2 shadow-sm">
-
                         <img
                             src={product.image}
                             alt={product.name}
@@ -106,6 +105,7 @@ export const ProductCard = React.memo(({product}: ProductCardProps) => {
                                 !product.inStock && "opacity-70 grayscale-[0.2]"
                             )}
                         />
+
 
                         {/* BADGES */}
                         <div className="absolute top-2 left-2 flex gap-1">

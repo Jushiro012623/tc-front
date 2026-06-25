@@ -1,7 +1,6 @@
 import {Button} from "@components/ui"
-import {type ErrorComponentProps} from "@tanstack/react-router"
 
-export function ErrorComponent({error}: ErrorComponentProps) {
+export function ErrorComponent() {
     return (
         <div className="min-h-[70vh] flex items-center justify-center px-6">
             <div className="max-w-md w-full text-center">

@@ -97,7 +97,6 @@ function Home() {
                         transition={{duration: 0.8, ease: "easeInOut"}}
                     />
                 </AnimatePresence>
-
                 <div className="absolute inset-0 bg-black/20"/>
                 <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent"/>
 
@@ -198,6 +197,7 @@ function Home() {
                                             key={product.id}
                                             variants={fadeUp}
                                             custom={i}
+                                            className={"relative"}
                                         >
                                             <ProductCard product={product}/>
                                         </motion.div>

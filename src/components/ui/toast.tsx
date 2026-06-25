@@ -50,8 +50,7 @@ export function ToastItem({toast, onClose}: ToastItemProps) {
                                 `toast-desc__${toast.type}`
                             )}
                         >
-                            {toast.description}
-                        </p>
+                            {toast.description}                        </p>
                     )}
                 </div>
 
@@ -72,11 +71,11 @@ export function ToastItem({toast, onClose}: ToastItemProps) {
                 <div
                     className={clsx(
                         "h-full",
-                        `toast-__${toast.type}`.replace('text-', 'bg-')
+                        `toast__${toast.type}`
                     )}
                     style={{
                         width: `${progress}%`,
-                        backgroundColor: "currentColor",
+                        backgroundColor: `var(--toast-${toast.type}-title)`,
                     }}
                 />
             </div>

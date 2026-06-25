@@ -1,5 +1,5 @@
 import {createFileRoute, defer, Await} from '@tanstack/react-router'
-import {Button, Main} from '@components/ui'
+import {Button, GlareCard, Main} from '@components/ui'
 import {fetchProducts} from '#/lib/products'
 import {ProductCard} from '@components/products/product-card'
 import {Suspense} from 'react'
@@ -116,13 +116,11 @@ function Component() {
                             <Await promise={productsDeferred}>
                                 {(products) => {
                                     if (filters.name && products.length === 1 && products[0].sku.toLowerCase() === filters.name.toLowerCase()) {
-                                        setTimeout(() => {
-                                            navigate({
-                                                to: '/products/$product',
-                                                params: {product: products[0].id},
-                                                replace: true
-                                            })
-                                        }, 0)
+                                        navigate({
+                                            to: '/products/$product',
+                                            params: {product: products[0].id},
+                                            replace: true
+                                        })
                                         return <motion.div
                                             className="grid grid-cols-2 lg:grid-cols-3 gap-6  w-full"
                                             initial="hidden"
@@ -173,7 +171,7 @@ function Component() {
                                         >
                                             {products.map((product, i) => (
                                                 <motion.div key={product.id} variants={fadeUp} custom={i}>
-                                                    <ProductCard product={product}/>
+                                                        <ProductCard product={product}/>
                                                 </motion.div>
                                             ))}
                                         </motion.div>

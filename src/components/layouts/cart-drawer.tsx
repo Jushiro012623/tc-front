@@ -3,18 +3,18 @@ import {Button, SeparatorX} from "@components/ui"
 import {Fragment} from "react"
 import {useCartStore} from "#/lib/store";
 import {AnimatePresence, motion} from "framer-motion";
+import {Link} from "@tanstack/react-router";
 
-type Props = {
+interface CartDrawerProps {
     open: boolean
     onClose: () => void
 }
 
-export const CartDrawer = ({open, onClose}: Props) => {
+export const CartDrawer: React.FC<CartDrawerProps> = ({open, onClose}) => {
     const {cart} = useCartStore()
 
     return (
         <Fragment>
-            {/* BACKDROP */}
             <AnimatePresence>
                 {open && (
                     <motion.div
@@ -29,95 +29,94 @@ export const CartDrawer = ({open, onClose}: Props) => {
             </AnimatePresence>
             <AnimatePresence>
                 {open && (
-                    <motion.aside
-                        data-lenis-prevent
-                        className="fixed top-0 right-0 h-full w-full sm:w-105 bg-background shadow-xl z-50 flex flex-col"
-                        initial={{x: "100%"}}
-                        animate={{x: 0}}
-                        exit={{x: "100%"}}
-                        transition={{type: "tween", duration: 0.25, ease: "easeOut"}}
-                    >
+                        <motion.aside
+                            data-lenis-prevent
+                            className="fixed
+                                inset-0
+                                sm:inset-y-2
+                                sm:right-0
+                                sm:left-auto
+                                sm:w-105
+                                bg-background
+                                sm:rounded-l-2xl
+                                z-50
+                                flex
+                                flex-col
+                                overflow-hidden
+                            "
+                            initial={{x: "100%"}}
+                            animate={{x: 0}}
+                            exit={{x: "100%"}}
+                            transition={{type: "tween", duration: 0.25, ease: "easeOut"}}
+                        >
+                            <div
+                                className="flex items-center justify-between p-5 item backdrop-blur">
 
-                        <div className="h-1 w-full bg-linear-to-l from-primary/60 via-primary to-transparent"/>
-                        {/* HEADER */}
-                        <div
-                            className="flex items-start justify-between p-5 bg-background/60 backdrop-blur">
+                                <div className="space-y-1">
+                                    <h2 className="text-lg font-semibold text-foreground">
+                                        Your Cart
+                                    </h2>
 
-                            <div className="space-y-1">
-                                <h2 className="text-lg font-semibold text-foreground">
-                                    Your Cart
-                                </h2>
+                                    <p className="text-xs text-muted-foreground">
+                                        Review your selected items before checkout
+                                    </p>
+                                </div>
 
-                                <p className="text-xs text-muted-foreground">
-                                    Review your selected items before checkout
-                                </p>
+                                <button
+                                    onClick={onClose}
+                                    className="p-2 rounded-md hover:bg-muted transition text-muted-foreground hover:text-foreground"
+                                >
+                                    <BiX size={22}/>
+                                </button>
                             </div>
 
-                            <button
-                                onClick={onClose}
-                                className="p-2 rounded-md hover:bg-muted transition text-muted-foreground hover:text-foreground"
-                            >
-                                <BiX size={22}/>
-                            </button>
-                        </div>
+                            <SeparatorX/>
 
-                        <SeparatorX/>
-
-                        {/* CONTENT */}
-                        <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                            {cart.items.length === 0 ? (
-                                <p className="text-muted-foreground text-sm text-center mt-10">
-                                    Your cart is empty
-                                </p>
-                            ) : (
-                                cart.items.map((item, index) => {
-                                    const isLastItem = index === cart.items.length - 1
-
-                                    return (
-                                        <Fragment key={item.id}>
-                                            <div className="flex gap-3 items-center pb-3">
-                                                <img
-                                                    src={item.product.image}
-                                                    alt={item.product.name}
-                                                    className="w-14 h-14 bg-muted rounded-md object-cover"
-                                                />
-
-                                                <div className="flex-1">
+                            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                                {cart.items.length === 0 ? (
+                                    <p className="text-muted-foreground text-sm text-center mt-10">Your cart is empty</p>
+                                ) : (
+                                    cart.items.map(({product, id}, index) => {
+                                        const isLastItem = index === cart.items.length - 1
+                                        const {image, name, sku, price} = product
+                                        return (
+                                            <Fragment key={id}>
+                                                <Link
+                                                    to={`/products/$product`}
+                                                    state={{product: product}}
+                                                    params={{product: product.id}}
+                                                    onClick={onClose}
+                                                    className="flex gap-3 items-center justify-center">
+                                                    <img
+                                                        src={image}
+                                                        alt={name}
+                                                        className="w-14 h-14 bg-muted rounded-md object-cover"
+                                                    />
+                                                    <div className="flex-1">
+                                                        <p className="text-sm font-medium">{name}</p>
+                                                        <p className="text-xs text-muted-foreground">{sku}</p>
+                                                    </div>
                                                     <p className="text-sm font-medium">
-                                                        {item.product.name}
+                                                        ${(price).toFixed(2)}
                                                     </p>
-
-                                                    <p className="text-xs text-muted-foreground">
-                                                        {item.product.sku}
-                                                    </p>
-                                                </div>
-
-                                                <p className="text-sm font-medium">
-                                                    ${(item.product.price).toFixed(2)}
-                                                </p>
-                                            </div>
-
-                                            {!isLastItem && <SeparatorX/>}
-                                        </Fragment>
-                                    )
-                                })
-                            )}
-                        </div>
-
-                        {/* FOOTER */}
-                        <SeparatorX/>
-
-                        <div className="p-4 space-y-3">
-                            <div className="flex justify-between text-sm">
-                                <span className="text-muted-foreground">Subtotal</span>
-                                <span className="font-medium">${cart.subtotal.toFixed(2)}</span>
+                                                </Link>
+                                                {!isLastItem && <SeparatorX/>}
+                                            </Fragment>
+                                        )
+                                    })
+                                )}
                             </div>
-
-                            <Button className="w-full bg-black text-white py-3 rounded-lg hover:opacity-90 transition">
-                                Checkout
-                            </Button>
-                        </div>
-                    </motion.aside>
+                            <SeparatorX/>
+                            <div className="p-4 space-y-3">
+                                <div className="flex justify-between text-sm">
+                                    <span className="text-muted-foreground">Subtotal</span>
+                                    <span className="font-medium">${cart.subtotal.toFixed(2)}</span>
+                                </div>
+                                <Button className="w-full">
+                                    Checkout
+                                </Button>
+                            </div>
+                        </motion.aside>
                 )}
             </AnimatePresence>
         </Fragment>

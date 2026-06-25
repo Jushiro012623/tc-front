@@ -22,7 +22,6 @@ export const MobileNavDrawer = ({ open, onClose }: Props) => {
 
     return (
         <>
-            {/* overlay */}
             <AnimatePresence>
                 {open && (
                     <motion.div
@@ -39,15 +38,12 @@ export const MobileNavDrawer = ({ open, onClose }: Props) => {
             <AnimatePresence>
                 {open && (
                     <motion.aside
-                        className="fixed top-0 right-0 h-full w-[85vw] max-w-sm bg-background/95 backdrop-blur-xl shadow-2xl z-50 flex flex-col"
+                        className="fixed top-1 right-0 bottom-1 rounded-l-2xl overflow-hidden w-[85vw] max-w-sm bg-background/95 backdrop-blur-xl shadow-2xl z-50 flex flex-col"
                         initial={{ x: "100%" }}
                         animate={{ x: 0 }}
                         exit={{ x: "100%" }}
                         transition={{ type: "spring", damping: 25, stiffness: 200 }}
                     >
-                        {/* top accent bar */}
-                        <div className="h-1 w-full bg-linear-to-r from-primary/60 via-primary to-transparent" />
-
                         {/* header */}
                         <div className="flex items-center justify-between px-6 py-5">
                             <Link to={'/'} onClick={onClose} className="hover:opacity-80 transition-opacity">
